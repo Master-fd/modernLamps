@@ -2,12 +2,42 @@
 <html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
-    {% block description %}{% endblock %}
-    {% block keywords %}{% endblock %}
-    {% block title %}{% endblock %}
-    
+    {% block description %}
+        <meta name="description" content="现代灯具">
+    {% endblock %}
+
+    {% block keywords %}
+        <meta name="keywords" content="现代灯具">
+    {% endblock %}
+
+    <title>
+        {% block title %}
+            现代灯具
+        {% endblock %}
+    </title>
+
+    <script type="text/javascript">
+        var isLogin=false;
+        var resourceUrl = 'http://127.0.0.1:8000/static/'
+    </script>
+
+    <link rel="shortcut icon" href="../../static/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../static/js/plugin/sweetalert/sweetalert.css">
+    <link rel="stylesheet" href="../../static/css/base.css">
+
 </head>
 <body>
 
+    {% block pageId %}
+        <div id="page" data-id="base" class="hide"></div>
+    {% endblock %}
+
+    {% include 'common/nav.html' %}
+    {% block content %}{% endblock %}
+    {% include 'common/bottom.html' %}
+
+    <script type="text/javascript" src="../../static/js/plugin/seajs-3.0.0/dist/sea.js"></script>
+    <script type="text/ecmascript" src="../../static/js/common/config.js"></script>
+    {% block userJavascript %}{% endblock %}
 </body>
 </html>
