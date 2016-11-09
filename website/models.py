@@ -1,3 +1,116 @@
+#coding: utf8
+
 from django.db import models
 
 # Create your models here.
+#用户表
+class UserTable(models.Model):
+    account = models.CharField(unique=True, blank=False, max_length=64);
+    password = models.CharField(blank=False, max_length=64);
+    iconUrl = models.CharField(max_length=256);
+    nickname = models.CharField(max_length=256);
+    sex_choices = (("undefine", "未定义"),
+                   ("male", "男"),
+                ("female", "女"));
+    sex = models.CharField(max_length=64, choices=sex_choices, default=sex_choices[0][0]);
+    vip = models.BooleanField(default=False);
+    level = models.IntegerField(default=0);
+    createDate = models.DateTimeField(auto_now_add=True);
+    updateDate = models.DateTimeField(auto_now=True);
+    email = models.EmailField();
+
+#地址表
+class AddressTable(models.Model):
+    account = models.CharField(blank=False, max_length=64);  #账户
+    addressId = models.CharField(unique=True, max_length=64, default='00000');  #地址id
+    contact = models.CharField(blank=False, max_length=256);  #联系人
+    phoneNumber = models.CharField(blank=False, max_length=64);  #电话
+    address = models.TextField(blank=False);           #详细地址
+    defaults = models.BooleanField(default=False);     #默认地址
+
+#收藏表
+class CollectTable(models.Model):
+    account = models.CharField(blank=False, max_length=64);  #账户
+    collectId = models.CharField(unique=True, max_length=64, default='00000');  #收藏id
+    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+
+#购物车表
+class ShoppingCartTable(models.Model):
+    account = models.CharField(blank=False, max_length=64);
+    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+    count = models.IntegerField(default=0);
+    sumPrice = models.CharField(max_length=64);   #小计
+    isSelect = models.BooleanField(default=True);
+
+
+#用户订单表,由用户控制删除
+class UserOrderTable(models.Model):
+    account = models.CharField(blank=False, max_length=64);  #账户
+    orderId = models.CharField(max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
+    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+    addressId = models.CharField(unique=True, max_length=64, default='00000');  #地址id
+    count = models.IntegerField(default=0);
+    sumPrice = models.CharField(max_length=64);   #小计
+    totalPrice = models.CharField(max_length=64);  #订单总价
+
+    status_choices = (("undefine", "未定义"),
+                      ("new", "新订单"),    #新订单
+                    ("process", "已发货"),    #已发货
+                    ("ok", "已成交"),         #已结束
+                      ("cancel", "已取消"),
+                      ("ruturnGoods", '请求退货'),
+                      ("ruturnGoodsing", '退货中'),
+                      ("ruturnGoodsed", '已退货'),);
+    status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
+
+
+#管理员订单表,由管理控制删除
+class ManagerOrderTable(models.Model):
+    account = models.CharField(blank=False, max_length=64);  #账户
+    orderId = models.CharField(max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
+    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+    addressId = models.CharField(unique=True, max_length=64, default='00000');  #地址id
+    count = models.IntegerField(default=0);
+    sumPrice = models.CharField(max_length=64);   #小计
+    totalPrice = models.CharField(max_length=64);  #订单总价
+
+    status_choices = (("new", "新订单"),    #新订单
+                    ("process", "已发货"),    #已发货
+                    ("ok", "已成交"),         #已结束
+                      ("cancel", "已取消"),
+                      ("ruturnGoods", '请求退货'),
+                      ("ruturnGoodsing", '退货中'),
+                      ("ruturnGoodsed", '已退货'),);
+    status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
+
+#商品表
+class GoodsTable(models.Model):
+    goodsName = models.CharField(max_length=256);   #商品名称
+    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+    goodsDescUrl = models.CharField(max_length=256);  #商品详情url
+    description = models.TextField(); #描述
+    price = models.CharField(max_length=64, default='0');   #价格max_digits最大多少位，decimal_places最大小数位多少位
+    freightCost = models.CharField(max_length=64, default='0');   #运费
+    subClass_choices = (("undefine", "未定义"),
+                         ("dropLamp", "吊灯"),
+                         ('deskLamp', "台灯"),
+                         ('parlorLamp', "客厅灯"),
+                        ('roomLamp',"卧室灯"));
+    subClass = models.CharField(choices=subClass_choices, default=subClass_choices[0][0], max_length=64);   #分类
+    saleCount = models.IntegerField(default=0);   #销量
+    inventoryCount = models.IntegerField(default=0);      #库存
+
+    #image url
+    descImageUrl1 = models.CharField(max_length=256);
+    descImageUrl2 = models.CharField(max_length=256);
+    descImageUrl3 = models.CharField(max_length=256);
+    descImageUrl4 = models.CharField(max_length=256);
+    descImageUrl5 = models.CharField(max_length=256);
+    descImageUrl6 = models.CharField(max_length=256);
+    descImageUrl7 = models.CharField(max_length=256);
+    descImageUrl8 = models.CharField(max_length=256);
+    descImageUrl9 = models.CharField(max_length=256);
+    descImageUrl10 = models.CharField(max_length=256);
+    aboutImageUrl = models.CharField(max_length=256);
+    remarkImageUrl = models.CharField(max_length=256);
+
