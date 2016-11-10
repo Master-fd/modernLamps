@@ -12,7 +12,7 @@
 
     <title>
         {% block title %}
-            现代灯具
+            胜宝龙灯具
         {% endblock %}
     </title>
 
@@ -25,11 +25,14 @@
     <link rel="stylesheet" href="../../static/js/plugin/sweetalert/sweetalert.css">
     <link rel="stylesheet" href="../../static/css/base.css">
 
+    {% block userStyle %}{% endblock %}
+
+
 </head>
 <body>
     {% include 'common/nav.html' %}
     {% block content %}{% endblock %}
-    {% include 'common/bottom.html' %}
+    
 
     <script type="text/javascript" src="../../static/js/plugin/seajs-3.0.0/dist/sea.js"></script>
     <script type="text/ecmascript" src="../../static/js/common/config.js"></script>

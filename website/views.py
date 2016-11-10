@@ -21,7 +21,8 @@ from website.python.order.order import OrderInfo
 
 #页面返回页面
 def home(request):
-    return render_to_response('home/home.html');
+    return render_to_response('goods/goodsInfo.html');
+
 
 
 #渲染一个商品

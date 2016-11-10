@@ -1,0 +1,74 @@
+
+
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content="首页">
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content="首页">
+{% endblock %}
+
+{% block title %}首页{% endblock %}
+
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/goodsInfo.css">
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="goodsInfo">
+{#        头部#}
+        <section class="header">
+            <div class="row50 col100">
+                <ul class="list float-left col100 row10">
+                    <li class="item">
+                        <img class="full" src="">
+                    </li>
+                    <li class="item">
+                        <img class="full" src="">
+                    </li>
+                    <li class="item">
+                        <img class="full" src="">
+                    </li>
+
+                </ul>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div class="row50 col100">
+                <div class="row100 col20">
+                    <h3>标题</h3>
+                    <input type="hidden" id="goodsId" value="11">
+                </div>
+
+                <table>
+                    <colgroup><col width="100"></colgroup>
+                    <tbody>
+                        <tr>
+                            <td>价格</td>
+                            <td>
+                                <span>￥</span>
+                                <span>456</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+
+            </div>
+        </section>
+
+{#    详情#}
+        <section class="datail">
+
+        </section>
+    </div>
+{% endblock %}

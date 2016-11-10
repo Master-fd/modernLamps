@@ -1,0 +1,23 @@
+
+
+.header{
+    width: 100%;
+    height: 500px;
+    margin-top: 30px;
+}
+.header div{
+    float: left;
+}
+
+.header .list{
+    margin: 5 auto 5 auto;
+}
+.header .list .item{
+    width: 60px;
+    height: 60px;
+}
+.header .list li:hover{
+    width: 52px;
+    height: 52px;
+    border: 4px solid #ddd;
+}

@@ -13,6 +13,9 @@
 {% block title %}首页{% endblock %}
 
 
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/home.css">
+{% endblock %}
 
 {% block content %}
 
@@ -20,25 +23,89 @@
 {#广告图#}
     <section class="banner">
         {#        left#}
-        <div class="left">
-
+        <div class="col100 row50">
+            <a href="javascript:void(0);" class="full">
+                <img class="full" src="">
+            </a>
         </div>
-        <div class="right">
-
+        <div class="col100 row50">
+            <div class="col60 row100">
+                <a href="javascript:void(0);" class="full">
+                    <img class="full" src="">
+                </a>
+            </div>
+            <div class="col40 row100">
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+            </div>
         </div>
     </section>
 
 {#   首推#}
     <section class="first">
-
+        {#        left#}
+        <div class="col100 row60">
+            <a href="javascript:void(0);" class="row70 col100 float-left">
+                <img class="full" src="">
+            </a>
+            <a href="javascript:void(0);" class="row30 col100 float-left">
+                <img class="full" src="">
+            </a>
+        </div>
+        <div class="col100 row40">
+            <div class="col50 row100">
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+            </div>
+            <div class="col50 row100">
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+                <a href="javascript:void(0);" class="float-left row50 col100">
+                    <img class="full" src="">
+                </a>
+            </div>
+        </div>
     </section>
 
 {#人气#}
-    <script class="hotgoods">
-
-    </script>
+    <section class="hotgoods">
+        <div class="col100 row33 float-left">
+            <a href="javascript:void(0);" class="row100 col33 float-left">
+                <img class="full" src="">
+            </a>
+            <a href="javascript:void(0);" class="row100 col66 float-left">
+                <img class="full" src="">
+            </a>
+        </div>
+        <div class="col100 row33 float-left">
+            <a href="javascript:void(0);" class="row100 col66 float-left">
+                <img class="full" src="">
+            </a>
+            <a href="javascript:void(0);" class="row100 col33 float-left">
+                <img class="full" src="">
+            </a>
+        </div>
+        <div class="col100 row33 float-left">
+            <a href="javascript:void(0);" class="row100 col33 float-left">
+                <img class="full" src="">
+            </a>
+            <a href="javascript:void(0);" class="row100 col66 float-left">
+                <img class="full" src="">
+            </a>
+        </div>
+    </section>
 
 </div>
 
+{% include 'common/bottom.html' %}
 {% endblock %}
 
