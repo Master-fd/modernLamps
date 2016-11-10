@@ -46,10 +46,14 @@ class CollectInfo(object):
     @classmethod
     def addCollect(cls, request=HttpRequest(), account='0'):
         collectId = '00000';
-        while True:
-            collectId = str(random.randint(10000, 60000));
-            if not models.CollectTable.objects.get(collectId=collectId):
-                break;
+        try:
+            while True:
+                collectId = str(random.randint(10000, 60000));
+                if not models.CollectTable.objects.get(collectId=collectId):
+                    break;
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '添加失败,请重试');
+
         goodsId = request.POST.get('goodsId', None);
         data = {
                     'collectId' : collectId,

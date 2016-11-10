@@ -52,10 +52,14 @@ class OrderInfo(object):
     def addOrder(cls, request=HttpRequest(), account='0'):
         #产生订单号
         orderId = '00000';
-        while True:
-            orderId = str(random.randint(10000, 60000));
-            if not models.UserOrderTable.objects.get(orderId=orderId) and models.ManagerOrderTable.objects.get(orderId=orderId):
-                break;
+        try:
+            while True:
+                orderId = str(random.randint(10000, 60000));
+                if not models.UserOrderTable.objects.get(orderId=orderId) and models.ManagerOrderTable.objects.get(orderId=orderId):
+                    break;
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '添加失败,请重试');
+
         #封装数据
         data = {
                     'orderId' : orderId,
@@ -107,7 +111,7 @@ class OrderInfo(object):
         orderId = request.POST.get('orderId', None);
         try:
             #查看是否为超级用户
-            result = models.UserTable.get(account=account);
+            result = models.UsersTable.get(account=account);
             if result.superUser == True:
                 #管理员
                 result = models.ManagerOrderTable.objects.get(orderId=orderId).delete();
@@ -158,7 +162,7 @@ class OrderInfo(object):
 
         try:
              #查看是否为超级用户
-            result = models.UserTable.get(account=account);
+            result = models.UsersTable.get(account=account);
             if result.superUser == True:
                 #管理员
                 results = models.ManagerOrderTable.objects.filter(**condition).order_by("id");

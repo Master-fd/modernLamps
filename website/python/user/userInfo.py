@@ -122,7 +122,7 @@ class UserInfo(object):
         if isLogin == True:
             #查找用户信息
             try:
-                result = models.UserTable.objects.get(account=account);
+                result = models.UsersTable.objects.get(account=account);
                 data = model_to_dict(result);
                 return Responses.responseJsonArray("success", "查找用户信息", data);
             except Exception, e:

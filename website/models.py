@@ -4,14 +4,14 @@ from django.db import models
 
 # Create your models here.
 #用户表
-class UserTable(models.Model):
+class UsersTable(models.Model):
     account = models.CharField(unique=True, blank=False, max_length=64);
     password = models.CharField(blank=False, max_length=64);
     iconUrl = models.CharField(max_length=256);
     nickname = models.CharField(max_length=256);
-    sex_choices = (("undefine", "未定义"),
-                   ("male", "男"),
-                ("female", "女"));
+    sex_choices = (("undefine", u"未定义"),
+                   ("male", u"男"),
+                ("female", u"女"));
     sex = models.CharField(max_length=64, choices=sex_choices, default=sex_choices[0][0]);
     vip = models.BooleanField(default=False);
     level = models.IntegerField(default=0);
@@ -33,7 +33,7 @@ class AddressTable(models.Model):
 class CollectTable(models.Model):
     account = models.CharField(blank=False, max_length=64);  #账户
     collectId = models.CharField(unique=True, max_length=64, default='00000');  #收藏id
-    goodsId = models.CharField(unique=True, max_length=64, default='00000');  #商品id
+    goodsId = models.CharField(max_length=64, default='00000');  #商品id
 
 #购物车表
 class ShoppingCartTable(models.Model):
@@ -47,26 +47,26 @@ class ShoppingCartTable(models.Model):
 class OrderTable(models.Model):
     account = models.CharField(blank=False, max_length=64);  #账户
     orderId = models.CharField(max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
-    goodsId = models.CharField(ax_length=64, default='00000');  #商品id
+    goodsId = models.CharField(max_length=64, default='00000');  #商品id
     count = models.IntegerField(default=0);
     sumPrice = models.CharField(max_length=64);   #小计
 
 #用户订单表,由用户控制删除
 class UserOrderTable(models.Model):
     account = models.CharField(blank=False, max_length=64);  #账户
-    orderId = models.CharField(max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
+    orderId = models.CharField(unique=True, max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
     totalPrice = models.CharField(max_length=64);  #订单总价
     contact = models.CharField(blank=False, max_length=256);  #联系人
     phoneNumber = models.CharField(blank=False, max_length=64);  #电话
     address = models.TextField(blank=False);           #详细地址
-    status_choices = (("undefine", "未定义"),
-                      ("new", "新订单"),    #新订单
-                    ("process", "已发货"),    #已发货
-                    ("ok", "已成交"),         #已结束
-                      ("cancel", "已取消"),
-                      ("ruturnGoods", '请求退货'),
-                      ("ruturnGoodsing", '退货中'),
-                      ("ruturnGoodsed", '已退货'),);
+    status_choices = (("undefine", u"未定义"),
+                      ("new", u"新订单"),    #新订单
+                    ("process", u"已发货"),    #已发货
+                    ("ok", u"已成交"),         #已结束
+                      ("cancel", u"已取消"),
+                      ("ruturnGoods", u'请求退货'),
+                      ("ruturnGoodsing", u'退货中'),
+                      ("ruturnGoodsed", u'已退货'),);
     status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
     createDate = models.DateTimeField(auto_now_add=True);
     updateDate = models.DateTimeField(auto_now=True);
@@ -75,19 +75,19 @@ class UserOrderTable(models.Model):
 #管理员订单表,由管理控制删除
 class ManagerOrderTable(models.Model):
     account = models.CharField(blank=False, max_length=64);  #账户
-    orderId = models.CharField(max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
+    orderId = models.CharField(unique=True, max_length=64);  #订单id,一个订单有多个商品，采用order id来归类同一个订单
     totalPrice = models.CharField(max_length=64);  #订单总价
     contact = models.CharField(blank=False, max_length=256);  #联系人
     phoneNumber = models.CharField(blank=False, max_length=64);  #电话
     address = models.TextField(blank=False);           #详细地址
-    status_choices = (("undefine", "未定义"),
-                      ("new", "新订单"),    #新订单
-                    ("process", "已发货"),    #已发货
-                    ("ok", "已成交"),         #已结束
-                      ("cancel", "已取消"),
-                      ("ruturnGoods", '请求退货'),
-                      ("ruturnGoodsing", '退货中'),
-                      ("ruturnGoodsed", '已退货'),);
+    status_choices = (("undefine", u"未定义"),
+                      ("new", u"新订单"),    #新订单
+                    ("process", u"已发货"),    #已发货
+                    ("ok", u"已成交"),         #已结束
+                      ("cancel", u"已取消"),
+                      ("ruturnGoods", u'请求退货'),
+                      ("ruturnGoodsing", u'退货中'),
+                      ("ruturnGoodsed", u'已退货'),);
     status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
     createDate = models.DateTimeField(auto_now_add=True);
     updateDate = models.DateTimeField(auto_now=True);
@@ -100,11 +100,11 @@ class GoodsTable(models.Model):
     description = models.TextField(); #描述
     price = models.CharField(max_length=64, default='0');   #价格max_digits最大多少位，decimal_places最大小数位多少位
     freightCost = models.CharField(max_length=64, default='0');   #运费
-    subClass_choices = (("undefine", "未定义"),
-                         ("dropLamp", "吊灯"),
-                         ('deskLamp', "台灯"),
-                         ('parlorLamp', "客厅灯"),
-                        ('roomLamp',"卧室灯"));
+    subClass_choices = (("undefine", u"未定义"),
+                         ("dropLamp", u"吊灯"),
+                         ('deskLamp', u"台灯"),
+                         ('parlorLamp', u"客厅灯"),
+                        ('roomLamp', u"卧室灯"));
     subClass = models.CharField(choices=subClass_choices, default=subClass_choices[0][0], max_length=64);   #分类
     saleCount = models.IntegerField(default=0);   #销量
     inventoryCount = models.IntegerField(default=0);      #库存

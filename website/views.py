@@ -1,4 +1,4 @@
-#conding utf8
+#coding: utf8
 from django.shortcuts import render
 
 # Create your views here.
@@ -18,27 +18,31 @@ from website.python.order.order import OrderInfo
 '''
 
 
+
+#页面返回页面
 def home(request):
-    return render_to_response('home.html');
+    return render_to_response('home/home.html');
 
-def userInfoRequestPortManager(request):
-    return UserInfo.userInfoRequestPortManager(request);
-
-def goodsInfoRequestPortManager(request):
-    return GoodsInfo.userInfoRequestPortManager(request);
 
 #渲染一个商品
 def goodsInfo(request, goodsId):
     return GoodsInfo.goodsInfo(goodsId);
 
+#ajax请求类操作
+def userInfoRequestPortManager(request):
+    return UserInfo.userInfoRequestPortManager(request);
+
+def goodsInfoRequestPortManager(request):
+    return GoodsInfo.goodsRequestPortManager(request);
+
 def orderRequestPortManager(request):
-    return OrderInfo.userInfoRequestPortManager(request);
+    return OrderInfo.orderRequestPortManager(request);
 
 def addressRequestPortManager(request):
-    return AddressInfo.userInfoRequestPortManager(request);
+    return AddressInfo.addressRequestPortManager(request);
 
 def collectRequestPortManager(request):
-    return CollectInfo.userInfoRequestPortManager(request);
+    return CollectInfo.collectRequestPortManager(request);
 
 def shoppingCartRequestPortManager(request):
-    return ShoppingCartInfo.userInfoRequestPortManager(request);
+    return ShoppingCartInfo.shoppingCartRequestPortManager(request);

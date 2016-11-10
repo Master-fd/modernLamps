@@ -7,8 +7,6 @@ from website import views
 
 urlpatterns = [
     url(r'^$', views.home),
-    url(r'^index/$', views.home),
-
-
+    url(r'^home/$', views.home),
 ]
 

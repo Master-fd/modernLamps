@@ -16,7 +16,7 @@ from modernLamps import settings
 根据用户请求，goods数据增删改查
 '''
 
-class goodsInfo(object):
+class GoodsInfo(object):
 
     #管理请求端口,分发任务
     @classmethod
@@ -116,12 +116,15 @@ class goodsInfo(object):
     def addGoods(cls, request=HttpRequest()):
 
         myUploder = Uploader(settings.MEDIA_ROOT);   #新建下载器
-
         goodsId = '00000';
-        while True:
-            goodsId = str(random.randint(10000, 60000));
-            if not models.GoodsTable.objects.get(goodsId=goodsId):
-                break;
+        try:
+            while True:
+                goodsId = str(random.randint(10000, 60000));
+                if not models.GoodsTable.objects.get(goodsId=goodsId):
+                    break;
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '添加失败,请重试');
+
         goodsName = request.POST.get('goodsName', None);
         if not goodsName:
             return Responses.responseJsonArray('fail', '商品名不能为空');

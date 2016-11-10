@@ -3,22 +3,26 @@
 <body>
     <header class="nav">
         <div class="container">
-            <label class="item"><a class="logo" href="http://127.0.0.1:8000/home/"></a></label>
-            <form action="http://127.0.0.1:8000/search/" method="get">
-                <label class="item">
-                    <input type="text" placeholder="搜索" name="keyword">
-                    <button type="submit"></button>
-                </label>
-            </form>
+            <label class="item"><a class="full logo" href="http://127.0.0.1:8000/home/"></a></label>
+            <label class="item">
+                <form action="http://127.0.0.1:8000/search/" method="get">
+                    <input class="search-text" type="text" placeholder="搜索" name="keyword">
+                    <button class="search-btn cursor-pointer" type="submit">
+                        <i class="search-icon icon"></i>
+                    </button>
+                </form>
+            </label>
+
             <label class="item">
                 <a class="user">
-                    <i class="icon icon-user"></i>
+                    <i class="icon icon-right"></i>
                     <span>登录</span>
                 </a>
             </label>
             <label class="item">
                 <a class="cart">
-                    <i class="icon icon-cart"></i>
+                    <i class="icon icon-right"></i>
+                    <span>购物车</span>
                 </a>
             </label>
         </div>

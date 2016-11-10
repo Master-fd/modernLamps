@@ -49,10 +49,13 @@ class AddressInfo(object):
     @classmethod
     def addAddress(cls, request=HttpRequest(), account='0'):
         addressId = '00000';
-        while True:
-            addressId = str(random.randint(10000, 60000));
-            if not models.AddressTable.objects.get(addressId=addressId):
-                break;
+        try:
+            while True:
+                addressId = str(random.randint(10000, 60000));
+                if not models.AddressTable.objects.get(addressId=addressId):
+                    break;
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '添加失败,请重试');
         data = {
                     'addressId' : addressId,
                     'account' : account,
@@ -99,6 +102,7 @@ class AddressInfo(object):
                     'defaults' : request.POST.get('defaults', None)
                 }
         try:
+            #开启事务
             with transaction.atomic():
                 if data['defaults'] == True:
                     models.AddressTable.objects.all().update(defaults=False);
