@@ -1,0 +1,85 @@
+
+
+.header{
+    width: 100%;
+    height: 43px;
+    margin-top: 30px;
+}
+.header .list{
+    background-color: #ededed;
+    text-align: center;
+}
+.header .list .item{
+    display: inline-block;
+    height: 100%;
+    line-height: 43px;
+    margin: 0 20px;
+}
+.header .list .current{
+    border-bottom: 3px solid #363636;
+}
+
+.content{
+    margin-top: 40px;
+    width: 100%;
+    overflow: hidden;
+}
+.content .list{
+    width: 100%;
+    overflow: hidden;
+}
+.content .list .item{
+    width: 262px;
+    height: 360px;
+    margin: 0 12px 40px 12px;
+    float: left;
+}
+.content .list .item .goods-image{
+    display: block;
+    width: 100%;
+    height: 262px;
+    line-height: 262px;
+    border: 1px solid #ededed;
+}
+.content .list .item .goods-name{
+    display: block;
+    margin-top: 20px;
+}
+.content .list .item .price-tag{
+    display: inline-block;
+    color: #ff6753;
+    font-size: 14px;
+    margin-top: 10px;
+}
+.content .list .item .price-num{
+    display: inline-block;
+    color: #ff6753;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.page{
+    margin: 30px auto 100px auto;
+    height: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+.page a{
+    display: inline-block;
+    border-radius: 3px;
+    margin: 0 4px;
+    padding: 0 10px;
+    height: 28px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #363636;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #363636;
+}
+.page .current{
+    color: #fff;
+    background-color: #363636;
+    border-color: transparent;
+}
