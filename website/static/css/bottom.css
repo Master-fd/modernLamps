@@ -57,7 +57,7 @@
 }
 .bottom .middle .list .item{
     float: left;
-    margin-left: 62px;
+    margin-left: 80px;
     margin-right: 126px;
     vertical-align: middle;
 }
@@ -76,4 +76,27 @@
     margin-left: 80px;
     margin-right: 62px;
     font-size: 12px;
+}
+
+/*底部*/
+.static-content{
+    width: 792px;
+    margin-top: 80px;
+    margin-bottom: 70px;
+    line-height: 1;
+    font-family: "microsoft yahei";
+}
+.static-content h3{
+    color: #333;
+    font-size: 36px;
+}
+.static-content h4{
+    font-size: 22px;
+    color: #363636;
+    margin: 40px 0 15px 0;
+}
+.static-content p{
+    font-size: 16px;
+    color: #363636;
+    line-height: 1.8;
 }

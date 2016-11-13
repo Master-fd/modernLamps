@@ -296,3 +296,13 @@ table .gap-line{
 .float-right{
     float: right;
 }
+.margin-bottom50{
+    margin-bottom: 50px;
+}
+.margin-bottom30{
+    margin-bottom: 30px;
+}
+.margin-bottom15{
+    margin-bottom: 15px;
+}
+

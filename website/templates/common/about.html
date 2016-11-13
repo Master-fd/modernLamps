@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }} xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="about">
+
+        <section class="static-content">
+            <h3 class="margin-bottom50">胜宝龙商城</h3>
+            <p class="margin-bottom30">是针对大众开设的基于线上的商城。主要经营智能硬件产品，包含胜宝龙灯具品类。</p>
+            <p class="margin-bottom15">胜宝龙商城作为一个网络销售平台，将优质灯具供应给消费者。在这个过程中，销售者不需要经过经销商、门店，无后顾之忧，轻松获取最大收益。</p>
+        </section>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }} xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="privacy">
+
+        <section class="static-content">
+            <h3 class="margin-bottom50">隐私条款</h3>
+            <h4>资讯公开与共享</h4>
+            <p>胜宝龙商城不会将你的个人信息和资讯故意透露、出租或出售给任何第三方。但以下情况除外：</p>
+            <p>(1)用户本人同意与第三方共享信息和资讯;</p>
+            <p>(2)只有透露用户的个人信息和资讯，才能提供用户所要求的某种产品和服务;</p>
+            <h4>编辑和删除个人帐户资料的权限</h4>
+            <p>你有权在任何时候编辑你的帐户信息和资讯，你也可以填写相关申请表格，要求删除个人帐户，但是你无条件同意在你的帐户删除后，该帐户内及与该帐户相关的信息和资讯仍然保留在硬蛋网档案记录中，除上述第三条规定的情况外，我们将为你保密。</p>
+            <h4>安全保障</h4>
+            <p>你的帐户具有密码保护功能，以确保你的隐私及信息和资讯安全。</p>
+            <h4>问题与建议</h4>
+            <p>如果你有任何问题和建议，请随时通知我们。</p>
+
+        </section>
+
+    </div>
+
+{% endblock %}
