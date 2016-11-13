@@ -104,7 +104,7 @@ class GoodsTable(models.Model):
                          ("dropLamp", u"吊灯"),
                          ('deskLamp', u"台灯"),
                          ('parlorLamp', u"客厅灯"),
-                        ('roomLamp', u"卧室灯"));
+                        ('roomLamp', u"餐厅灯"));
     subClass = models.CharField(choices=subClass_choices, default=subClass_choices[0][0], max_length=64);   #分类
     saleCount = models.IntegerField(default=0);   #销量
     inventoryCount = models.IntegerField(default=0);      #库存

@@ -21,7 +21,7 @@ from website.python.order.order import OrderInfo
 
 #页面返回页面
 def home(request):
-    return render_to_response('common/privacy.html');
+    return render_to_response('home/home.html');
 
 
 
