@@ -24,6 +24,7 @@
     <link rel="shortcut icon" href="../../static/image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../static/js/plugin/sweetalert/sweetalert.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/userBackgroup.css">
 
     {% block userStyle %}{% endblock %}
 
@@ -32,7 +33,8 @@
 <body>
     {% include 'common/nav.html' %}
     {% block content %}{% endblock %}
-    
+    {% include 'common/bottom.html' %}
+    {% include 'common/login.html' %}
 
     <script type="text/javascript" src="../../static/js/plugin/seajs-3.0.0/dist/sea.js"></script>
     <script type="text/ecmascript" src="../../static/js/common/config.js"></script>

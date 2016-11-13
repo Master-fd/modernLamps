@@ -1,5 +1,9 @@
 
 
+body{
+    background-color: #FFFFFF;
+}
+
 .header{
     width: 100%;
     height: 500px;
@@ -22,10 +26,10 @@
 .header .list .current{
     border: 4px solid #ddd;
 }
-.header .bottom{
+.header .bottom-collect{
     float: left;
 }
-.header .bottom .icon-collect{
+.header .bottom-collect .icon-collect{
     margin: 10px auto auto 53%;
     display: inline-block;
     background-position: -35px -362px;

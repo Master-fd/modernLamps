@@ -28,10 +28,21 @@ body{
     font-family: "Microsoft YaHei Light","Microsoft YaHei",Arial,Helvetica,"Hiragino Sans GB","SimSun","WenQuanYi Micro Hei",sans-serif;
     color: #333;
     background: #fff;
+    background-color: #ededed;
 }
 a{
     text-decoration: none;
     cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #333;
+    font-family: 'Microsoft YaHei';
+}
+
+table .gap-line{
+    height: 1px;
+    width: 100%;
 }
 .cursor-pointer{
     cursor: pointer;
@@ -105,6 +116,7 @@ a{
     width: 1170px;
     /*background-color: #FFFFFF;*/
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .full{
@@ -115,7 +127,94 @@ a{
     display: inline-block;
     background: url(../image/sbolo-icon.png);
 }
+.passport-icon{
+    display: inline-block;
+    background: url(../image/passport-icon.png);
+}
 
+/*login*/
+.login-modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1000;
+}
+.login-modal .modal-mask{
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.3;
+}
+.login-modal .modal-main{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 438px;
+    height: 454px;
+    margin: -227px 0 0 -219px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #666;
+    color: #363636;
+    font-size: 18px;
+}
+.login-modal .modal-main .close-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+}
+.login-modal .modal-main .close-icon {
+    vertical-align: middle;
+    background-position: -434px -39px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+}
+.login-modal .modal-main .passport-logo{
+    background-position: 0 -91px;
+    width: 190px;
+    height: 47px;
+    margin: 68px auto 40px;
+    text-align: center;
+}
+.login-modal .modal-main .modal-content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 20px auto 20px auto;
+    display: block;
+    text-align: center;
+}
+.login-modal .modal-main .modal-content input{
+    margin-top: 20px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #c2c3c6;
+    border-radius: 4px;
+    padding: 5px 15px 5px 45px;
+    width: 240px;
+    color: #363636;
+    font-size: 14px;
+}
+.login-modal .modal-main .modal-content .submit-btn{
+    display: block;
+    width: 302px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #e72715;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 30px;
+    margin-left: 67px;
+}
 .row10{
     width: 10%;
 }

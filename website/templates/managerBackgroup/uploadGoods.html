@@ -1,0 +1,203 @@
+
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }}>
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+    <link rel="stylesheet" href="../../static/css/userBackgroup.css">
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="uploadGoods">
+
+{% include 'common/managerNavBar.html' %}
+        <div class="page-containter">
+            <section class="title">
+                <h3>上传商品</h3>
+            </section>
+
+            <section class="upload-info">
+                <div class="gap-line"></div>
+                <form method="post" enctype="multipart/form-data">
+{#                    图片上传#}
+                    <div class="row60 left float-left">
+                       <!-- 轮播图图片-->
+                        <div class="header-image">
+                            <h3 class="title">头部轮播图1~3个</h3>
+                            <ul>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" >
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                           </ul>
+                        </div>
+{#                        描述详情#}
+                        <div class="desc-image">
+                            <h3 class="title">描述详情图片1~10个</h3>
+                            <ul>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                           </ul>
+                        </div>
+{#                        产品说明，购买说明#}
+                        <div class="about-image">
+                            <h3 class="title">购买说明</h3>
+                            <ul>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                                <li>
+                                   <div class="full ">
+                                       <input class="hide-input" type="file" accept="image/gif,image/jpeg,image/jpg" value="">
+                                       <img class="mask-input" src="http://127.0.0.1:8000/static/image/plus.png">
+                                   </div>
+                                </li>
+                           </ul>
+                        </div>
+                    </div>
+
+                    <div class="row40 right float-left">
+                        <div class="goods-desc">
+                            <h3 class="title">商品参数</h3>
+                        </div>
+
+                        <table>
+                            <colgroup>
+                                <col width="100">
+                                <col width="242">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <td class="name">名称</td>
+                                    <td><input class="input-num" type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td class="name">单价</td>
+                                    <td><input class="input-num" type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td class="name">运费</td>
+                                    <td><input class="input-num" type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td class="name">库存</td>
+                                    <td><input class="input-num" type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td class="name">分类</td>
+                                    <td>
+                                        <ul>
+                                            <li class="item current">吊灯</li>
+                                            <li class="item">台灯</li>
+                                            <li class="item">客厅灯</li>
+                                            <li class="item">餐厅灯</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr class="desc-input">
+                                    <td class="name">描述</td>
+                                    <td><textarea></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td class="name" colspan="2"><a href="javascript:void(0);" class="submit-btn">上传</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+               </form>
+
+            </section>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

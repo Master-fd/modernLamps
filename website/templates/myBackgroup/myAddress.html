@@ -1,0 +1,129 @@
+
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }}>
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+    <link rel="stylesheet" href="../../static/css/userBackgroup.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="myAddress">
+
+{% include 'common/userNavBar.html' %}
+
+        <div class="page-containter">
+            <section class="title">
+                <h3>我的收货地址
+                    <a class="add-address"><i class="icon icon-add"></i>添加新地址</a>
+                </h3>
+            </section>
+
+            <section class="content">
+                <table class="table" border="0" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="100">
+                        <col width="400">
+                        <col width="127">
+                        <col width="127">
+                        <col width="127">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="text-left">姓名</th>
+                            <th class="text-left">详细信息</th>
+                            <th>电话</th>
+                            <th>默认地址</th>
+                            <th>用户操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-id="2216">
+                            <td>
+                                <div class="text-center">朱飞东</div>
+                            </td>
+                            <td>
+                                <div>深圳市南山区白石洲</div>
+                            </td>
+                            <td>
+                                <div class="text-center">18824863922</div>
+                            </td>
+                            <td>
+                                <div class="text-center"><a>默认地址</a></div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
+                                    <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="gap-line"></tr>
+                        <tr data-id="2216">
+                            <td>
+                                <div class="text-center">朱飞东</div>
+                            </td>
+                            <td>
+                                <div>深圳市南山区白石洲</div>
+                            </td>
+                            <td>
+                                <div class="text-center">18824863922</div>
+                            </td>
+                            <td>
+                                <div class="text-center"><a>默认地址</a></div>
+                            </td>
+                            <td>
+                                <div class="text-center">
+                                    <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
+                                    <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </section>
+            <section>
+                <div id="pop" class="address-modal" style="display: block">
+                    <div class="modal-mask"></div>
+                    <div class="modal-main">
+                        <div class="modal-header">
+                            添加收货地址
+                            <a class="close-btn" href="javascritpt:void(0);">
+                                <i class="passport-icon close-icon"></i>
+                            </a>
+                        </div>
+                        <div class="modal-content">
+                            <input class="input input-small" type="text" placeholder="收件人">
+                            <input class="input input-small" type="text" placeholder="联系电话">
+                            <input class="input input-big" type="text" placeholder="详细地址">
+                            <div class="default-checkbox">
+                                <input class="check" type="checkbox" checked="checked">
+                                设为默认地址
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a class="cancel-btn" href="javascritpt:void(0);">取消</a>
+                            <a class="submit-btn" href="javascritpt:void(0);">确定</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+{% endblock %}

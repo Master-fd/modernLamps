@@ -1,0 +1,101 @@
+
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }}>
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+    <link rel="stylesheet" href="../../static/css/userBackgroup.css">
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="allGoods">
+
+{% include 'common/managerNavBar.html' %}
+        <div class="page-containter">
+            <section class="title">
+                <h3>所有订单</h3>
+            </section>
+
+            <section class="orders-info">
+                <table class="orders-table" cellpadding="0" cellspacing="0" border="0">
+                            <colgroup>
+                                <col width="100">
+                                <col width="100">
+                                <col width="70">
+                                <col width="100">
+                                <col width="70">
+                                <col width="70">
+                                <col width="100">
+                                <col width="70">
+                                <col width="100">
+                                <col width="110">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>图片</th>
+                                    <th>商品名</th>
+                                    <th>商品ID</th>
+                                    <th>描述</th>
+                                    <th>单价</th>
+                                    <th>运费</th>
+                                    <th>分类</th>
+                                    <th>销量</th>
+                                    <th>库存</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><div class="price"><a><img class="goods-image-size" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
+                                    <td><div class="price"><a>墨镜</a></div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">456</div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">餐厅灯</div></td>
+                                    <td><div class="price">132</div></td>
+                                    <td><div class="price">1232</div></td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
+                                            <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><div class="price"><a><img class="goods-image-size" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
+                                    <td><div class="price"><a>墨镜</a></div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">456</div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">￥<span>5</span></div></td>
+                                    <td><div class="price">餐厅灯</div></td>
+                                    <td><div class="price">132</div></td>
+                                    <td><div class="price">1232</div></td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
+                                            <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+            </section>
+
+
+        </div>
+    </div>
+
+{% endblock %}

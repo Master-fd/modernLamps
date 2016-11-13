@@ -21,7 +21,7 @@ from website.python.order.order import OrderInfo
 
 #页面返回页面
 def home(request):
-    return render_to_response('goods/shoppingCart.html');
+    return render_to_response('goods/goodsInfo.html');
 
 
 

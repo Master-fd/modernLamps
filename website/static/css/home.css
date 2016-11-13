@@ -1,7 +1,9 @@
 
 
 /*middle content*/
-
+body{
+    background-color: #FFFFFF;
+}
 .banner{
     width: 100%;
     height: 600px;

@@ -1,0 +1,56 @@
+
+{% extends 'common/base.html' %}
+
+{% block description %}
+    <meta name="description" content={{ goodsName }}>
+{% endblock %}
+
+{% block keywords%}
+    <meta name="keywords" content={{ goodsName }}>
+{% endblock %}
+
+{% block title %}{{ goodsName }}{% endblock %}
+
+{% block userStyle %}
+    <link rel="stylesheet" href="../../static/css/bottom.css">
+    <link rel="stylesheet" href="../../static/css/userBackgroup.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <div id="page" class="container" data-id="myAddress">
+
+{% include 'common/userNavBar.html' %}
+
+        <div class="page-containter">
+            <section class="title">
+                <h3>账户资料</h3>
+            </section>
+
+            <section class="information">
+                <ul class="list">
+                    <li class="item">
+                        <h4 class="title"><i class="icon icon-check"></i>账户昵称</h4>
+                        <span class="nike-name">1234567896</span>
+                        <a href="javascript:void(0);" class="modify">修改</a>
+                        <div class="gap-line"></div>
+                    </li>
+                    <li class="item">
+                        <h4 class="title"><i class="icon icon-check"></i>账户</h4>
+                        <span class="nike-name">1fadsfasdfa234567896</span>
+                        <a href="javascript:void(0);" class="modify">修改</a>
+                    </li>
+                    <li class="item">
+                        <h4 class="title"><i class="icon icon-check"></i>登录密码</h4>
+                        <span class="nike-name">互联网账号存在被盗风险，建议您定期 更改密码以保护账户安全。</span>
+                        <a href="javascript:void(0);" class="modify">修改</a>
+                    </li>
+                </ul>
+            </section>
+
+
+        </div>
+    </div>
+
+{% endblock %}
