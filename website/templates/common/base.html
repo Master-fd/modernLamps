@@ -17,8 +17,8 @@
     </title>
 
     <script type="text/javascript">
-        var isLogin=false;
-        var resourceUrl = 'http://127.0.0.1:8000/static/'
+        var isLogin={{ isLogin }};       //服务器渲染是否已经login
+        var resourceUrl = 'http://127.0.0.1:8000/';   //请求基地址
     </script>
 
     <link rel="shortcut icon" href="../../static/image/favicon.ico" type="image/x-icon">
@@ -33,7 +33,7 @@
 <body>
     {% include 'common/nav.html' %}
     {% block content %}{% endblock %}
-    {% include 'common/bottom.html' %}
+    {% include 'common/../static/bottom.html' %}
     {% include 'common/login.html' %}
 
     <script type="text/javascript" src="../../static/js/plugin/seajs-3.0.0/dist/sea.js"></script>

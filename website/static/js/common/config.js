@@ -7,13 +7,13 @@
 
         base : resourceUrl,
         alias : {   //配置模块
-            'jquery' : 'js/plugin/jquery-2.1.4/jquery.js',
-            'sweetalert' : 'js/plugin/sweetalert/sweetalert.min.js',
-            'account' : 'js/common/account.js',
-            'pop' : 'js/common/pop.js'
+            'jquery' : 'static/js/plugin/jquery-2.1.4/jquery.js',
+            'sweetalert' : 'static/js/plugin/sweetalert/sweetalert.min.js',
+            'account' : 'static/js/common/account.js',
+            'pop' : 'static/js/common/pop.js'
         }
     });
 
-    seajs.use('js/common/main.js');  //加载不同的模块
+    seajs.use('static/js/common/main.js');  //加载不同的模块
 
 })(resourceUrl);

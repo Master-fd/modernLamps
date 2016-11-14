@@ -49,18 +49,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-id="2216">
+                        {% for address in addressList %}
+                            <tr data-id="{{ address.addressId }}">
                             <td>
-                                <div class="text-center">朱飞东</div>
+                                <div class="text-center">{{ address.contact }}</div>
                             </td>
                             <td>
-                                <div>深圳市南山区白石洲</div>
+                                <div>{{ address.address }}</div>
                             </td>
                             <td>
-                                <div class="text-center">18824863922</div>
+                                <div class="text-center">{{ address.phoneNumber }}</div>
                             </td>
                             <td>
-                                <div class="text-center"><a>默认地址</a></div>
+                                {% if address.defaults != 0 %}
+                                    <div class="text-center"><a href="javascript:void(0);">默认地址</a></div>
+                                {% else %}
+                                    <div class="text-center"><a href="javascript:void(0);">设为地址</a></div>
+                                {% endif %}
+
                             </td>
                             <td>
                                 <div class="text-center">
@@ -70,26 +76,8 @@
                             </td>
                         </tr>
                         <tr class="gap-line"></tr>
-                        <tr data-id="2216">
-                            <td>
-                                <div class="text-center">朱飞东</div>
-                            </td>
-                            <td>
-                                <div>深圳市南山区白石洲</div>
-                            </td>
-                            <td>
-                                <div class="text-center">18824863922</div>
-                            </td>
-                            <td>
-                                <div class="text-center"><a>默认地址</a></div>
-                            </td>
-                            <td>
-                                <div class="text-center">
-                                    <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
-                                    <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        {% endfor %}
+
                     </tbody>
 
                 </table>

@@ -22,25 +22,26 @@
 
 <div id="page" class="container" data-id="home">
 {#广告图#}
+{#    又服务器端渲染，传递一个数组，每个商品就是一个字典#}
     <section class="banner">
         {#        left#}
         <div class="col100 row50">
-            <a href="javascript:void(0);" class="full">
-                <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+            <a href="{{ goodsList.banner0.goodsDescUrl }}" class="full">
+                <img class="full" src="{{ goodsList.banner0.minImageUrl1 }}">
             </a>
         </div>
         <div class="col100 row50">
             <div class="col60 row100">
-                <a href="javascript:void(0);" class="full">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.banner1.goodsDescUrl }}" class="full">
+                    <img class="full" src="{{ goodsList.banner1.minImageUrl1 }}">
                 </a>
             </div>
             <div class="col40 row100">
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.banner2.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="full" src="{{ goodsList.banner2.minImageUrl1 }}">
                 </a>
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.banner3.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="full" src="{{ goodsList.banner3.minImageUrl1 }}">
                 </a>
             </div>
         </div>
@@ -50,57 +51,45 @@
     <section class="hotgoods">
         <div class="col100 row33 float-left">
             <label class="small">
-                <a href="javascript:void(0);" class="row100 col33 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        分行了司法导师非礼阿发死不发挥了福大dhadhso;dlakdabhhlfudgsbrwqerr䦹ladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods1.goodsDescUrl }}" class="row100 col33 blank">
+                    <img class="full" src="{{ goodsList.hotGoods1.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods1.description }}</p>
                 </a>
             </label>
             <label class="big">
-                <a href="javascript:void(0);" class="row100 col66 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        分行了司法导师非礼阿发死不发挥了福大dhadhdhadhso;dlakdabhhlfudgsbladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods2.goodsDescUrl }}" class="row100 col66 blank">
+                    <img class="full" src="{{ goodsList.hotGoods2.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods2.description }}</p>
                 </a>
             </label>
         </div>
         <div class="col100 row33 float-left">
             <label class="big">
-                <a href="javascript:void(0);" class="row100 col66 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        dhadhso;dlakdabhhlfudgsbladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods3.goodsDescUrl }}" class="row100 col66 blank">
+                    <img class="full" src="{{ goodsList.hotGoods3.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods3.description }}</p>
                 </a>
             </label>
             <label class="small">
-                <a href="javascript:void(0);" class="row100 col33 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        dhadhso;dlakdabhhlfudasdsdfafewfrewqrdgsbladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods4.goodsDescUrl }}" class="row100 col33 blank">
+                    <img class="full" src="{{ goodsList.hotGoods4.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods4.description }}</p>
                 </a>
             </label>
         </div>
         <div class="col100 row33 float-left">
             <label class="small">
-                <a href="javascript:void(0);" class="row100 col33 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        dhadhso;dlakdabhhlfudgsbladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods5.goodsDescUrl }}" class="row100 col33 blank">
+                    <img class="full" src="{{ goodsList.hotGoods5.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods5.description }}</p>
                 </a>
                 </label>
             <label class="big">
-                <a href="javascript:void(0);" class="row100 col66 blank">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                    <p class="datail">
-                        dhadhso;dlakdabhhlfudgsbladlsjfadsjfbjsda
-                    </p>
+                <a href="{{ goodsList.hotGoods6.goodsDescUrl }}" class="row100 col66 blank">
+                    <img class="full" src="{{ goodsList.hotGoods6.minImageUrl1 }}">
+                    <p class="datail">{{ goodsList.hotGoods6.description }}</p>
                 </a>
-                </label>
+            </label>
         </div>
     </section>
 
@@ -108,40 +97,40 @@
     <section class="first">
         {#        left#}
         <div class="col100 row60">
-            <a href="javascript:void(0);" class="row70 col100 float-left">
-                <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+            <a href="{{ goodsList.first1.goodsDescUrl }}" class="row70 col100 float-left">
+                <img class="full" src="{{ goodsList.first1.minImageUrl1 }}">
             </a>
             <label class="left">
-                <a href="javascript:void(0);" class="row30 col100 float-left">
-                    <img class="image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.first2.goodsDescUrl }}" class="row30 col100 float-left">
+                    <img class="image" src="{{ goodsList.first2.minImageUrl1 }}">
                     <p class="goodsName">商品</p>
-                    <p class="price-tag">￥<span class="price-num">239</span></p>
+                    <p class="price-tag">￥<span class="price-num">{{ goodsList.first2.price }}</span></p>
                 </a>
             </label>
         </div>
         <div class="right col100 row40">
             <div class="col50 row100">
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.first3.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="image" src="{{ goodsList.first3.minImageUrl1 }}">
                     <p class="goodsName">商品</p>
-                    <p class="price-tag">￥<span class="price-num">239</span></p>
+                    <p class="price-tag">￥<span class="price-num">{{ goodsList.first3.price }}</span></p>
                 </a>
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.first4.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="image" src="{{ goodsList.first4.minImageUrl1 }}">
                     <p class="goodsName">商品</p>
-                    <p class="price-tag">￥<span class="price-num">239</span></p>
+                    <p class="price-tag">￥<span class="price-num">{{ goodsList.first4.price }}</span></p>
                 </a>
             </div>
             <div class="col50 row100">
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.first5.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="image" src="{{ goodsList.first5.minImageUrl1 }}">
                     <p class="goodsName">商品</p>
-                    <p class="price-tag">￥<span class="price-num">239</span></p>
+                    <p class="price-tag">￥<span class="price-num">{{ goodsList.first5.price }}</span></p>
                 </a>
-                <a href="javascript:void(0);" class="float-left row50 col100">
-                    <img class="image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                <a href="{{ goodsList.first6.goodsDescUrl }}" class="float-left row50 col100">
+                    <img class="image" src="{{ goodsList.first6.minImageUrl1 }}">
                     <p class="goodsName">商品</p>
-                    <p class="price-tag">￥<span class="price-num">239</span></p>
+                    <p class="price-tag">￥<span class="price-num">{{ goodsList.first6.price }}</span></p>
                 </a>
             </div>
         </div>

@@ -28,39 +28,16 @@
             </section>
             <section class="content">
                 <ul class="list">
-
-                    <li class="item">
-                        <a class="goods-image">
-                            <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                        </a>
-                        <a class="goods-name">钢琴</a>
-                        <span class="price-tag">￥</span>
-                        <span class="price-num">0</span>
-                    </li>
-                    <li class="item">
-                        <a class="goods-image">
-                            <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                        </a>
-                        <a class="goods-name">钢琴</a>
-                        <span class="price-tag">￥</span>
-                        <span class="price-num">0</span>
-                    </li>
-                    <li class="item">
-                        <a class="goods-image">
-                            <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                        </a>
-                        <a class="goods-name">钢琴</a>
-                        <span class="price-tag">￥</span>
-                        <span class="price-num">0</span>
-                    </li>
-                    <li class="item">
-                        <a class="goods-image">
-                            <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                        </a>
-                        <a class="goods-name">钢琴</a>
-                        <span class="price-tag">￥</span>
-                        <span class="price-num">0</span>
-                    </li>
+                    {% for goods in collectList %}
+                        <li class="item">
+                            <a href="{{ goods.goodsDescUrl }}" class="goods-image">
+                                <img class="full" src="{{ goods.minImageUrl1 }}">
+                            </a>
+                            <a href="{{ goods.goodsDescUrl }}" class="goods-name">{{ goods.goodsName }}</a>
+                            <span class="price-tag">￥</span>
+                            <span class="price-num">{{ goods.price }}</span>
+                        </li>
+                    {% endfor %}
                 </ul>
             </section>
         </div>

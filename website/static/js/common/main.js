@@ -14,11 +14,11 @@ define(function(require){
 
     switch (_page){
 
-        case 'home' : seajs.use('js/home/home.js'); break;   //加载Home
+        case 'home' : seajs.use('static/js/home/home.js'); break;   //加载Home
 
         default : break;
     }
 
-    seajs.use('js/common/base.js');   //加载nav和bottom的js
+    seajs.use('static/js/common/base.js');   //加载nav和bottom的js
 
 });

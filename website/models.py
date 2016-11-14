@@ -68,6 +68,8 @@ class UserOrderTable(models.Model):
                       ("ruturnGoodsing", u'退货中'),
                       ("ruturnGoodsed", u'已退货'),);
     status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
+    company = models.CharField(max_length=64);   #快递公司
+    expressId = models.CharField(max_length=128); #快递单号
     createDate = models.DateTimeField(auto_now_add=True);
     updateDate = models.DateTimeField(auto_now=True);
 
@@ -89,6 +91,8 @@ class ManagerOrderTable(models.Model):
                       ("ruturnGoodsing", u'退货中'),
                       ("ruturnGoodsed", u'已退货'),);
     status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
+    company = models.CharField(max_length=64);   #快递公司
+    expressId = models.CharField(max_length=128); #快递单号
     createDate = models.DateTimeField(auto_now_add=True);
     updateDate = models.DateTimeField(auto_now=True);
 

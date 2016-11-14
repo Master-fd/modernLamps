@@ -37,6 +37,10 @@ body{
     height: 18px;
     vertical-align: middle;
 }
+.header .bottom-collect .icon-collect:hover,
+.header .bottom-collect .icon-collect.current{
+    background: url('http://127.0.0.1:8000/static/image/sbolo-icon.png') no-repeat -113px -362px;
+}
 .header .right{
     padding-left: 70px;
     width: auto;

@@ -23,29 +23,32 @@
 {#        头部#}
         <section class="header">
             <div class="row50 col100">
+{#                左侧小图标#}
                 <ul class="list float-left col80 row15">
                     <li class="item current">
-                        <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                        <img class="full" src="{{ goods.minImageUrl1 }}">
                     </li>
                     <li class="item">
-                        <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                        <img class="full" src="{{ goods.minImageUrl2 }}">
                     </li>
                     <li class="item">
-                        <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                        <img class="full" src="{{ goods.minImageUrl3 }}">
                     </li>
                 </ul>
+{#                大图#}
                 <div class="row80 col80">
-                    <img class="full" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                    <img class="full" src="{{ goods.minImageUrl1 }}">
                 </div>
+{#                收藏#}
                 <div class="bottom-collect row100 col10">
                     <a href="javascript:void(0);" class="icon icon-collect"></a>
                 </div>
             </div>
             <div class="right col100">
                 <div class="row100 col20">
-                    <h3 class="goodsName">标题</h3>
+                    <h3 class="goodsName">{{ goods.goodsName }}</h3>
                     <div class="gap-line"></div>
-                    <input type="hidden" id="goodsId" value="11">
+                    <input type="hidden" id="goodsId" value="{{ goods.goodsId }}">
                 </div>
 
                 <table>
@@ -55,22 +58,22 @@
                             <td>价格</td>
                             <td>
                                 <span class="price-tag">￥</span>
-                                <span class="price-num">0</span>
+                                <span class="price-num">{{ goods.price }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>运费</td>
                             <td>
                                 <span class="price-tag">￥</span>
-                                <span class="price-num">0</span>
+                                <span class="price-num">{{ goods.freightCost }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>销量</td>
                             <td>
-                                <span class="sale-num">0</span>
+                                <span class="sale-num">{{ goods.saleCount }}</span>
                                 <span class=>库存</span>
-                                <span class="invent-num">0</span>
+                                <span class="invent-num">{{ goods.inventoryCount }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -97,9 +100,9 @@
         <section class="datail">
             <h3 class="title">商品详情</h3>
             <div class="goods-desc">
-                <img src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                <img src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
-                <img src="http://127.0.0.1:8000/static/image/sbolo-logo.png">
+                {% for goodsImageUrl in goodsImageUrlList %}
+                    <img src = "{{ goodsImageUrl }}">
+                {% endfor %}
             </div>
         </section>
     </div>

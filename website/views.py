@@ -21,13 +21,18 @@ from website.python.order.order import OrderInfo
 
 #页面返回页面
 def home(request):
-    return render_to_response('home/home.html');
+    return render_to_response('goods/goodsInfo.html');
 
 
 
 #渲染一个商品
 def goodsInfo(request, goodsId):
     return GoodsInfo.goodsInfo(goodsId);
+
+#返回用户后台首页
+def userBackgroup(request):
+    return render_to_response('myBackgroup/myCollect.html');
+
 
 #ajax请求类操作
 def userInfoRequestPortManager(request):

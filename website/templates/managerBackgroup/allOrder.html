@@ -28,6 +28,7 @@
 
             <section class="orders-info">
                 <ul>
+                {% for order in ordersList %}
                     <li>
                         <table class="orders-table" cellpadding="0" cellspacing="0" border="0">
                             <colgroup>
@@ -51,103 +52,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
-                                    <td><div class="price"><a>墨镜</a></div></td>
-                                    <td><div class="price">￥<span>5</span></div></td>
-                                    <td class="gap-line-right"><div class="price">456</div></td>
-                                    <td rowspan="2"><div class="price">￥<span>5</span></div></td>
-                                    <td rowspan="2"><div class="price"><a href="">新订单</a></div></td>
-                                    <td rowspan="2"><div class="price"><a>删除</a></div> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
-                                    <td><div class="price"><a>墨镜</a></div></td>
-                                    <td><div class="price">￥<span>5</span></div></td>
-                                    <td class="gap-line-right"><div class="price">456</div></td>
-                                </tr>
-
+{#                            订单所有goods#}
+                            {% for goods in order.goodsList %}
+                                {% if forloop.first %}
+                                    <tr>
+                                        <td><div><a href="{{ goods.goodsDescUrl }}" class="goods"><img class="goods-image" src="{{ goods.minImageUrl1 }}"></a></div></td>
+                                        <td><div class="price"><a href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a></div></td>
+                                        <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
+                                        <td class="gap-line-right"><div class="price">{{ goods.count }}</div></td>
+                                        <td rowspan="2"><div class="price">￥<span>{{ order.totalPrice }}</span></div></td>
+                                        <td rowspan="2"><div class="price"><a href="javascript:void(0);">{{ order.status }}</a></div></td>
+                                        <td rowspan="2"><div class="price"><a href="javascript:void(0);" data-id="{{ order.orderId }}">删除</a></div> </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td><div><a href="{{ goods.goodsDescUrl }}" class="goods"><img class="goods-image" src="{{ goods.minImageUrl1 }}"></a></div></td>
+                                        <td><div class="price"><a href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a></div></td>
+                                        <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
+                                        <td class="gap-line-right"><div class="price">{{ goods.count }}</div></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            {#订单地址#}
                                 <tr>
                                     <td class="address gap-line-right" colspan="4">
                                         <div>
-                                            <span>收件人:</span>
-                                            <span>朱飞东</span>
-                                            <span>18898655184</span>
-                                            <span>详细地分发生的发发大水发</span>
+                                            <span>收件地址:</span>
+                                            <span>{{ order.address.contact }}</span>
+                                            <span>{{ order.address.phoneNumber }}</span>
+                                            <span>{{ order.address.address }}</span>
                                         </div>
                                     </td>
                                     <td colspan="3">
                                         <div>
                                             <span>快递单号:</span>
-                                            <span>顺丰</span>
-                                            <span>12458456544544</span>
+                                            <span>{{ order.express.company }}</span>
+                                            <span>{{ order.express.expressId }}</span>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </li>
-                    <li>
-                        <table class="orders-table" cellpadding="0" cellspacing="0" border="0">
-                            <colgroup>
-                                <col width="180">
-                                <col width="255">
-                                <col width="83">
-                                <col width="73">
-                                <col width="110">
-                                <col width="103">
-                                <col width="86">
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>2016-15-45 15:15:02</th>
-                                    <th>订单编号:<span>41564</span></th>
-                                    <th>单价</th>
-                                    <th>数量</th>
-                                    <th>总计</th>
-                                    <th>状态</th>
-                                    <th>操作</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
-                                    <td><div class="price"><a>墨镜</a></div></td>
-                                    <td><div class="price">￥<span>5</span></div></td>
-                                    <td class="gap-line-right"><div class="price">456</div></td>
-                                    <td rowspan="2"><div class="price">￥<span>5</span></div></td>
-                                    <td rowspan="2"><div class="price"><a href="">新订单</a></div></td>
-                                    <td rowspan="2"><div class="price"><a>删除</a></div> </td>
-                                </tr>
-
-                                <tr>
-                                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png"></a></div></td>
-                                    <td><div class="price"><a>墨镜</a></div></td>
-                                    <td><div class="price">￥<span>5</span></div></td>
-                                    <td class="gap-line-right"><div class="price">456</div></td>
-                                </tr>
-
-                                <tr>
-                                    <td class="address gap-line-right" colspan="4">
-                                        <div>
-                                            <span>收件人:</span>
-                                            <span>朱飞东</span>
-                                            <span>18898655184</span>
-                                            <span>详细地分发生的发发大水发</span>
-                                        </div>
-                                    </td>
-                                    <td colspan="3">
-                                        <div>
-                                            <span>快递单号:</span>
-                                            <span>顺丰</span>
-                                            <span>12458456544544</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </li>
+                {% endfor %}
                 </ul>
             </section>
 

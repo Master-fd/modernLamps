@@ -31,8 +31,15 @@ class UserInfo(object):
                 return Responses.responseJsonArray('fail', 'operation有误');
         elif request.method == 'GET':
             operation = request.GET.get('operation', None);
-            if operation == 'get':   #获取用户资料
+            if operation == 'getUserInfo':   #获取用户资料
                 return cls.__getUserInfo(request);
+            elif operation == 'isLogin':
+                isLogin, account = cls.checkIsLogin(request);
+                if isLogin:
+                    return Responses.responseJsonArray('success', '已登录', [{'isLogin': True,
+                                                                           'account': account}]);
+                else:
+                    return Responses.responseJsonArray('fail', '未登录');
             else:
                 return Responses.responseJsonArray('fail', 'operation有误');
         else:
@@ -123,7 +130,7 @@ class UserInfo(object):
             #查找用户信息
             try:
                 result = models.UsersTable.objects.get(account=account);
-                data = model_to_dict(result);
+                data = [model_to_dict(result)];
                 return Responses.responseJsonArray("success", "查找用户信息", data);
             except Exception, e:
                 return Responses.responseJsonArray("fail", "查找失败");
