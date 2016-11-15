@@ -4,7 +4,7 @@
 '''
 请求响应数据
 '''
-from django.shortcuts import HttpResponse, HttpResponseRedirect, render_to_response
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render_to_response, Http404
 import json
 
 class Responses(object):
@@ -28,4 +28,24 @@ class Responses(object):
         };
         return HttpResponse(json.dumps(dict));
 
+    #渲染返回页面,同时返回login
+    @classmethod
+    def returnDrawPage(cls, isLogin, page, dictName, data):
+
+        dataDict = {
+            'isLogin' : isLogin,
+            dictName : data
+        };
+        if data:
+            return render_to_response(page, dataDict);
+        else:
+            return Http404;
+
+    #渲染返回后台类页面，需要先check用户是否login
+    @classmethod
+    def returnCheckLoginDrawPage(cls, isLogin, page, dictName, data):
+        if isLogin:
+            return cls.returnDrawPage(isLogin, page, dictName, data);
+        else:
+            return cls.responseJsonArray('fail', '未登录');
 

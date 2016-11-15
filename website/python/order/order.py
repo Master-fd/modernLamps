@@ -160,6 +160,14 @@ class OrderInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
+        data = cls.getOrderData(page, pageSize, account, **condition);
+        if data:
+            return Responses.responseJsonArray('success', '请求成功', data);
+        else:
+            return Responses.responseJsonArray('fail', '没有数据');
+
+    @classmethod
+    def getOrderData(cls, page=1, pageSize=20, account=0, **condition):
         try:
              #查看是否为超级用户
             result = models.UsersTable.get(account=account);
@@ -178,8 +186,8 @@ class OrderInfo(object):
                 for obj in results:   #模型转字典
                     dict = model_to_dict(obj);
                     data.append(dict);
-                return Responses.responseJsonArray('success', '请求成功', data);
+                return data;  #返回数组
             else:
-                return Responses.responseJsonArray('fail', '没有数据');
+                return None;
         except:
-            return Responses.responseJsonArray('fail', '请求异常');
+            return None;

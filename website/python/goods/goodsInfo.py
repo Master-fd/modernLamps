@@ -40,18 +40,6 @@ class GoodsInfo(object):
         else:
             return Responses.responseJsonArray('fail', '请使用get或post请求');
 
-    #渲染返回商品详情,不存在时返回不存在
-    @classmethod
-    def goodsInfo(cls, goodsId=None):
-        try:
-            result = models.GoodsTable.objects.get(goodsId=goodsId);
-            if result:
-                params = model_to_dict(result);
-                return render_to_response('goods/goodsInfo.html', params);
-            else:
-                return render_to_response('goods/goodsNot.html');
-        except Exception, e:
-            return render_to_response('goods/goodsNot.html');
 
     #分页查找商品,返回json
     @classmethod
@@ -70,13 +58,23 @@ class GoodsInfo(object):
             page = 1;
         if pageSize <= 20:
             pageSize
-        data = [];
-        try:
-            condition = {
+        condition = {
                 'goodsName' : goodsName,
                 'goodsId' : goodsId,
                 'subClass' : subClass
             };
+        data = cls.getGoodsData(page, pageSize, **condition);
+        if data:
+            return Responses.responseJsonArray('success', '请求成功', data);
+        else:
+            return Responses.responseJsonArray('fail', '没有数据');
+
+
+    #查找商品
+    @classmethod
+    def getGoodsData(cls, page=1, pageSize=20, **condition):
+        data = [];
+        try:
             results = models.GoodsTable.objects.filter(**condition).order_by('id');
             if results.count():
                 paginator = Paginator(results, pageSize);  #分页
@@ -88,12 +86,11 @@ class GoodsInfo(object):
                 for obj in results:   #模型转字典
                     goods = model_to_dict(obj);
                     data.append(goods);
-                return Responses.responseJsonArray('success', '请求成功', data);
+                return data;
             else:
-                return Responses.responseJsonArray('fail', '没有数据');
+                return None;
         except:
-            return Responses.responseJsonArray('fail', '请求异常');
-
+            return None;
     #删除商品
     @classmethod
     def deleteGoods(cls, request=HttpRequest()):

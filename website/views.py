@@ -11,6 +11,7 @@ from website.python.user.myAddress import AddressInfo
 from website.python.user.myCollect import CollectInfo
 from website.python.goods.goodsInfo import GoodsInfo
 from website.python.order.order import OrderInfo
+from website.python.common.response import Responses
 
 
 '''
@@ -23,15 +24,25 @@ from website.python.order.order import OrderInfo
 def home(request):
     return render_to_response('goods/goodsInfo.html');
 
-
-
 #渲染一个商品
 def goodsInfo(request, goodsId):
-    return GoodsInfo.goodsInfo(goodsId);
+    isLogin, account = UserInfo.checkIsLogin();
+    condition = {
+        'goodsId', goodsId
+    }
+    goods = GoodsInfo.getGoodsData(1, 20, condition);
+    Responses.returnDrawPage(isLogin, 'goods/goodsInfo.html', 'goods', **goods);
+
 
 #返回用户后台首页
 def userBackgroup(request):
-    return render_to_response('myBackgroup/myCollect.html');
+    #获取order信息
+    isLogin, account = UserInfo.checkIsLogin();
+    condition = {
+        'account' : account
+    }
+    orderList = OrderInfo.getOrderData(1, 20, account, **condition);
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'orderList', *orderList);
 
 
 #ajax请求类操作
