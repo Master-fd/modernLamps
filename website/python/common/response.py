@@ -4,7 +4,8 @@
 '''
 请求响应数据
 '''
-from django.shortcuts import HttpResponse, HttpResponseRedirect, render_to_response, Http404
+from django.shortcuts import HttpResponse, HttpResponseRedirect, render_to_response
+from django.http import Http404
 import json
 
 class Responses(object):
@@ -32,14 +33,19 @@ class Responses(object):
     @classmethod
     def returnDrawPage(cls, isLogin, page, dictName, data):
 
+        if isLogin == True:
+            isLogin = 1;
+        if isLogin == False:
+            isLogin = 0;
+
         dataDict = {
             'isLogin' : isLogin,
             dictName : data
         };
-        if data:
-            return render_to_response(page, dataDict);
-        else:
-            return Http404;
+        # if data:
+        return render_to_response(page, dataDict);
+        # else:
+        #     raise Http404;
 
     #渲染返回后台类页面，需要先check用户是否login
     @classmethod

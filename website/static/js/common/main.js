@@ -6,8 +6,7 @@
 define(function(require){
 
     window.$ = window.jQuery = require('jquery');  //加载jq
-    window.swal = require('sweetalert');        //加载弹窗对话框
-    window.pop = require('pop');    //加载蒙版
+    window.pop = require('pop');    //加载蒙版弹框
 
 
     var _page = $('#page').data('id');

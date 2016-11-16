@@ -34,6 +34,9 @@ a{
     text-decoration: none;
     cursor: pointer;
 }
+a:link{
+    color: #222222;
+}
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
     color: #333;
@@ -104,6 +107,9 @@ table .gap-line{
 .item .user .icon-right{
     margin-left: 250px;
     background-position: -314px -23px;
+}
+.item .logout{
+    margin-left: 10px;
 }
 .item .cart .icon-right{
     margin-left: 20px;
@@ -187,7 +193,7 @@ table .gap-line{
     position: absolute;
     left: 0;
     right: 0;
-    margin: 20px auto 20px auto;
+    margin: 0px auto 20px auto;
     display: block;
     text-align: center;
 }
@@ -205,14 +211,14 @@ table .gap-line{
 .login-modal .modal-main .modal-content .submit-btn{
     display: block;
     width: 302px;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     background-color: #e72715;
     color: #fff;
     border-radius: 4px;
     font-size: 16px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 67px;
 }
 .row10{

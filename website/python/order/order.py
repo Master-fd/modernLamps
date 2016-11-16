@@ -160,14 +160,14 @@ class OrderInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
-        data = cls.getOrderData(page, pageSize, account, **condition);
+        data = cls.getOrderData(page, pageSize, account, condition={});
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
             return Responses.responseJsonArray('fail', '没有数据');
 
     @classmethod
-    def getOrderData(cls, page=1, pageSize=20, account=0, **condition):
+    def getOrderData(cls, page, pageSize, account, condition={}):
         try:
              #查看是否为超级用户
             result = models.UsersTable.get(account=account);

@@ -140,8 +140,12 @@ class UserInfo(object):
     #检测用户是否已经登录
     @classmethod
     def checkIsLogin(cls, request=HttpRequest()):
-        account = request.session.get('account', None);
-        if account:
-            return True, account;
-        else:
+        account = None;
+        try:
+            account = request.session.get('account', None);
+            if account:
+                return True, account;
+            else:
+                return False, account;
+        except:
             return False, account;

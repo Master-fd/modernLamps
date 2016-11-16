@@ -8,7 +8,6 @@
         base : resourceUrl,
         alias : {   //配置模块
             'jquery' : 'static/js/plugin/jquery-2.1.4/jquery.js',
-            'sweetalert' : 'static/js/plugin/sweetalert/sweetalert.min.js',
             'account' : 'static/js/common/account.js',
             'pop' : 'static/js/common/pop.js'
         }

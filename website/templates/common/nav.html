@@ -16,8 +16,24 @@
             <label class="item">
                 <a href="javascript:void(0);" class="user js-login" data-id="">
                     <i class="icon icon-right"></i>
-                    <span>登录</span>
+                    {% if isLogin == False %}
+                        <span class="js-loginName">登录</span>
+                    {% else %}
+                        <span class="js-loginName">个人中心</span>
+                    {% endif %}
                 </a>
+
+            </label>
+            <label class="item">
+                {% if isLogin == False %}
+                <a href="javascript:void(0);" class="logout js-logout" style="display: none">
+                    <span>退出</span>
+                </a>
+            {% else %}
+                <a href="javascript:void(0);" class="logout js-logout" style="display: block">
+                    <span>退出</span>
+                </a>
+            {% endif %}
             </label>
             <label class="item">
                 <a href="javascript:void(0);" class="cart" href="http://127.0.0.1:8000/shoppingCart">

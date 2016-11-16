@@ -75,7 +75,10 @@ class GoodsInfo(object):
     def getGoodsData(cls, page=1, pageSize=20, **condition):
         data = [];
         try:
-            results = models.GoodsTable.objects.filter(**condition).order_by('id');
+            if condition:
+                results = models.GoodsTable.objects.filter(**condition).order_by('id');
+            else:
+                results = models.GoodsTable.objects.all().order_by('id');
             if results.count():
                 paginator = Paginator(results, pageSize);  #分页
                 try:

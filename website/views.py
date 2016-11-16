@@ -20,9 +20,31 @@ from website.python.common.response import Responses
 
 
 
-#页面返回页面
+#返回首页页面
 def home(request):
-    return render_to_response('goods/goodsInfo.html');
+    # isLogin, account = UserInfo.checkIsLogin();
+    # goods = GoodsInfo.getGoodsData(1, 20, None);
+    # goodsList = {
+    #     'banner1' : goods[0],
+    #     'banner2' : goods[1],
+    #     'banner3' : goods[2],
+    #     'banner4' : goods[3],
+    #     'hotGoods1' : goods[4],
+    #     'hotGoods2' : goods[5],
+    #     'hotGoods3' : goods[6],
+    #     'hotGoods4' : goods[7],
+    #     'hotGoods5' : goods[8],
+    #     'hotGoods6' : goods[9],
+    #     'first1' : goods[10],
+    #     'first2' : goods[11],
+    #     'first3' : goods[12],
+    #     'first4' : goods[13],
+    #     'first5' : goods[14],
+    #     'first6' : goods[15],
+    #
+    # }
+    isLogin = False;
+    return Responses.returnDrawPage(isLogin, 'home/home.html', 'goodsList', None);
 
 #渲染一个商品
 def goodsInfo(request, goodsId):
@@ -31,7 +53,7 @@ def goodsInfo(request, goodsId):
         'goodsId', goodsId
     }
     goods = GoodsInfo.getGoodsData(1, 20, condition);
-    Responses.returnDrawPage(isLogin, 'goods/goodsInfo.html', 'goods', **goods);
+    return Responses.returnDrawPage(isLogin, 'goods/goodsInfo.html', 'goods', **goods);
 
 
 #返回用户后台首页
@@ -41,8 +63,8 @@ def userBackgroup(request):
     condition = {
         'account' : account
     }
-    orderList = OrderInfo.getOrderData(1, 20, account, **condition);
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'orderList', *orderList);
+    orderList = OrderInfo.getOrderData(1, 20, account, condition);
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'orderList', orderList);
 
 
 #ajax请求类操作
