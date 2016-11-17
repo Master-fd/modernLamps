@@ -50,7 +50,9 @@ table .gap-line{
 .cursor-pointer{
     cursor: pointer;
 }
-
+.hidden{
+    display: none;
+}
 
 /*nav*/
 .nav{
@@ -104,8 +106,30 @@ table .gap-line{
     height: 21px;
     vertical-align: middle;
 }
+.item .home{
+    margin-left: 70px;
+}
+.item .goods{
+    margin-left: 30px;
+}
+.item .home,
+.item .goods{
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+}
+.item .home.current,
+.item .goods.current{
+    background-color: #363636;
+    color: #FFFFFF;
+}
+.item .user{
+    margin-left: 100px;
+}
 .item .user .icon-right{
-    margin-left: 250px;
+    /*margin-left: 250px;*/
     background-position: -314px -23px;
 }
 .item .logout{

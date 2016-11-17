@@ -22,7 +22,7 @@ from website.python.common.response import Responses
 
 #返回首页页面
 def home(request):
-    # isLogin, account = UserInfo.checkIsLogin();
+    isLogin, account = UserInfo.checkIsLogin(request);
     # goods = GoodsInfo.getGoodsData(1, 20, None);
     # goodsList = {
     #     'banner1' : goods[0],
@@ -43,12 +43,16 @@ def home(request):
     #     'first6' : goods[15],
     #
     # }
-    isLogin = False;
     return Responses.returnDrawPage(isLogin, 'home/home.html', 'goodsList', None);
+
+#所有商品页面
+def allGoods(request):
+    isLogin, account = UserInfo.checkIsLogin(request);
+    return Responses.returnDrawPage(isLogin, 'goods/goodsBrowse.html', 'goodsList', None);
 
 #渲染一个商品
 def goodsInfo(request, goodsId):
-    isLogin, account = UserInfo.checkIsLogin();
+    isLogin, account = UserInfo.checkIsLogin(request);
     condition = {
         'goodsId', goodsId
     }
@@ -56,19 +60,43 @@ def goodsInfo(request, goodsId):
     return Responses.returnDrawPage(isLogin, 'goods/goodsInfo.html', 'goods', **goods);
 
 
-#返回用户后台首页
-def userBackgroup(request):
+#返回用户后台首页 order
+def userBackgroupOrder(request):
     #获取order信息
-    isLogin, account = UserInfo.checkIsLogin();
+    isLogin, account = UserInfo.checkIsLogin(request);
     condition = {
         'account' : account
     }
     orderList = OrderInfo.getOrderData(1, 20, account, condition);
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'orderList', orderList);
-
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myOrder.html', 'orderList', orderList);
+#用户后台 收藏
+def userBackgroupCollect(request):
+    #获取order信息
+    isLogin, account = UserInfo.checkIsLogin(request);
+    condition = {
+        'account' : account
+    }
+    collectList = CollectInfo.getCollectData(1, 20, account, condition);
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'collectList', collectList);
+#用户后台 地址
+def userBackgroupAddress(request):
+    #获取order信息
+    isLogin, account = UserInfo.checkIsLogin(request);
+    condition = {
+        'account' : account
+    }
+    addressList = AddressInfo.getAddressData(1, 20, account, condition);
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myAddress.html', 'addressList', addressList);
+#用户后台 我的资料
+def userBackgroupUserInfo(request):
+    #获取order信息
+    isLogin, account = UserInfo.checkIsLogin(request);
+    userInfo = UserInfo.getUserInfoData(account);
+    userInfo=userInfo[0];
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myPersonal.html', 'userInfo', userInfo);
 
 #ajax请求类操作
-def userInfoRequestPortManager(request):
+def userInfoRequestPortManager(request): #check ok
     return UserInfo.userInfoRequestPortManager(request);
 
 def goodsInfoRequestPortManager(request):

@@ -32,14 +32,8 @@ class Responses(object):
     #渲染返回页面,同时返回login
     @classmethod
     def returnDrawPage(cls, isLogin, page, dictName, data):
-
-        if isLogin == True:
-            isLogin = 1;
-        if isLogin == False:
-            isLogin = 0;
-
         dataDict = {
-            'isLogin' : isLogin,
+            'isLogin' : json.dumps(isLogin),
             dictName : data
         };
         # if data:
@@ -53,5 +47,6 @@ class Responses(object):
         if isLogin:
             return cls.returnDrawPage(isLogin, page, dictName, data);
         else:
+            #返回login 弹窗
             return cls.responseJsonArray('fail', '未登录');
 

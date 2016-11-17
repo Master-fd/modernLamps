@@ -6,11 +6,9 @@ define(function(require, exports){
 
     account = require('account');
     $body = $('body');
+    $page = $('#page');
 
-    //获取用户信息，设置导航栏
-    account.getUserInfo();
-
-
+/************导航栏数据*******************/
     //登录头像被点击,
     $body.on('click', '.nav .js-login', function(){
         if (isLogin == false){
@@ -19,7 +17,6 @@ define(function(require, exports){
             //跳转到用户后台界面
             window.location.href = resourceUrl+'userBackgroup';
         }
-
     }).on('click', '.nav .js-logout', function () {
         account.logout();  //退出
     }).on('click', '.login-modal .submit-btn', function(){  //login or register
@@ -38,8 +35,15 @@ define(function(require, exports){
         }
 
         account.loginOrRegister(userAccount, password, operation);
-
     })
+
+
+    var pageId = $page.data('id');
+    switch (pageId){
+        case 'home' : $body.find('.js-home').addClass('current');break;
+        case 'goodsBrowse' : $body.find('.js-goods').addClass('current');break;
+    }
+
 
 
 

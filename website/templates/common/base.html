@@ -17,7 +17,7 @@
     </title>
 
     <script type="text/javascript">
-        var isLogin={{ isLogin }};       //服务器渲染是否已经login
+        var isLogin={{ isLogin | safe}};       //服务器渲染是否已经login
         var resourceUrl = 'http://127.0.0.1:8000/';   //请求基地址
     </script>
 

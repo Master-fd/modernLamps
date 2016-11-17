@@ -19,7 +19,7 @@
 
 {% block content %}
 
-    <div id="page" class="container" data-id="myAddress">
+    <div id="page" class="container" data-id="myPersonal">
 
 {% include 'common/userNavBar.html' %}
 
@@ -32,19 +32,19 @@
                 <ul class="list">
                     <li class="item">
                         <h4 class="title"><i class="icon icon-check"></i>账户昵称</h4>
-                        <span class="nike-name">1234567896</span>
-                        <a href="javascript:void(0);" class="modify">修改</a>
+                        <span class="nike-name">{{ userInfo.nickname }}</span>
+                        <a href="javascript:void(0);" class="modify" data-id="nickname">修改</a>
                         <div class="gap-line"></div>
                     </li>
                     <li class="item">
-                        <h4 class="title"><i class="icon icon-check"></i>账户</h4>
-                        <span class="nike-name">1fadsfasdfa234567896</span>
-                        <a href="javascript:void(0);" class="modify">修改</a>
+                        <h4 class="title"><i class="icon icon-check"></i>E-mail</h4>
+                        <span class="nike-name">{{ userInfo.email }}</span>
+                        <a href="javascript:void(0);" class="modify" data-id="email">修改</a>
                     </li>
                     <li class="item">
                         <h4 class="title"><i class="icon icon-check"></i>登录密码</h4>
                         <span class="nike-name">互联网账号存在被盗风险，建议您定期 更改密码以保护账户安全。</span>
-                        <a href="javascript:void(0);" class="modify">修改</a>
+                        <a href="javascript:void(0);" class="modify" data-id="password">修改</a>
                     </li>
                 </ul>
             </section>

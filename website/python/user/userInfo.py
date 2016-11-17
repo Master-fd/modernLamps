@@ -1,7 +1,7 @@
 #coding:utf8
 # __author__ = 'fenton-fd.zhu'
 
-from django.http import HttpRequest
+from django.http import HttpRequest,HttpResponse, HttpResponseRedirect
 from django.forms.models import model_to_dict
 from django.core.paginator import Paginator
 import random
@@ -10,7 +10,7 @@ import hashlib
 from website import models
 from website.python.common.response import Responses
 from modernLamps import settings
-
+from modernLamps import settings
 '''
 根据用户信息数据增删改查
 '''
@@ -27,6 +27,8 @@ class UserInfo(object):
                 return cls.__userLogin(request);
             elif operation == 'logout':  #注销
                 return cls.__userLogout(request);
+            elif operation == 'modify':
+                return cls.__userModify(request);
             else:
                 return Responses.responseJsonArray('fail', 'operation有误');
         elif request.method == 'GET':
@@ -67,8 +69,9 @@ class UserInfo(object):
         #输入合法性检验
         account = request.POST.get('account', None);
         password = request.POST.get('password', None);
+        print account , password
         checkResult = cls.__inputDataCheck(account, password);
-
+        print account , password, checkResult
         if checkResult == True:
             hash_md5 = hashlib.md5(); #加密
             hash_md5.update(password);
@@ -82,7 +85,7 @@ class UserInfo(object):
                 result = models.UsersTable.objects.create(account=account, password=hashPassword);
                 if result:
                     data = [{ 'account' : account}];
-                    request.session['account'] = account;  #登录
+                    request.session['account'] = account;  #注册之后直接登录
                     return Responses.responseJsonArray("success", "注册成功", data);
                 else:
                     return Responses.responseJsonArray("fail", "注册失败，请重试");
@@ -128,14 +131,24 @@ class UserInfo(object):
         isLogin, account = cls.checkIsLogin(request);
         if isLogin == True:
             #查找用户信息
-            try:
-                result = models.UsersTable.objects.get(account=account);
-                data = [model_to_dict(result)];
+            data = cls.getUserInfoData(account);
+            if data:
                 return Responses.responseJsonArray("success", "查找用户信息", data);
-            except Exception, e:
+            else:
                 return Responses.responseJsonArray("fail", "查找失败");
         else:
             return Responses.responseJsonArray("fail", "未登录");
+
+    @classmethod
+    def getUserInfoData(cls, account):
+        #查找用户信息
+        try:
+            result = models.UsersTable.objects.get(account=account);
+            data = [model_to_dict(result)];
+            return data;
+        except Exception, e:
+            return None;
+
 
     #检测用户是否已经登录
     @classmethod
@@ -149,3 +162,28 @@ class UserInfo(object):
                 return False, account;
         except:
             return False, account;
+    #修改用户信息
+    @classmethod
+    def __userModify(cls, request=HttpRequest()):
+        isLogin, account = cls.checkIsLogin(request);
+        if isLogin:
+            condition = {};
+            if request.POST.get('password', None):
+                password = request.POST.get('password', None);
+                hash_md5 = hashlib.md5();
+                hash_md5.update(password);
+                hashPassword = hash_md5.hexdigest();
+                condition['password'] = hashPassword;
+            if request.POST.get('nickname', None):
+                condition['nickname'] = request.POST.get('nickname', None);
+            if request.POST.get('email', None):
+                condition['email'] = request.POST.get('email', None);
+
+            try:
+                result = models.UsersTable.objects.filter(account=account).update(**condition);
+                if result:
+                    return Responses.responseJsonArray('success', '修改成功');
+                else:
+                    return Responses.responseJsonArray('fail', '修改失败');
+            except Exception, e:
+                return Responses.responseJsonArray('fail', '修改失败');

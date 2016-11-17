@@ -18,7 +18,7 @@
 
 {% block content %}
 
-    <div id="page" class="container" data-id="goodsBrowose">
+    <div id="page" class="container" data-id="goodsBrowse">
 
         <section class="header row100">
             <ul class="list full">
@@ -33,7 +33,7 @@
         <section class="content">
             <ul class="list full">
 
-                {% for goods in list.goodsList %}
+                {% for goods in goodsList %}
 
                     <li class="item">
                         <a class="goods-image" href="{{ goods.goodsDescUrl }}">

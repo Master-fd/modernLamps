@@ -104,8 +104,17 @@ class CollectInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
+        data = cls.getCollectData(page, pageSize, condition);
+        if data:
+            return Responses.responseJsonArray('success', '请求成功', data);
+        else:
+            return Responses.responseJsonArray('fail', '没有数据');
+
+
+    @classmethod
+    def getCollectData(cls, page, pageSize, account, condition={}):
         try:
-            results = models.CollectTable.objects.filter(**condition).order_by("id");
+            results = models.CollectTable.objects.filter(condition).order_by("id");
             if results.count():
                 paginator = Paginator(results, pageSize);  #分页
                 try:
@@ -116,8 +125,8 @@ class CollectInfo(object):
                 for obj in results:   #模型转字典
                     dict = model_to_dict(obj);
                     data.append(dict);
-                return Responses.responseJsonArray('success', '请求成功', data);
+                return data;
             else:
-                return Responses.responseJsonArray('fail', '没有数据');
+                return None;
         except:
-            return Responses.responseJsonArray('fail', '请求异常');
+            return None;
