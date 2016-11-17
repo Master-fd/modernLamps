@@ -487,7 +487,8 @@
     cursor: pointer;
 }
 .page-containter .upload-info .right ul .current{
-    background-color: #EFEFEF;
+    background-color: #363636;
+    color: #FFFFFF;
 }
 .page-containter .upload-info .right .submit-btn{
     display: inline-block;

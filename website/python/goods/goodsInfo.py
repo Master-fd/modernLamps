@@ -116,11 +116,12 @@ class GoodsInfo(object):
     def addGoods(cls, request=HttpRequest()):
 
         myUploder = Uploader(settings.MEDIA_ROOT);   #新建下载器
+
         goodsId = '00000';
         try:
             while True:
                 goodsId = str(random.randint(10000, 60000));
-                if not models.GoodsTable.objects.get(goodsId=goodsId):
+                if not models.GoodsTable.objects.filter(goodsId=goodsId).count():
                     break;
         except Exception, e:
             return Responses.responseJsonArray('fail', '添加失败,请重试');
@@ -143,10 +144,12 @@ class GoodsInfo(object):
                     'price' : price,
                     'description' : request.POST.get('description', None),
                     'freightCost' : request.POST.get('freightCost', '0'),
-                    'saleCount' : '0',
+                    'saleCount' : 0,
                     'inventoryCount' : inventoryCount,
                     'subClass' : request.POST.get('subClass', "undefine"),
-                    'sex' : request.POST.get('sex', "undefine"),
+                    'minImageUrl1' : myUploder.uploadFile(request.FILES.get('minImageUrl1', None)),
+                    'minImageUrl2' : myUploder.uploadFile(request.FILES.get('minImageUrl2', None)),
+                    'minImageUrl3' : myUploder.uploadFile(request.FILES.get('minImageUrl3', None)),
                     'descImageUrl1' : myUploder.uploadFile(request.FILES.get('descImageUrl1', None)),
                     'descImageUrl2' : myUploder.uploadFile(request.FILES.get('descImageUrl2', None)),
                     'descImageUrl3' : myUploder.uploadFile(request.FILES.get('descImageUrl3', None)),
@@ -160,6 +163,7 @@ class GoodsInfo(object):
                     'aboutImageUrl' : myUploder.uploadFile(request.FILES.get('aboutImageUrl', None)),
                     'remarkImageUrl' :  myUploder.uploadFile(request.FILES.get('remarkImageUrl', None)),
                 };
+
         try:
             result = models.GoodsTable.objects.create(**data);
             if result:
@@ -167,5 +171,5 @@ class GoodsInfo(object):
             else:
                 Responses.responseJsonArray('fail', '上传失败,请重试');
         except Exception, e:
-            return Responses.responseJsonArray('fail', '上传失败,请重试');
+            return Responses.responseJsonArray('faill', '上传失败,请重试');
 

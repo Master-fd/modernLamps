@@ -50,6 +50,7 @@ def allGoods(request):
     isLogin, account = UserInfo.checkIsLogin(request);
     return Responses.returnDrawPage(isLogin, 'goods/goodsBrowse.html', 'goodsList', None);
 
+
 #渲染一个商品
 def goodsInfo(request, goodsId):
     isLogin, account = UserInfo.checkIsLogin(request);
@@ -59,6 +60,18 @@ def goodsInfo(request, goodsId):
     goods = GoodsInfo.getGoodsData(1, 20, condition);
     return Responses.returnDrawPage(isLogin, 'goods/goodsInfo.html', 'goods', **goods);
 
+#管理员上传页面
+def managerUploader(request):
+    isLogin, account = UserInfo.checkIsLogin(request);
+    return Responses.returnDrawPage(isLogin, 'managerBackgroup/uploadGoods.html', 'upload', None);
+#管理员所有商品
+def managerAllGoods(request):
+    isLogin, account = UserInfo.checkIsLogin(request);
+    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allGoods.html', 'goodsList', None);
+#管理员所有订单
+def managerAllOrder(request):
+    isLogin, account = UserInfo.checkIsLogin(request);
+    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allOrder.html', 'ordersList', None);
 
 #返回用户后台首页 order
 def userBackgroupOrder(request):

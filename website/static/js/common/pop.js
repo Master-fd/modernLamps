@@ -10,7 +10,7 @@ define(function (require, exports) {
 
 
 
-    exports.popType = function (type, title, confirmText) {
+    exports.popType = function (type, title, message) {
 
         switch (type){
             case 'login' : $body.find('.login-modal').css('display', 'block'); break;
@@ -21,9 +21,6 @@ define(function (require, exports) {
                                showCancelButton : false,
                                showConfirmButton : false,
                                 timer : 1500
-                               //closeOnConfirm: false,
-                               //confirmButtonText: confirmText,
-                               //confirmButtonColor: "rgba(230,69, 102, 1)"
                            }, function(){
                                 swal.close();
                             });
@@ -34,12 +31,16 @@ define(function (require, exports) {
                                showCancelButton : false,
                                 showConfirmButton : false,
                                 timer : 1500
-                               //closeOnConfirm: false,
-                               //confirmButtonText: confirmText,
-                               //confirmButtonColor: "rgba(230,69, 102, 1)"
                            }, function(){
                                 swal.close();
                             });
+                break;
+            case 'message' : swal({
+                               title : title,
+                               showCancelButton : false,
+                                showConfirmButton : false,
+                                timer : 10*60*1000
+                           });
                 break;
         }
     }
@@ -47,6 +48,7 @@ define(function (require, exports) {
     //代码主动关闭弹窗
     exports.popClose = function(){
         $body.find('#pop').css('display', 'none');
+        swal.close();
     }
 
     //单击‘x’，或者外面阴影部分，关闭弹窗

@@ -18,7 +18,9 @@ define(function(require){
         case 'myCollect' : seajs.use('static/js/userBackgroup/userBackgroup.js'); break;
         case 'myOrder' : seajs.use('static/js/userBackgroup/userBackgroup.js'); break;
         case 'myPersonal' : seajs.use('static/js/userBackgroup/userBackgroup.js');break;
-
+        case 'allGoods' : seajs.use('static/js/managerBackgroup/managerBackgroup.js');break;
+        case 'allOrder' : seajs.use('static/js/managerBackgroup/managerBackgroup.js');break;
+        case 'uploadGoods' : seajs.use('static/js/managerBackgroup/managerBackgroup.js');break;
 
         default : break;
     }

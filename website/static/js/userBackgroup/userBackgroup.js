@@ -22,7 +22,8 @@ define(function(require, exports){
     $body.on('click', '.user-page-left a', function () {
         var url = 'http://127.0.0.1:8000/userBackgroup/'+$(this).data('id')+'/';
         account.isLoginFun(url);
-    })
+    });
+
 /*个人资料修改处理*/
     $page.on('click', '.page-containter .modify', function(){
         var $item = $(this).siblings('.nike-name');

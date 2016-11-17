@@ -7,7 +7,7 @@ __author__ = 'fenton-fd.zhu'
 '''
 from django.http import HttpRequest
 import hashlib
-import os
+import os, stat
 from os.path import getsize
 from modernLamps import settings
 
@@ -27,13 +27,11 @@ class Uploader(object):
         name, extension = os.path.splitext(fileMemItem.name);  #分解文件名和扩展名
         if extension not in self.__fileType:
             return 'fileType fail';
-        #check size
-        fileSize = getsize(fileMemItem);
-        if fileSize > self.__maxSize:
-            return 'maxSize fail' + fileSize;
-        #路径
+
+        # #路径
         if not os.path.exists(self.__diskPath):
-            result = os.makedirs(self.__diskPath)   #新建文件夹
+            result = os.makedirs(self.__diskPath);   #新建文件夹
+            os.chmod(result, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH);  # mode:777
             if result:
                 return result;
         return True;
@@ -42,9 +40,10 @@ class Uploader(object):
     def uploadFile(self, fileMemItem):
         if fileMemItem:
             #文件检验
+
             result = self.fileCheck(fileMemItem);
             if result != True:
-                return result;
+                return '';
 
             name, extension = os.path.splitext(fileMemItem.name);  #分解文件名和扩展名
             hash_md5 = hashlib.md5();
@@ -56,10 +55,12 @@ class Uploader(object):
                     for chunk in fileMemItem.chunks():
                         descFile.write(chunk);
                 descFile.close();
-                path = settings.BASE_URL + self.__diskPath.split('/')[-1];
-                return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
+                # path = settings.BASE_URL + self.__diskPath.split('/')[-1];
+                # return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
+                print self.__diskPath + "\\" + fileName;
+                return self.__diskPath + "\\" + fileName;
             except Exception, e:
-                return None;
+                return '';
         else:
-            return None;
+            return '';
 

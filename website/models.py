@@ -114,17 +114,20 @@ class GoodsTable(models.Model):
     inventoryCount = models.IntegerField(default=0);      #库存
 
     #image url
-    descImageUrl1 = models.CharField(max_length=256);
-    descImageUrl2 = models.CharField(max_length=256);
-    descImageUrl3 = models.CharField(max_length=256);
-    descImageUrl4 = models.CharField(max_length=256);
-    descImageUrl5 = models.CharField(max_length=256);
-    descImageUrl6 = models.CharField(max_length=256);
-    descImageUrl7 = models.CharField(max_length=256);
-    descImageUrl8 = models.CharField(max_length=256);
-    descImageUrl9 = models.CharField(max_length=256);
-    descImageUrl10 = models.CharField(max_length=256);
-    aboutImageUrl = models.CharField(max_length=256);
-    remarkImageUrl = models.CharField(max_length=256);
+    minImageUrl1 = models.CharField(max_length=256, blank=True);
+    minImageUrl2 = models.CharField(max_length=256, blank=True);
+    minImageUrl3 = models.CharField(max_length=256, blank=True);
+    descImageUrl1 = models.CharField(max_length=256, blank=True);
+    descImageUrl2 = models.CharField(max_length=256, blank=True);
+    descImageUrl3 = models.CharField(max_length=256, blank=True);
+    descImageUrl4 = models.CharField(max_length=256, blank=True);
+    descImageUrl5 = models.CharField(max_length=256, blank=True);
+    descImageUrl6 = models.CharField(max_length=256, blank=True);
+    descImageUrl7 = models.CharField(max_length=256, blank=True);
+    descImageUrl8 = models.CharField(max_length=256, blank=True);
+    descImageUrl9 = models.CharField(max_length=256, blank=True);
+    descImageUrl10 = models.CharField(max_length=256, blank=True);
+    aboutImageUrl = models.CharField(max_length=256, blank=True);
+    remarkImageUrl = models.CharField(max_length=256, blank=True);
 
 

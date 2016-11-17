@@ -18,7 +18,14 @@ urlpatterns = [
     url(r'^userBackgroup/address/$', views.userBackgroupAddress),  #用户后台页面address
     url(r'^userBackgroup/userInfo/$', views.userBackgroupUserInfo),  #用户后台页面personal
 
+    url(r'^managerBackgroup/$', views.managerAllOrder),  #后台页面order
+    url(r'^managerBackgroup/order/$', views.managerAllOrder),  #后台页面order
+    url(r'^managerBackgroup/uploader/$', views.managerUploader),  #上传
+    url(r'^managerBackgroup/goods/$', views.managerAllGoods),  #所有商品
+
+
     url(r'^userInfoRequest/$', views.userInfoRequestPortManager),   #用户信息请求类处理端口，例如Login，检查是否login等
-    url(r'^addressRequest/$', views.addressRequestPortManager),   #用户地址请求类处理端口，
+    url(r'^addressRequest/$', views.addressRequestPortManager),   #用户地址请求类处理端口
+    url(r'^goodsInfoRequest/$', views.goodsInfoRequestPortManager),   #goods请求类处理端口
 ]
 
