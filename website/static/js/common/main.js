@@ -14,6 +14,7 @@ define(function(require){
     switch (_page){
 
         case 'home' : seajs.use('static/js/home/home.js'); break;   //加载Home
+        case 'goodsBrowse' : seajs.use('static/js/goods/goodsBrowse.js');break;
         case 'myAddress' : seajs.use('static/js/userBackgroup/userBackgroup.js'); break;
         case 'myCollect' : seajs.use('static/js/userBackgroup/userBackgroup.js'); break;
         case 'myOrder' : seajs.use('static/js/userBackgroup/userBackgroup.js'); break;

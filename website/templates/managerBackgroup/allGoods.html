@@ -32,13 +32,13 @@
                                 <col width="100">
                                 <col width="100">
                                 <col width="70">
-                                <col width="100">
+                                <col width="140">
                                 <col width="70">
                                 <col width="70">
                                 <col width="100">
                                 <col width="70">
                                 <col width="100">
-                                <col width="110">
+                                <col width="70">
                             </colgroup>
                     <thead>
                                 <tr>
@@ -51,7 +51,7 @@
                                     <th>分类</th>
                                     <th>销量</th>
                                     <th>库存</th>
-                                    <th>操作</th>
+                                    <th>删除</th>
                                 </tr>
                             </thead>
                     <tbody>
@@ -59,19 +59,14 @@
                         <tr>
                             <td><div class="price"><a href="{{ goods.goodsDescUrl }}"><img class="goods-image-size" src="{{ goods.minImageUrl1 }}"></a></div></td>
                             <td><div class="price"><a href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a></div></td>
-                            <td><div class="price">{{ goods.goodsId }}</div></td>
+                            <td><div class="price js-goodsId">{{ goods.goodsId }}</div></td>
                             <td><div class="price">{{ goods.description }}</div></td>
                             <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
                             <td><div class="price">￥<span>{{ goods.freightCost }}</span></div></td>
                             <td><div class="price">{{ goods.subClass }}</div></td>
                             <td><div class="price">{{ goods.saleCount }}</div></td>
                             <td><div class="price">{{ goods.inventoryCount }}</div></td>
-                            <td>
-                                <div class="text-center">
-                                    <a href="javascript:void(0);"><i class="icon icon-address icon-edit-address"></i></a>
-                                    <a href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a>
-                                </div>
-                            </td>
+                            <td><div class="price"><a class="js-delete" href="javascript:void(0);"><i class="icon icon-address icon-del-address"></i></a></div></td>
                         </tr>
                     {% endfor %}
                     </tbody>

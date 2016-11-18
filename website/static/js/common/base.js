@@ -3,12 +3,12 @@
  */
 define(function(require, exports){
 
-
     account = require('account');
-    $body = $('body');
-    $page = $('#page');
 
-/************导航栏数据*******************/
+    var $body = $('body'),
+        $page = $('#page');
+
+/************导航栏头像login数据*******************/
     //登录头像被点击,
     $body.on('click', '.nav .js-login', function(){
         if (isLogin == false){
@@ -19,8 +19,8 @@ define(function(require, exports){
         }
     }).on('click', '.nav .js-logout', function () {
         account.logout();  //退出
-    }).on('click', '.login-modal .submit-btn', function(){  //login or register
-
+    }).on('click', '.login-modal .submit-btn', function(){
+        //login or register
         userAccount = $(this).siblings("input[name='account']").val();
         password = $(this).siblings("input[name='password']").val();
         operation = $(this).data('id');
@@ -37,14 +37,11 @@ define(function(require, exports){
         account.loginOrRegister(userAccount, password, operation);
     })
 
-
+/*********商品和首页选择************************************************************************/
     var pageId = $page.data('id');
     switch (pageId){
         case 'home' : $body.find('.js-home').addClass('current');break;
         case 'goodsBrowse' : $body.find('.js-goods').addClass('current');break;
     }
-
-
-
 
 });

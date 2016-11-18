@@ -21,25 +21,45 @@
     <div id="page" class="container" data-id="goodsBrowse">
 
         <section class="header row100">
-            <ul class="list full">
-                <li class="item current"><a data-id="undefine">全部商品</a></li>
-                <li class="item"><a data-id="dropLamp">吊灯</a></li>
-                <li class="item"><a data-id="deskLamp">台灯</a></li>
-                <li class="item"><a data-id="parlorLamp">客厅灯</a></li>
-                <li class="item"><a data-id="roomLamp">餐厅灯</a></li>
+            <ul class="list full" data-id="{{ data.subClass }}">
+                {% if data.subClass == 'undefine' %}
+                    <li class="item current" ><a href="http://127.0.0.1:8000/allGoods/undefine/">全部商品</a></li>
+                {% else %}
+                    <li class="item" ><a href="http://127.0.0.1:8000/allGoods/undefine/">全部商品</a></li>
+                {% endif %}
+                {% if data.subClass == 'dropLamp' %}
+                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/dropLamp/">吊灯</a></li>
+                {% else %}
+                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/dropLamp/">吊灯</a></li>
+                {% endif %}
+                {% if data.subClass == 'deskLamp' %}
+                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/deskLamp/">台灯</a></li>
+                {% else %}
+                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/deskLamp/">台灯</a></li>
+                {% endif %}
+                {% if data.subClass == 'parlorLamp' %}
+                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/parlorLamp/">客厅灯</a></li>
+                {% else %}
+                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/parlorLamp/">客厅灯</a></li>
+                {% endif %}
+                {% if data.subClass == 'roomLamp' %}
+                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/roomLamp/">餐厅灯</a></li>
+                {% else %}
+                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/roomLamp/">餐厅灯</a></li>
+                {% endif %}
             </ul>
         </section>
 
         <section class="content">
             <ul class="list full">
 
-                {% for goods in goodsList %}
+                {% for goods in data.goodsList %}
 
                     <li class="item">
                         <a class="goods-image" href="{{ goods.goodsDescUrl }}">
                             <img class="full" src={{ goods.minImageUrl }}>
                         </a>
-                        <a class="goods-name" href="{{ goods.goodsDescUrl }}">钢琴</a>
+                        <a class="goods-name" href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a>
                         <span class="price-tag">￥</span>
                         <span class="price-num">{{ goods.price }}</span>
                     </li>
@@ -52,8 +72,8 @@
         <section class="page">
             <a class href="http://127.0.0.1/goods/page/1">上一页</a>
             <a class="current" href="http://127.0.0.1/goods/page/1">1</a>
-            <a href="http://127.0.0.1/goods/page/1">1</a>
-            <a href="http://127.0.0.1/goods/page/1">下一页</a>
+            <a href="http://127.0.0.1/goods/page/2">2</a>
+            <a href="http://127.0.0.1/goods/page/3">下一页</a>
         </section>
     </div>
 {% endblock %}

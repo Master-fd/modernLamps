@@ -34,7 +34,10 @@ a{
     text-decoration: none;
     cursor: pointer;
 }
-a:link{
+a,
+a:link,
+a:hover,
+a:visited{
     color: #222222;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -144,11 +147,15 @@ table .gap-line{
 /*container*/
 .container{
     width: 1170px;
+    min-height: 1000px;
     /*background-color: #FFFFFF;*/
     margin: 0 auto;
     overflow: hidden;
+    position: relative;
 }
-
+.bottom .container{
+    min-height: 0px;
+}
 .full{
     width: 100%;
     height: 100%;

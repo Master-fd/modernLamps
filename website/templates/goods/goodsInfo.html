@@ -3,14 +3,14 @@
 {% extends 'common/base.html' %}
 
 {% block description %}
-    <meta name="description" content={{ goodsName }}>
+    <meta name="description" content={{ goods.description }}>
 {% endblock %}
 
 {% block keywords%}
-    <meta name="keywords" content={{ goodsName }}>
+    <meta name="keywords" content={{ goods.goodsName }}>
 {% endblock %}
 
-{% block title %}{{ goodsName }}{% endblock %}
+{% block title %}{{ goods.goodsName }}{% endblock %}
 
 {% block userStyle %}
     <link rel="stylesheet" href="../../static/css/bottom.css">

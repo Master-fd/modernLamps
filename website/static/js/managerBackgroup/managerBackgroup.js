@@ -5,9 +5,9 @@
 define(function (require) {
 
 
-    $body = $('body');
-    $page = $('#page');
-    $pop = $("#pop");
+    var $body = $('body');
+    var $page = $('#page');
+    var $pop = $("#pop");
 
 /*******导航栏选择*****************************************************************/
     var pageId = $page.data('id');
@@ -79,31 +79,31 @@ define(function (require) {
         data.append('subClass', $page.find('.js-subclass').children('.current').data('id'));
 
         //合法性判断
-        //if (! $page.find("input[name='goodsName']").val())
-        //{
-        //    pop.popType('error', '名称不能为空');
-        //    return false;
-        //}
-        //if (! $page.find("input[name='price']").val())
-        //{
-        //    pop.popType('error', '价格不能为空');
-        //    return false;
-        //}
-        //if (! $page.find("input[name='freightCost']").val())
-        //{
-        //    pop.popType('error', '运费不能为空');
-        //    return false;
-        //}
-        //if (! $page.find("input[name='inventoryCount']").val())
-        //{
-        //    pop.popType('error', '库存不能为空');
-        //    return false;
-        //}
-        //if (! $page.find("textarea[name='description']").val())
-        //{
-        //    pop.popType('error', '描述不能为空');
-        //    return false;
-        //}
+        if (! $page.find("input[name='goodsName']").val())
+        {
+            pop.popType('error', '名称不能为空');
+            return false;
+        }
+        if (! $page.find("input[name='price']").val())
+        {
+            pop.popType('error', '价格不能为空');
+            return false;
+        }
+        if (! $page.find("input[name='freightCost']").val())
+        {
+            pop.popType('error', '运费不能为空');
+            return false;
+        }
+        if (! $page.find("input[name='inventoryCount']").val())
+        {
+            pop.popType('error', '库存不能为空');
+            return false;
+        }
+        if (! $page.find("textarea[name='description']").val())
+        {
+            pop.popType('error', '描述不能为空');
+            return false;
+        }
 
 
         //弹窗蒙版
@@ -134,7 +134,30 @@ define(function (require) {
 
 /********************************************************************************/
 
+/*********所有商品**********************************************************************/
 
+
+    $page.on('click', '.orders-info .js-delete', function(){
+        //删除
+        $item = $(this);
+        var params = {
+            operation : 'delete',
+            goodsId : $item.parents('tr').find('.js-goodsId').text()
+        };
+        $.post(resourceUrl+"goodsInfoRequest/", params, function(json_data){
+
+            if (json_data.status == 'success'){
+                //删除成功
+                $item.parents('tr').remove();
+            }else{
+                pop.popType('error', '删除失败，请检查网络');
+            }
+        }, 'json');
+
+    });
+
+
+/***************************************************************************************/
 
 
 });

@@ -5,9 +5,9 @@
 
 define(function(require, exports){
 
-    $body = $('body');
-    $page = $('#page');
-    $pop = $("#pop");
+    var $body = $('body');
+    var $page = $('#page');
+    var $pop = $("#pop");
 
     var pageId = $page.data('id');
 
@@ -45,10 +45,12 @@ define(function(require, exports){
             confirmButtonColor: "rgba(230,69, 102, 1)"
         }, function(data){
             swal.close();
-            if (key!='password')
-                $item.text(data);
-            account.modifyUserInfo(key, data);
-
+            if (data)
+            {
+                if (key!='password')
+                    $item.text(data);
+                account.modifyUserInfo(key, data);
+            }
         });
     });
 /*****************************************************************************************************************/

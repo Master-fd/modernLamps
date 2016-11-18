@@ -58,27 +58,52 @@ class GoodsInfo(object):
             page = 1;
         if pageSize <= 20:
             pageSize
-        condition = {
-                'goodsName' : goodsName,
-                'goodsId' : goodsId,
-                'subClass' : subClass
-            };
-        data = cls.getGoodsData(page, pageSize, **condition);
+
+
+        condition = {};
+        if goodsName:
+            condition['goodsName'] = goodsName;
+        if goodsId:
+            condition['goodsId'] = goodsId;
+        if subClass:
+            condition['subClass'] = subClass;
+
+        data = cls.getGoodsData(page, pageSize, condition);
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
             return Responses.responseJsonArray('fail', '没有数据');
 
-
-    #查找商品
+    #搜索商品, 正则匹配
     @classmethod
-    def getGoodsData(cls, page=1, pageSize=20, **condition):
+    def searchGoods(cls, page, pageSize, goodsName):
+        try:
+            data = [];
+            results = models.GoodsTable.objects.filter(goodsName__icontains=goodsName);
+            paginator = Paginator(results, pageSize);  #分页
+            if results:
+                try:
+                    results = paginator.page(page);
+                except Exception ,e:
+                    results = paginator.page(paginator.num_pages);
+                for obj in results:
+                    obj = model_to_dict(obj);
+                    data.append(obj);
+                return data;
+            else:
+                return None;
+        except Exception, e:
+            return None;
+
+    #分页查找商品
+    @classmethod
+    def getGoodsData(cls, page=1, pageSize=20, condition={}):
         data = [];
         try:
             if condition:
-                results = models.GoodsTable.objects.filter(**condition).order_by('id');
+                results = models.GoodsTable.objects.filter(**condition).order_by('-id');
             else:
-                results = models.GoodsTable.objects.all().order_by('id');
+                results = models.GoodsTable.objects.all().order_by('-id');
             if results.count():
                 paginator = Paginator(results, pageSize);  #分页
                 try:
@@ -88,6 +113,7 @@ class GoodsInfo(object):
 
                 for obj in results:   #模型转字典
                     goods = model_to_dict(obj);
+                    goods['subClass'] = obj.get_subClass_display;
                     data.append(goods);
                 return data;
             else:
@@ -98,16 +124,13 @@ class GoodsInfo(object):
     @classmethod
     def deleteGoods(cls, request=HttpRequest()):
         try:
-            goodsId = request.GET.get('goodsId', None);
+            goodsId = request.POST.get('goodsId', None);
         except Exception, e:
             return Responses.responseJsonArray('fail', '参数有误');
 
         try:
-            result = models.GoodsTable.objects.get(goodsId=goodsId).delete();
-            if result:
-                return Responses.responseJsonArray('success', '删除成功');
-            else:
-                return Responses.responseJsonArray('fail', '删除失败');
+            models.GoodsTable.objects.filter(goodsId=goodsId).delete();
+            return Responses.responseJsonArray('success', '删除成功');
         except Exception, e:
             return Responses.responseJsonArray('fail', '删除失败');
 

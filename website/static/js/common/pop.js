@@ -6,7 +6,7 @@
 define(function (require, exports) {
 
     seajs.use('static/js/plugin/sweetalert/sweetalert.min.js');
-    $body = $('body');
+    var $body = $('body');
 
 
 
