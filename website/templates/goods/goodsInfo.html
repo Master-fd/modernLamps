@@ -25,30 +25,29 @@
             <div class="row50 col100">
 {#                左侧小图标#}
                 <ul class="list float-left col80 row15">
-                    <li class="item current">
-                        <img class="full" src="{{ goods.minImageUrl1 }}">
-                    </li>
-                    <li class="item">
-                        <img class="full" src="{{ goods.minImageUrl2 }}">
-                    </li>
-                    <li class="item">
-                        <img class="full" src="{{ goods.minImageUrl3 }}">
-                    </li>
+                    {% for min in goods.minImageUrls %}
+                        {% if forloop.first %}
+                            <li class="item current"><img class="full" src="{{ min }}"></li>
+                        {% else %}
+                            <li class="item"><img class="full" src="{{ min }}"></li>
+                        {% endif %}
+
+                    {% endfor %}
                 </ul>
 {#                大图#}
                 <div class="row80 col80">
-                    <img class="full" src="{{ goods.minImageUrl1 }}">
+                    <img class="full js-big-headerImg" src="{{ goods.minImageUrls.0 }}">
                 </div>
 {#                收藏#}
                 <div class="bottom-collect row100 col10">
-                    <a href="javascript:void(0);" class="icon icon-collect"></a>
+                    <a href="javascript:void(0);" class="icon icon-collect js-collect" data-id=""></a>
                 </div>
             </div>
             <div class="right col100">
                 <div class="row100 col20">
                     <h3 class="goodsName">{{ goods.goodsName }}</h3>
                     <div class="gap-line"></div>
-                    <input type="hidden" id="goodsId" value="{{ goods.goodsId }}">
+                    <input class="hidden js-goodsId" type="text" value="{{ goods.goodsId }}">
                 </div>
 
                 <table>
@@ -58,14 +57,14 @@
                             <td>价格</td>
                             <td>
                                 <span class="price-tag">￥</span>
-                                <span class="price-num">{{ goods.price }}</span>
+                                <span class="price-num js-price">{{ goods.price }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>运费</td>
                             <td>
                                 <span class="price-tag">￥</span>
-                                <span class="price-num">{{ goods.freightCost }}</span>
+                                <span class="price-num js-freightCost">{{ goods.freightCost }}</span>
                             </td>
                         </tr>
                         <tr>
@@ -73,22 +72,22 @@
                             <td>
                                 <span class="sale-num">{{ goods.saleCount }}</span>
                                 <span class=>库存</span>
-                                <span class="invent-num">{{ goods.inventoryCount }}</span>
+                                <span class="invent-num js-inventoryCount">{{ goods.inventoryCount }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>数量</td>
                             <td>
-                                <a class="icon icon-minus"></a>
-                                <input class="input-num" type="text" value="1">
-                                <a class="icon icon-plus"></a>
+                                <a class="icon icon-minus js-minus"></a>
+                                <input class="input-num" name="count" type="text" value="1">
+                                <a class="icon icon-plus js-plus"></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="btn-list">
-                    <a href="javascript:void(0);" class="buy-now">立即购买</a>
-                    <a href="javascript:void(0);" class="buy-bag">加入购物车</a>
+                    <a href="javascript:void(0);" class="buy-now js-buy-now">立即购买</a>
+                    <a href="javascript:void(0);" class="buy-bag js-add-cart">加入购物车</a>
                 </div>
             </div>
             <div>
@@ -100,8 +99,8 @@
         <section class="datail">
             <h3 class="title">商品详情</h3>
             <div class="goods-desc">
-                {% for goodsImageUrl in goodsImageUrlList %}
-                    <img src = "{{ goodsImageUrl }}">
+                {% for descUrl in goods.descImageUrls %}
+                    <img src = "{{ descUrl }}">
                 {% endfor %}
             </div>
         </section>

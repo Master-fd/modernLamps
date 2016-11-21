@@ -9,7 +9,7 @@
     <meta name="keywords" content="首页">
 {% endblock %}
 
-{% block title %}首页{% endblock %}
+{% block title %}订单结算{% endblock %}
 
 
 {% block userStyle %}
@@ -23,18 +23,25 @@
     <section class="addressInfo">
         <h3 class="title">收货信息</h3>
         <ul class="list">
-            <li class="item current">
-                <input type="checkbox" checked="checked">
-                <div>姓名打发斯蒂芬</div>
-                <div>电话165468415</div>
-                <div>地地址发斯蒂芬问我发的发的说法是发的发达的算法址发斯蒂芬问我发的发的说法是发的发达的算法为我</div>
-            </li>
-            <li class="item">
-                <input type="checkbox" checked="checked">
-                <div>姓名打发斯蒂芬</div>
-                <div>电话165468415</div>
-                <div>地地址发斯蒂芬问我发的发的说法是发的发达的算法址发斯蒂芬问我发的发的说法是发的发达的算法为我</div>
-            </li>
+            {% if order.addressList %}
+                {% for address in order.addressList %}
+                    {% if address.defaults == True %}
+                    <li class="item current" data-id="{{ address.addressId }}">
+                        <input type="checkbox" checked="checked">
+                    {% else %}
+                    <li class="item" data-id="{{ address.addressId }}">
+                        <input type="checkbox">
+                    {% endif %}
+                        <div>{{ address.contact }}</div>
+                        <div>{{ address.phoneNumber }}</div>
+                        <div>{{ address.address }}</div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <div>
+                    <a class="add-addr-btn js-goto-addr">前往添加新地址</a>
+                </div>
+            {% endif %}
         </ul>
     </section>
 
@@ -43,11 +50,11 @@
 
         <table class="table" cellpadding="0" cellspacing="0" border="0">
             <colgroup>
-                <col width="450">
-                <col width="170">
+                <col width="400">
+                <col width="150">
                 <col width="100">
-                <col width="190">
-                <col width="180">
+                <col width="240">
+                <col width="200">
             </colgroup>
             <thead>
                 <tr class="title">
@@ -59,26 +66,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">墨镜</a></div></td>
-                    <td><div class="price">￥<span>5</span></div></td>
-                    <td><div class="price">456</div></td>
-                    <td class="gap-line-right"><div class="price">￥<span>5</span></div></td>
-                    <td rowspan="2"><div class="price">￥<span>12</span></div></td>
+            {% for goods in order.goodsList %}
+                <tr data-id="{{ goods.goodsId }}">
+                    <td><div><a class="goods" href="{{ goods.goodsDescUrl }}"><img class="goods-image" src="{{ goods.minImageUrl1 }}">{{ goods.goodsName }}</a></div></td>
+                    <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
+                    <td><div class="price js-count">{{ goods.count }}</div></td>
+                    <td class="gap-line-right"><div class="price">￥<span class="js-sumPrice">{{ goods.sumPrice }}</span></div></td>
+                    {% if forloop.first %}
+                        <td rowspan="{{ order.rowspan }}"><div class="price">￥<span>{{ order.freightCost }}</span></div></td>
+                    {% endif %}
                 </tr>
-                <tr>
-                    <td><div><a class="goods"><img class="goods-image" src="http://127.0.0.1:8000/static/image/sbolo-logo.png">墨镜</a></div></td>
-                    <td><div class="price">￥<span>5</span></div></td>
-                    <td><div class="price">456</div></td>
-                    <td class="gap-line-right"><div class="price">￥<span>5</span></div></td>
-                </tr>
+            {% endfor %}
+
                 <tr>
                     <td colspan="3"></td>
                     <td colspan="2">
                         <div class="calcuate">
                             <span>合计： ￥</span>
-                            <span>322</span>
-                            <a class="calcuate-btn">结算</a>
+                            <span class="js-totalPrice">{{ order.totalPrice }}</span>
+                            <a class="calcuate-btn js-calcuate">结算</a>
                         </div>
                     </td>
                 </tr>

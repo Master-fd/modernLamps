@@ -67,7 +67,6 @@ class GoodsInfo(object):
             condition['goodsId'] = goodsId;
         if subClass:
             condition['subClass'] = subClass;
-
         data = cls.getGoodsData(page, pageSize, condition);
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
@@ -113,7 +112,7 @@ class GoodsInfo(object):
 
                 for obj in results:   #模型转字典
                     goods = model_to_dict(obj);
-                    goods['subClass'] = obj.get_subClass_display;
+                    # goods['subClass'] = obj.get_subClass_display;
                     data.append(goods);
                 return data;
             else:

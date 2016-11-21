@@ -10,7 +10,7 @@ define(function (require, exports) {
 
 
 
-    exports.popType = function (type, title, message) {
+    exports.popType = function (type, title, message, func) {
 
         switch (type){
             case 'login' : $body.find('.login-modal').css('display', 'block'); break;
@@ -23,6 +23,9 @@ define(function (require, exports) {
                                 timer : 1500
                            }, function(){
                                 swal.close();
+                                if (func){
+                                    func();
+                                }
                             });
                 break;
             case 'success' : swal({
@@ -33,6 +36,9 @@ define(function (require, exports) {
                                 timer : 1500
                            }, function(){
                                 swal.close();
+                                if (func){
+                                    func();
+                                }
                             });
                 break;
             case 'message' : swal({

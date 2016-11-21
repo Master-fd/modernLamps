@@ -66,6 +66,9 @@
     margin-right: 75px;
     vertical-align: middle;
 }
+.bottom .list .item a{
+    color: #FFFFFF;
+}
 .bottom .down{
     height: 80px;
     color: #FFFFFF;

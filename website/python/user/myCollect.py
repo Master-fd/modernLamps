@@ -35,6 +35,8 @@ class CollectInfo(object):
                 operation = request.GET.get('operation', None);
                 if operation == 'get':
                     return cls.getCollect(request, account);
+                elif operation == 'check':
+                    return cls.checkCollect(request, account);
                 else:
                     return Responses.responseJsonArray('fail', 'operation有误');
             else:
@@ -49,7 +51,7 @@ class CollectInfo(object):
         try:
             while True:
                 collectId = str(random.randint(10000, 60000));
-                if not models.CollectTable.objects.get(collectId=collectId):
+                if not models.CollectTable.objects.filter(collectId=collectId):
                     break;
         except Exception, e:
             return Responses.responseJsonArray('fail', '添加失败,请重试');
@@ -61,12 +63,12 @@ class CollectInfo(object):
                     'goodsId' : goodsId
                 }
         try:
-            result = models.CollectTable.objects.get(goodsId=goodsId);
+            result = models.CollectTable.objects.filter(goodsId=goodsId);
             if result:
-                return Responses.responseJsonArray('fail', '已存在');
+                return Responses.responseJsonArray('success', '已存在');
             result = models.CollectTable.objects.create(**data);
             if result:
-                data = [{model_to_dict(result)}];
+                data = [model_to_dict(result)];
                 return Responses.responseJsonArray('success', '添加成功', data);
             else:
                 return Responses.responseJsonArray('fail', '添加失败,请重试');
@@ -75,13 +77,10 @@ class CollectInfo(object):
 
     @classmethod
     def deleteCollect(cls, request=HttpRequest(), account='0'):
-        collectId = request.POST.get('collectId', None);
+        goodsId = request.POST.get('goodsId', None);
         try:
-            result = models.CollectTable.objects.filter(collectId=collectId, account=account).delete();
-            if result:
-                return Responses.responseJsonArray('success', '删除成功');
-            else:
-                return Responses.responseJsonArray('fail', '删除失败');
+            result = models.CollectTable.objects.filter(goodsId=goodsId, account=account).delete();
+            return Responses.responseJsonArray('success', '删除成功');
         except Exception, e:
             return Responses.responseJsonArray('fail', '删除失败');
 
@@ -110,12 +109,29 @@ class CollectInfo(object):
         else:
             return Responses.responseJsonArray('fail', '没有数据');
 
+    @classmethod
+    def checkCollect(cls, request=HttpRequest(), account='0'):
+
+        goodsId = request.GET.get('goodsId', None);
+
+        try:
+            results = models.CollectTable.objects.filter(account=account, goodsId=goodsId);
+            if results:
+                data = [];
+                for obj in results:
+                    obj = model_to_dict(obj);
+                    data.append(obj);
+                return Responses.responseJsonArray('success', '已收藏', data);
+            else:
+                return Responses.responseJsonArray('fail', '未收藏');
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '未找到');
 
     @classmethod
     def getCollectData(cls, page, pageSize, account, condition={}):
         try:
-            results = models.CollectTable.objects.filter(condition).order_by("id");
-            if results.count():
+            results = models.CollectTable.objects.filter(**condition).order_by("-id");
+            if results:
                 paginator = Paginator(results, pageSize);  #分页
                 try:
                     results = paginator.page(page);

@@ -42,8 +42,8 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th>2016-15-45 15:15:02</th>
-                                    <th>订单编号:<span>41564</span></th>
+                                    <th>{{ order.createDate }}</th>
+                                    <th>订单编号:<span>{{ order.orderId }}</span></th>
                                     <th>单价</th>
                                     <th>数量</th>
                                     <th>总计</th>
@@ -60,9 +60,9 @@
                                         <td><div class="price"><a href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a></div></td>
                                         <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
                                         <td class="gap-line-right"><div class="price">{{ goods.count }}</div></td>
-                                        <td rowspan="2"><div class="price">￥<span>{{ order.totalPrice }}</span></div></td>
-                                        <td rowspan="2"><div class="price"><a href="javascript:void(0);">{{ order.status }}</a></div></td>
-                                        <td rowspan="2"><div class="price"><a href="javascript:void(0);" data-id="{{ order.orderId }}">删除</a></div> </td>
+                                        <td rowspan="{{ order.goodsCount }}"><div class="price">￥<span>{{ order.totalPrice }}</span></div></td>
+                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a href="javascript:void(0);">{{ order.status }}</a></div></td>
+                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a class="js-delete-order" href="javascript:void(0);" data-id="{{ order.orderId }}">删除</a></div> </td>
                                     </tr>
                                 {% else %}
                                     <tr>
@@ -78,16 +78,16 @@
                                     <td class="address gap-line-right" colspan="4">
                                         <div>
                                             <span>收件地址:</span>
-                                            <span>{{ order.address.contact }}</span>
-                                            <span>{{ order.address.phoneNumber }}</span>
-                                            <span>{{ order.address.address }}</span>
+                                            <span>{{ order.contact }}</span>
+                                            <span>{{ order.phoneNumber }}</span>
+                                            <span>{{ order.address }}</span>
                                         </div>
                                     </td>
                                     <td colspan="3">
                                         <div>
                                             <span>快递单号:</span>
-                                            <span>{{ order.express.company }}</span>
-                                            <span>{{ order.express.expressId }}</span>
+                                            <span>{{ order.company }}</span>
+                                            <span>{{ order.expressId }}</span>
                                         </div>
                                     </td>
                                 </tr>

@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 from django.db import transaction, IntegrityError     #事务操作
 from django.db.transaction import TransactionManagementError
 import random
+import json
 
 from website import models
 from website.python.common.response import Responses
@@ -28,6 +29,13 @@ class OrderInfo(object):
         if isLogin == True:
             if request.method == 'POST':
                 operation = request.POST.get('operation', None);
+                if operation == None:  #有可能传递过来的是json
+                    try:
+                        result = json.loads(request.body);
+                        operation = result['operation'];
+                    except Exception, e:
+                        return Responses.responseJsonArray('fail', 'operation无法获取');
+
                 if operation == 'add':
                     return cls.addOrder(request, account);
                 elif operation == 'modify':
@@ -55,51 +63,64 @@ class OrderInfo(object):
         try:
             while True:
                 orderId = str(random.randint(10000, 60000));
-                if not models.UserOrderTable.objects.get(orderId=orderId) and models.ManagerOrderTable.objects.get(orderId=orderId):
+                if not models.UserOrderTable.objects.filter(orderId=orderId) and not models.ManagerOrderTable.objects.filter(orderId=orderId):
                     break;
         except Exception, e:
-            return Responses.responseJsonArray('fail', '添加失败,请重试');
+            return Responses.responseJsonArray('fail', '产生订单号失败');
+
+        jsonResult = json.loads(request.body);   #获取json数据
+        phoneNumber = '';
+        address = '';
+        contact = '';
+        print jsonResult
+        #获取地址
+        try:
+            addressId = jsonResult.get('addressId', None);
+            result = models.AddressTable.objects.filter(account=account, addressId=addressId);
+            if result:
+                addr = result[0];
+                phoneNumber = addr.phoneNumber;
+                address = addr.address;
+                contact = addr.contact;
+        except Exception, e:
+            return Responses.responseJsonArray('fail', '没有填写地址');
 
         #封装数据
         data = {
                     'orderId' : orderId,
                     'account' : account,
                     'status' : 'new',
-                    'phoneNumber' : request.POST.get('phoneNumber', None),
-                    'order' : request.POST.get('order', None),
-                    'contact' : request.POST.get('contact', None),
-                }
-
+                    'phoneNumber' : phoneNumber,
+                    'address' : address,
+                    'contact' : contact,
+                    'totalPrice' : jsonResult.get('totalPrice', None)
+                };
 
         try:
             #一个订单有多个goods
-            goodsIds = request.POST.get('goodsIds', None);
-            counts = request.POST.get('counts', None),
-            if len(goodsIds) != len(counts):
-                return Responses.responseJsonArray('fail', '添加失败,请重试');
+            goodsList = jsonResult.get('goodsList', None);
+            buyNow = jsonResult.get('buyNow', None);
 
             #开启一个事务，增加订单，库存减少，购物车删除
+            if not goodsList:
+                return Responses.responseJsonArray('fail', '没有商品');
             with transaction.atomic():
-                totalPrice = 0;
-                for (goodsId, count) in zip(goodsIds, counts):
+                for goods in goodsList:
                     #查找goods看看是否失效
-                    result = models.GoodsTable.objects.get(goodsId=goodsId);
-                    if result and result.inventoryCount >= count:
-                        sumPrice = float(result.price) * count;
-                        totalPrice += sumPrice;
+                    result = models.GoodsTable.objects.get(goodsId=goods['goodsId']);
+                    if result and result.inventoryCount >= goods['count']:
                         goods = {'account' : account,
                                 'orderId' : orderId,
-                                'goodsId' : goodsId,
-                                'count' : count,
-                                'sumPrice' : sumPrice};
-                        models.OrderTable.objects.create(**goods);  #添加数据
+                                'goodsId' : goods['goodsId'],
+                                'count' : goods['count'],
+                                'sumPrice' : goods['sumPrice']};
+                        models.OrderTable.objects.create(**goods);  #添加数据到order goods表
                     else:
                         #订单无效, 抛出事务异常
                         raise TransactionManagementError;
-                #清空购物车
-                models.ShoppingCartTable.objects.filter(account=account).delete();
+                if not buyNow:
+                    models.ShoppingCartTable.objects.filter(account=account).delete();  #清空购物车
                 #增加订单
-                data['totalPrice'] = str(totalPrice);
                 models.UserOrderTable.objects.create(**data);
                 models.ManagerOrderTable.objects.create(**data);
                 return Responses.responseJsonArray('success', '添加成功');
@@ -111,16 +132,14 @@ class OrderInfo(object):
         orderId = request.POST.get('orderId', None);
         try:
             #查看是否为超级用户
-            result = models.UsersTable.get(account=account);
+            result = models.UsersTable.objects.get(account=account);
             if result.superUser == True:
                 #管理员
                 result = models.ManagerOrderTable.objects.get(orderId=orderId).delete();
             else:  #普通用户
                 result = models.UserOrderTable.objects.get(orderId=orderId).delete();
-            if result:
-                return Responses.responseJsonArray('success', '删除成功');
-            else:
-                return Responses.responseJsonArray('fail', '删除失败');
+
+            return Responses.responseJsonArray('success', '删除成功');
         except Exception, e:
             return Responses.responseJsonArray('fail', '删除失败');
 
@@ -170,13 +189,14 @@ class OrderInfo(object):
     def getOrderData(cls, page, pageSize, account, condition={}):
         try:
              #查看是否为超级用户
-            result = models.UsersTable.get(account=account);
+            result = models.UsersTable.objects.get(account=account);
             if result.superUser == True:
                 #管理员
-                results = models.ManagerOrderTable.objects.filter(**condition).order_by("id");
+                results = models.ManagerOrderTable.objects.filter(**condition).order_by("-id");
             else:
-                results = models.UserOrderTable.objects.filter(**condition).order_by("id");
-            if results.count():
+                results = models.UserOrderTable.objects.filter(**condition).order_by("-id");
+
+            if results:
                 paginator = Paginator(results, pageSize);  #分页
                 try:
                     results = paginator.page(page);
@@ -185,6 +205,8 @@ class OrderInfo(object):
                 data = [];
                 for obj in results:   #模型转字典
                     dict = model_to_dict(obj);
+                    dict['createDate'] = obj.createDate;
+                    dict['createDate'] = obj.updateDate;   #model_to_dict无法转换时间，需要手动转
                     data.append(dict);
                 return data;  #返回数组
             else:

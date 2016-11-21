@@ -36,6 +36,18 @@
 .table td div{
     margin: 30px 20px 30px 20px;
     vertical-align: middle;
+    position: relative;
+}
+.table td div .stock-tip{
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    color: red;
+    border: 1px solid red;
 }
 .table td .price{
     text-align: center;

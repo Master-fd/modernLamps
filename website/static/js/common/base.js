@@ -35,7 +35,13 @@ define(function(require, exports){
         }
 
         account.loginOrRegister(userAccount, password, operation);
-    })
+    });
+
+/*********前往购物车****************************************************************************/
+    $body.on('click', '.nav .js-cart', function () {
+        var url = resourceUrl+'shoppingCart/';
+        account.isLoginFun(url);
+    });
 
 /*********商品和首页选择************************************************************************/
     var pageId = $page.data('id');
@@ -43,5 +49,7 @@ define(function(require, exports){
         case 'home' : $body.find('.js-home').addClass('current');break;
         case 'goodsBrowse' : $body.find('.js-goods').addClass('current');break;
     }
+
+
 
 });
