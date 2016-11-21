@@ -59,32 +59,6 @@ body{
     margin-top: 10px;
     margin-left: 5px;
 }
-
 .page{
-    position: absolute;
     width: 100%;
-    display: block;
-    bottom: 10px;
-    margin: 30px auto 100px auto;
-    height: auto;
-    vertical-align: middle;
-    text-align: center;
-}
-.page a{
-    display: inline-block;
-    border-radius: 3px;
-    margin: 0 4px;
-    padding: 0 10px;
-    height: 28px;
-    font-size: 14px;
-    line-height: 28px;
-    color: #363636;
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid #363636;
-}
-.page .current{
-    color: #fff;
-    background-color: #363636;
-    border-color: transparent;
 }

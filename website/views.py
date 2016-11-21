@@ -42,7 +42,7 @@ def search(request):
 #返回首页页面
 def home(request):
     isLogin, account = UserInfo.checkIsLogin(request);
-    goods = GoodsInfo.getGoodsData(1, 20, None);
+    goods, pageResult = GoodsInfo.getGoodsData(1, 20, None);
     try:
         goodsList = {
             'banner1' : goods[0],
@@ -70,18 +70,32 @@ def home(request):
 #渲染所有商品页面,需要设置分类
 def goodsBrowse(request, subClass):
     isLogin, account = UserInfo.checkIsLogin(request);
+    #获取页码
+    try:
+        page = int(request.GET.get('page', '1'));
+    except Exception, e:
+        page = 1;
+
     if subClass != 'undefine':
         condition = {
             'subClass' : subClass
         }
-        goodsList = GoodsInfo.getGoodsData(1, 20, condition);
+        goodsList, pageResult = GoodsInfo.getGoodsData(page, 1, condition);
     else:
-        goodsList = GoodsInfo.getGoodsData(1, 20, None);
+        goodsList, pageResult = GoodsInfo.getGoodsData(page, 1, None);  #获取所有
 
+    #限定只能看到多少页，例如总的有20页，只限定看2--5页
+    new_page_range = [];
+    if pageResult:
+        for page_number in pageResult.paginator.page_range:
+            if abs(page_number-pageResult.number) <= 3:
+                new_page_range.append(page_number);
 
     data = {
         'subClass' : subClass,
-        'goodsList' : goodsList
+        'goodsList' : goodsList,
+        'pageResult' : pageResult,
+        'new_page_range' : new_page_range
     }
     return Responses.returnDrawPage(isLogin, 'goods/goodsBrowse.html', 'data', data);
 
@@ -92,7 +106,7 @@ def goodsInfo(request, goodsId):
     condition = {
         'goodsId': goodsId
     };
-    goodsList = GoodsInfo.getGoodsData(1, 20, condition);
+    goodsList, pageResult = GoodsInfo.getGoodsData(1, 20, condition);
 
     minImageUrls = [];
     descImageUrls = [];
@@ -123,7 +137,7 @@ def shoppingCart(request):
         data = ShoppingCartInfo.getShoppingCartData(1, 20, condition);
         if data:
             for obj in data:
-                objList = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
+                objList, pageResult = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
                 goods = objList[0];
                 #从新计算价格,以最新的为准
                 obj['sumPrice'] = str(float(goods['price'])*obj['count']);
@@ -178,7 +192,7 @@ def orderCheckout(request):
     if goodsId:
         #有商品id,说明是立即购买
         try:
-            goodsList = GoodsInfo.getGoodsData(1, 20, {'goodsId' : goodsId});
+            goodsList, pageResult = GoodsInfo.getGoodsData(1, 20, {'goodsId' : goodsId});
             goods = goodsList[0];
             if count < 1:
                 count = 1;
@@ -201,7 +215,7 @@ def orderCheckout(request):
             data = ShoppingCartInfo.getShoppingCartData(1, 20, condition);
             if data:
                 for obj in data:
-                    objList = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
+                    objList, pageResult = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
                     goods = objList[0];
                     #从新计算价格,以最新的为准
                     obj['sumPrice'] = str(float(goods['price'])*obj['count']);
@@ -231,24 +245,53 @@ def managerUploader(request):
 #管理员所有商品
 def managerAllGoods(request):
     isLogin, account = UserInfo.checkIsLogin(request);
+
+    #获取页码
+    try:
+        page = int(request.GET.get('page', '1'));
+    except Exception, e:
+        page = 1;
     #分页获取所有商品
-    goodsList = GoodsInfo.getGoodsData(1, 20, None);
-    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allGoods.html', 'goodsList', goodsList);
+    goodsList, pageResult = GoodsInfo.getGoodsData(page, 1, None);
+    #限定只能看到多少页，例如总的有20页，只限定看2--5页
+    new_page_range = [];
+    if pageResult:
+        for page_number in pageResult.paginator.page_range:
+            if abs(page_number-pageResult.number) <= 3:
+                new_page_range.append(page_number);
+    data = {
+        'goodsList' : goodsList,
+        'pageResult' : pageResult,
+        'new_page_range' : new_page_range
+    }
+    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allGoods.html', 'data', data);
 #管理员所有订单
 def managerAllOrder(request):
     isLogin, account = UserInfo.checkIsLogin(request);
+    #获取页码
+    try:
+        page = int(request.GET.get('page', '1'));
+    except Exception, e:
+        page = 1;
 
-    #获取所有订单
-    allOrder = OrderInfo.getOrderData(1, 20, account);
+    #获取订单
+    allOrder, pageResult = OrderInfo.getOrderData(page, 10, account);
+    #限定只能看到多少页，例如总的有20页，只限定看2--5页
+    new_page_range = [];
+    if pageResult:
+        for page_number in pageResult.paginator.page_range:
+            if abs(page_number-pageResult.number) <= 3:
+                new_page_range.append(page_number);
+
     orderList = [];
     if allOrder:  #所有订单
         for order in allOrder:
             #获取该笔订单的所有商品
-            orderGoods = OrderGoodsInfo.getOrderGoodsData(1, 20, account, {'orderId' : order['orderId']});
+            orderGoods = OrderGoodsInfo.getOrderGoodsData(account, {'orderId' : order['orderId']});
             goodsList = [];   #一个订单的所有商品
             if orderGoods:
                 for obj in orderGoods:
-                    list = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
+                    list, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : obj['goodsId']});
                     goods = list[0];
                     goods['count'] = obj['count'];
                     goodsList.append(goods);
@@ -260,27 +303,42 @@ def managerAllOrder(request):
             #添加到订单列表
             orderList.append(order);
 
-    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allOrder.html', 'ordersList', orderList);
+    data = {
+        'orderList' : orderList,
+        'pageResult' : pageResult,
+        'new_page_range' : new_page_range
+    }
+    return Responses.returnDrawPage(isLogin, 'managerBackgroup/allOrder.html', 'data', data);
 
 #返回用户后台首页 order
 def userBackgroupOrder(request):
     #获取order信息
     isLogin, account = UserInfo.checkIsLogin(request);
-    condition = {
-        'account' : account
-    }
+
+    #获取页码
+    try:
+        page = int(request.GET.get('page', '1'));
+    except Exception, e:
+        page = 1;
+
     #获取该用户的所有order
-    allOrder = OrderInfo.getOrderData(1, 20, account, condition);
+    allOrder, pageResult = OrderInfo.getOrderData(page, 1, account, {'account' : account});
+    #限定只能看到多少页，例如总的有20页，只限定看2--5页
+    new_page_range = [];
+    if pageResult:
+        for page_number in pageResult.paginator.page_range:
+            if abs(page_number-pageResult.number) <= 3:
+                new_page_range.append(page_number);
 
     orderList = [];
     if allOrder:  #所有订单
         for order in allOrder:
             #获取该笔订单的所有商品
-            orderGoods = OrderGoodsInfo.getOrderGoodsData(1, 20, account, {'orderId' : order['orderId']});
+            orderGoods = OrderGoodsInfo.getOrderGoodsData(account, {'orderId' : order['orderId']});
             goodsList = [];   #一个订单的所有商品
             if orderGoods:
                 for obj in orderGoods:
-                    list = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
+                    list, pageGoodsResult = GoodsInfo.getGoodsData(1, 20, {'goodsId' : obj['goodsId']});
                     goods = list[0];
                     goods['count'] = obj['count'];
                     goodsList.append(goods);
@@ -288,33 +346,54 @@ def userBackgroupOrder(request):
             #拼接成一个完整的订单
             order['goodsList'] = goodsList;
             order['goodsCount'] = len(goodsList);        #商品数量
-
             #添加到订单列表
             orderList.append(order);
 
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myOrder.html', 'orderList', orderList);
+    data = {
+        'orderList' : orderList,
+        'pageResult' : pageResult,
+        'new_page_range' : new_page_range
+    }
+
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myOrder.html', 'data', data);
 
 #用户后台 收藏
 def userBackgroupCollect(request):
-    #获取order信息
+
     isLogin, account = UserInfo.checkIsLogin(request);
-    condition = {
-        'account' : account
-    }
-    collectList = CollectInfo.getCollectData(1, 20, account, condition);
-    data = [];
+    #获取页码
+    try:
+        page = int(request.GET.get('page', '1'));
+    except Exception, e:
+        page = 1;
+
+    #获取该用户collect
+    collectList, pageResult = CollectInfo.getCollectData(page, 5, account, {'account' : account});
+    #限定只能看到多少页，例如总的有20页，只限定看2--5页
+    new_page_range = [];
+    if pageResult:
+        for page_number in pageResult.paginator.page_range:
+            if abs(page_number-pageResult.number) <= 3:
+                new_page_range.append(page_number);
+
+    goodsList = [];
     for collect in  collectList:
-        goods = GoodsInfo.getGoodsData(1, 20, {'goodsId' : collect['goodsId']});
-        data.append(goods[0]);
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'collectList', data);
+        goods, pageGoodsResult = GoodsInfo.getGoodsData(1, 20, {'goodsId' : collect['goodsId']});
+        goodsList.append(goods[0]);
+
+    data = {
+        'collectList' : goodsList,
+        'pageResult' : pageResult,
+        'new_page_range' : new_page_range
+    }
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'data', data);
 #用户后台 地址
 def userBackgroupAddress(request):
     #获取order信息
     isLogin, account = UserInfo.checkIsLogin(request);
-    condition = {
-        'account' : account
-    }
-    addressList = AddressInfo.getAddressData(1, 20, account, condition);
+
+    #获取地址
+    addressList = AddressInfo.getAddressData(1, 20, account, {'account' : account});
     return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myAddress.html', 'addressList', addressList);
 #用户后台 我的资料
 def userBackgroupUserInfo(request):

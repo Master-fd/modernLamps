@@ -16,16 +16,11 @@ class OrderGoodsInfo(object):
 
     #获取goodsid
     @classmethod
-    def getOrderGoodsData(cls, page, pageSize, account, condition={}):
+    def getOrderGoodsData(cls, account, condition={}):
         try:
             condition['account'] = account;
             results = models.OrderTable.objects.filter(**condition).order_by('-id');
             if results:
-                paginator = Paginator(results, pageSize);  #分页
-                try:
-                    results = paginator.page(page);
-                except Exception ,e:
-                    results = paginator.page(paginator.num_pages);
                 data = [];
                 for obj in results:   #模型转字典
                     dict = model_to_dict(obj);

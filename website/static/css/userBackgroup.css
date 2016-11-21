@@ -162,6 +162,9 @@
 }
 
 /*address momdal*/
+.table td{
+    border-bottom: 1px solid #EFEFEF;
+}
 .address-modal{
     position: fixed;
     left: 0;
@@ -504,3 +507,4 @@
     width: 300px;
     margin-left: 23px;
 }
+

@@ -179,7 +179,7 @@ class OrderInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
-        data = cls.getOrderData(page, pageSize, account, condition={});
+        data, pageResult = cls.getOrderData(page, pageSize, account, condition={});
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
@@ -190,6 +190,7 @@ class OrderInfo(object):
         try:
              #查看是否为超级用户
             result = models.UsersTable.objects.get(account=account);
+            print result;
             if result.superUser == True:
                 #管理员
                 results = models.ManagerOrderTable.objects.filter(**condition).order_by("-id");
@@ -207,9 +208,10 @@ class OrderInfo(object):
                     dict = model_to_dict(obj);
                     dict['createDate'] = obj.createDate;
                     dict['createDate'] = obj.updateDate;   #model_to_dict无法转换时间，需要手动转
+                    dict['status'] = obj.get_status_display;   #获取状态显示
                     data.append(dict);
-                return data;  #返回数组
+                return data, results;  #返回数组
             else:
-                return None;
+                return None, None;
         except:
-            return None;
+            return None, None;

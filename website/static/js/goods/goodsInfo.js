@@ -12,15 +12,15 @@ define(function (require, exports) {
         inputNum = parseInt($page.find("input[name='count']").val()),  //计数
         goodsId = $page.find('.header .js-goodsId').val();
 
+    var params = {};
 
-    var url = resourceUrl + 'goodsInfoRequest/',
-        params = {};
+
 /************获取库存等参数*************************************************************/
     params = {
         operation : 'get',
         goodsId : goodsId
     };
-    $.get(url, params, function (json_data) {
+    $.get(resourceUrl + 'goodsInfoRequest/', params, function (json_data) {
 
         if (json_data.status == 'success'){
             data = json_data.data[0];
@@ -40,7 +40,7 @@ define(function (require, exports) {
     });
 
 /***********收藏******************************************************************/
-    url = resourceUrl + 'collectRequest/';
+
     if (isLogin)
     {  //获取用户资料是否已经收藏了,并显示
 
@@ -49,7 +49,7 @@ define(function (require, exports) {
             goodsId : $page.find('.header .js-goodsId').val()
         };
 
-        $.getJSON(url, params, function(json_data){
+        $.getJSON(resourceUrl + 'collectRequest/', params, function(json_data){
 
             if (json_data.status == 'success'){
                 //已经收藏了
@@ -64,6 +64,7 @@ define(function (require, exports) {
         //检测是否login
         var $this = $(this);
         account.isLoginFun('', function(){
+
             //已经login了
             if ($this.hasClass('current')){
                 //已经高亮，说明已经收藏了，就要取消
@@ -71,7 +72,7 @@ define(function (require, exports) {
                     operation : 'delete',
                     goodsId : goodsId
                 };
-                $.post(url, params, function(json_data){
+                $.post(resourceUrl + 'collectRequest/', params, function(json_data){
                     if (json_data.status == 'success'){
                     //删除成功
                         $page.find('.header .js-collect').removeClass('current');
@@ -85,7 +86,7 @@ define(function (require, exports) {
                     operation : 'add',
                     goodsId : goodsId
                 };
-                    $.post(url, params, function(json_data){
+                    $.post(resourceUrl + 'collectRequest/', params, function(json_data){
                     if (json_data.status == 'success'){
                     //收藏成功
                         $page.find('.header .js-collect').addClass('current');
@@ -141,7 +142,7 @@ define(function (require, exports) {
     });
 
 /***************加入购物车**  立即购买*****************************************************************************/
-    url = resourceUrl + 'shoppingCartRequest/';
+
     $page.on('click', '.header .js-add-cart', function(){
         //加入购物车
         var sumPrice = inputNum * parseFloat($page.find('.header .js-price').text()) + parseFloat($page.find('.header .js-freightCost').text());
@@ -152,7 +153,7 @@ define(function (require, exports) {
             count : inputNum
         };
         account.isLoginFun('', function () {
-            $.post(url, params, function(json_data){
+            $.post(resourceUrl + 'shoppingCartRequest/', params, function(json_data){
 
                 if (json_data.status == 'success'){
                     pop.popType('success', '已添加到购物车');

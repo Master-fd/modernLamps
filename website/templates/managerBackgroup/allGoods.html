@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                     <tbody>
-                    {% for goods in goodsList %}
+                    {% for goods in data.goodsList %}
                         <tr>
                             <td><div class="price"><a href="{{ goods.goodsDescUrl }}"><img class="goods-image-size" src="{{ goods.minImageUrl1 }}"></a></div></td>
                             <td><div class="price"><a href="{{ goods.goodsDescUrl }}">{{ goods.goodsName }}</a></div></td>
@@ -73,8 +73,23 @@
                 </table>
 
             </section>
+            <section class="page">
+                {% if data.pageResult.has_previous %}
+                    <a class href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ data.pageResult.previous_page_number }}">上一页</a>
+                {% endif %}
+                {% for page_number in data.new_page_range %}
+                    {% ifequal page_number data.pageResult.number %}
+                        <a class="current" href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
+                    {% else %}
+                        <a href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
+                    {% endifequal %}
+                {% endfor %}
+                {% if data.pageResult.has_next %}
+                    <a class href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ data.pageResult.next_page_number }}">下一页</a>
+                {% endif %}
 
 
+            </section>
         </div>
     </div>
 

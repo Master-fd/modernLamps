@@ -103,7 +103,7 @@ class CollectInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
-        data = cls.getCollectData(page, pageSize, condition);
+        data, pageResult = cls.getCollectData(page, pageSize, condition);
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
@@ -141,8 +141,8 @@ class CollectInfo(object):
                 for obj in results:   #模型转字典
                     dict = model_to_dict(obj);
                     data.append(dict);
-                return data;
+                return data, results;
             else:
-                return None;
+                return None, None;
         except:
-            return None;
+            return None, None;

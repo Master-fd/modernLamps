@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                         {% for address in addressList %}
-                            <tr data-id="{{ address.addressId }}">
+                        <tr data-id="{{ address.addressId }}">
                             <td>
                                 <div class="text-center js-contact">{{ address.contact }}</div>
                             </td>
@@ -75,7 +75,6 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="gap-line"></tr>
                         {% endfor %}
 
                     </tbody>
@@ -111,6 +110,7 @@
                     </div>
                 </div>
             </section>
+
         </div>
     </div>
 

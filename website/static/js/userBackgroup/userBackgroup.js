@@ -26,15 +26,6 @@ define(function(require, exports) {
             $body.find('.user-page-left .js-userInfo').addClass('current');
             break;
 
-        case 'uploadGoods' :
-            $body.find('.user-page-left .js-uploader').addClass('current');
-            break;
-        case 'allOrder' :
-            $body.find('.user-page-left .js-allOrder').addClass('current');
-            break;
-        case 'allGoods' :
-            $body.find('.user-page-left .js-allgoods').addClass('current');
-            break;
     }
 
     $body.on('click', '.user-page-left a', function () {

@@ -67,7 +67,7 @@ class GoodsInfo(object):
             condition['goodsId'] = goodsId;
         if subClass:
             condition['subClass'] = subClass;
-        data = cls.getGoodsData(page, pageSize, condition);
+        data, pageResult = cls.getGoodsData(page, pageSize, condition);
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
@@ -103,7 +103,7 @@ class GoodsInfo(object):
                 results = models.GoodsTable.objects.filter(**condition).order_by('-id');
             else:
                 results = models.GoodsTable.objects.all().order_by('-id');
-            if results.count():
+            if results:
                 paginator = Paginator(results, pageSize);  #分页
                 try:
                     results = paginator.page(page);
@@ -112,13 +112,13 @@ class GoodsInfo(object):
 
                 for obj in results:   #模型转字典
                     goods = model_to_dict(obj);
-                    # goods['subClass'] = obj.get_subClass_display;
+                    goods['subClass'] = obj.get_subClass_display;
                     data.append(goods);
-                return data;
+                return data, results;
             else:
-                return None;
+                return None, None;
         except:
-            return None;
+            return None, None;
     #删除商品
     @classmethod
     def deleteGoods(cls, request=HttpRequest()):
