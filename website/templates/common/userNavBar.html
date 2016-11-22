@@ -9,6 +9,11 @@
             <li class="item js-collect"><a data-id='collect' href="javascript:void(0);">我的收藏</a></li>
             <li class="item js-address"><a data-id='address' href="javascript:void(0);">我的地址</a></li>
             <li class="item js-userInfo"><a data-id='userInfo' href="javascript:void(0);">我的资料</a></li>
+            {% if data.superUser %}
+                <li class="item js-allOrder"><a data-id='allOrder' href="javascript:void(0);">所有订单</a></li>
+                <li class="item js-allgoods"><a data-id='goods' href="javascript:void(0);">所有商品</a></li>
+                <li class="item js-uploader"><a data-id='uploader' href="javascript:void(0);">商品上传</a></li>
+            {% endif %}
         </ul>
     </div>
 </body>

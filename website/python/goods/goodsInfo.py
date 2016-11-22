@@ -53,12 +53,13 @@ class GoodsInfo(object):
             pageSize = int(request.GET.get('pageSize', '20'));
         except ValueError, e:
             page = 1;
-            pageSize = 20;
+            pageSize = 2000;
+
 
         if page <= 1:
             page = 1;
         if pageSize <= 20:
-            pageSize
+            pageSize = 2000;
 
 
         condition = {};
@@ -69,6 +70,7 @@ class GoodsInfo(object):
         if subClass:
             condition['subClass'] = subClass;
         data, pageResult = cls.getGoodsData(page, pageSize, condition);
+
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
@@ -113,7 +115,7 @@ class GoodsInfo(object):
 
                 for obj in results:   #模型转字典
                     goods = model_to_dict(obj);
-                    goods['subClass'] = obj.get_subClass_display;
+                    # goods['subClass'] = obj.get_subClass_display;   #会导致json.dump不了
                     data.append(goods);
                 return data, results;
             else:

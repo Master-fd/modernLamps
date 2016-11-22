@@ -35,6 +35,8 @@ class UserInfo(object):
             operation = request.GET.get('operation', None);
             if operation == 'getUserInfo':   #获取用户资料
                 return cls.__getUserInfo(request);
+            elif operation == 'superUser':  #判断用户是否是管理员
+                return cls.checkIsSuperUser(request);
             elif operation == 'isLogin':
                 isLogin, account = cls.checkIsLogin(request);
                 if isLogin:
@@ -138,6 +140,19 @@ class UserInfo(object):
                 return Responses.responseJsonArray("fail", "查找失败");
         else:
             return Responses.responseJsonArray("fail", "未登录");
+
+    @classmethod
+    def checkIsSuperUser(cls, request=HttpRequest()):
+        isLogin, account = cls.checkIsLogin(request);
+        if isLogin == True:
+            #查找用户信息
+            result = models.UsersTable.objects.get(account=account);
+            if result:
+                return result.superUser;
+            else:
+                return False;
+        else:
+            return False;
 
     @classmethod
     def getUserInfoData(cls, account):

@@ -29,7 +29,7 @@ def noresults(request):
 def search(request):
     isLogin, account = UserInfo.checkIsLogin(request);
     goodsName = request.GET.get('keyword', None);
-    goodsList = GoodsInfo.searchGoods(1, 20, goodsName);
+    goodsList = GoodsInfo.searchGoods(1, 50, goodsName);
     data = {
         'subClass' : 'undefine',
         'goodsList' : goodsList
@@ -158,7 +158,7 @@ def shoppingCart(request):
                 if obj['isSelect']:
                     totalPrice += float(goods['sumPrice']);
     except Exception, e:
-        Responses.returnCheckLoginDrawPage(isLogin, 'goods/shoppingCart.html', 'order', None);
+        Responses.returnCheckLoginDrawPage(isLogin, 'goods/shoppingCart.html', 'data', None);
 
 
     order = {
@@ -244,7 +244,10 @@ def orderCheckout(request):
 #管理员上传页面
 def managerUploader(request):
     isLogin, account = UserInfo.checkIsLogin(request);
-    return Responses.returnCheckLoginDrawPage(isLogin, 'managerBackgroup/uploadGoods.html', 'upload', None);
+    data = {
+        'superUser' : UserInfo.checkIsSuperUser(request)
+    }
+    return Responses.returnCheckLoginDrawPage(isLogin, 'managerBackgroup/uploadGoods.html', 'data', data);
 #管理员所有商品
 def managerAllGoods(request):
     isLogin, account = UserInfo.checkIsLogin(request);
@@ -265,7 +268,8 @@ def managerAllGoods(request):
     data = {
         'goodsList' : goodsList,
         'pageResult' : pageResult,
-        'new_page_range' : new_page_range
+        'new_page_range' : new_page_range,
+        'superUser' : UserInfo.checkIsSuperUser(request)
     }
     return Responses.returnCheckLoginDrawPage(isLogin, 'managerBackgroup/allGoods.html', 'data', data);
 #管理员所有订单
@@ -309,7 +313,8 @@ def managerAllOrder(request):
     data = {
         'orderList' : orderList,
         'pageResult' : pageResult,
-        'new_page_range' : new_page_range
+        'new_page_range' : new_page_range,
+        'superUser' : UserInfo.checkIsSuperUser(request)
     }
     return Responses.returnCheckLoginDrawPage(isLogin, 'managerBackgroup/allOrder.html', 'data', data);
 
@@ -317,6 +322,7 @@ def managerAllOrder(request):
 def userBackgroupOrder(request):
     #获取order信息
     isLogin, account = UserInfo.checkIsLogin(request);
+    isSuperUser = UserInfo.checkIsSuperUser(request);
 
     #获取页码
     try:
@@ -355,7 +361,8 @@ def userBackgroupOrder(request):
     data = {
         'orderList' : orderList,
         'pageResult' : pageResult,
-        'new_page_range' : new_page_range
+        'new_page_range' : new_page_range,
+        'superUser' : isSuperUser
     }
 
     return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myOrder.html', 'data', data);
@@ -364,6 +371,7 @@ def userBackgroupOrder(request):
 def userBackgroupCollect(request):
 
     isLogin, account = UserInfo.checkIsLogin(request);
+    isSuperUser = UserInfo.checkIsSuperUser(request);
     #获取页码
     try:
         page = int(request.GET.get('page', '1'));
@@ -380,14 +388,16 @@ def userBackgroupCollect(request):
                 new_page_range.append(page_number);
 
     goodsList = [];
-    for collect in  collectList:
-        goods, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : collect['goodsId']});
-        goodsList.append(goods[0]);
+    if collectList:
+        for collect in  collectList:
+            goods, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : collect['goodsId']});
+            goodsList.append(goods[0]);
 
     data = {
         'collectList' : goodsList,
         'pageResult' : pageResult,
-        'new_page_range' : new_page_range
+        'new_page_range' : new_page_range,
+        'superUser' : isSuperUser
     }
     return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myCollect.html', 'data', data);
 #用户后台 地址
@@ -396,14 +406,25 @@ def userBackgroupAddress(request):
     isLogin, account = UserInfo.checkIsLogin(request);
     #获取地址
     addressList = AddressInfo.getAddressData(1, 2000, account, {'account' : account});
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myAddress.html', 'addressList', addressList);
+    data = {
+        'addressList' : addressList,
+        'superUser' : UserInfo.checkIsSuperUser(request)
+    }
+
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myAddress.html', 'data', data);
 #用户后台 我的资料
 def userBackgroupUserInfo(request):
     #获取order信息
     isLogin, account = UserInfo.checkIsLogin(request);
     userInfo = UserInfo.getUserInfoData(account);
-    userInfo=userInfo[0];
-    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myPersonal.html', 'userInfo', userInfo);
+    data = [];
+    if userInfo:
+        userInfo=userInfo[0];
+        data = {
+            'userInfo' : userInfo,
+            'superUser' : UserInfo.checkIsSuperUser(request)
+        }
+    return Responses.returnCheckLoginDrawPage(isLogin, 'myBackgroup/myPersonal.html', 'data', data);
 
 #bottom静态页面
 def bottomStaticPage(request, page):

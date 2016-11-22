@@ -55,9 +55,12 @@ class Uploader(object):
                     for chunk in fileMemItem.chunks():
                         descFile.write(chunk);
                 descFile.close();
-                # path = settings.BASE_URL + self.__diskPath.split('/')[-1];
-                # return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
-                return self.__diskPath + "\\" + fileName;
+
+                if settings.DEBUG == False:
+                    path = settings.BASE_URL + self.__diskPath.split('/')[-1];
+                    return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
+                else:
+                    return self.__diskPath + "\\" + fileName;  #只是为了本地文件调试
             except Exception, e:
                 return '';
         else:

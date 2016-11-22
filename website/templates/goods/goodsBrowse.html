@@ -2,11 +2,11 @@
 {% extends 'common/base.html' %}
 
 {% block description %}
-    <meta name="description" content={{ goodsName }}>
+    <meta name="description" content=是针对大众开设的基于线上的商城。主要经营智能硬件产品，包含胜宝龙灯具品类。胜宝龙商城作为一个网络销售平台，将优质灯具供应给消费者。在这个过程中，销售者不需要经过经销商、门店，无后顾之忧，轻松获取最大收益。>
 {% endblock %}
 
 {% block keywords%}
-    <meta name="keywords" content={{ goodsName }}>
+    <meta name="keywords" content=胜宝龙商城、胜宝龙>
 {% endblock %}
 
 {% block title %}胜宝龙商城{% endblock %}
@@ -23,29 +23,29 @@
         <section class="header row100">
             <ul class="list full" data-id="{{ data.subClass }}">
                 {% if data.subClass == 'undefine' %}
-                    <li class="item current" ><a href="http://127.0.0.1:8000/allGoods/undefine/">全部商品</a></li>
+                    <li class="item current" ><a href="/allGoods/undefine/">全部商品</a></li>
                 {% else %}
-                    <li class="item" ><a href="http://127.0.0.1:8000/allGoods/undefine/">全部商品</a></li>
+                    <li class="item" ><a href="/allGoods/undefine/">全部商品</a></li>
                 {% endif %}
                 {% if data.subClass == 'dropLamp' %}
-                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/dropLamp/">吊灯</a></li>
+                    <li class="item current"><a href="/allGoods/dropLamp/">吊灯</a></li>
                 {% else %}
-                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/dropLamp/">吊灯</a></li>
+                    <li class="item"><a href="/allGoods/dropLamp/">吊灯</a></li>
                 {% endif %}
                 {% if data.subClass == 'deskLamp' %}
-                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/deskLamp/">台灯</a></li>
+                    <li class="item current"><a href="/allGoods/deskLamp/">台灯</a></li>
                 {% else %}
-                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/deskLamp/">台灯</a></li>
+                    <li class="item"><a href="/allGoods/deskLamp/">台灯</a></li>
                 {% endif %}
                 {% if data.subClass == 'parlorLamp' %}
-                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/parlorLamp/">客厅灯</a></li>
+                    <li class="item current"><a href="/allGoods/parlorLamp/">客厅灯</a></li>
                 {% else %}
-                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/parlorLamp/">客厅灯</a></li>
+                    <li class="item"><a href="/allGoods/parlorLamp/">客厅灯</a></li>
                 {% endif %}
                 {% if data.subClass == 'roomLamp' %}
-                    <li class="item current"><a href="http://127.0.0.1:8000/allGoods/roomLamp/">餐厅灯</a></li>
+                    <li class="item current"><a href="/allGoods/roomLamp/">餐厅灯</a></li>
                 {% else %}
-                    <li class="item"><a href="http://127.0.0.1:8000/allGoods/roomLamp/">餐厅灯</a></li>
+                    <li class="item"><a href="/allGoods/roomLamp/">餐厅灯</a></li>
                 {% endif %}
             </ul>
         </section>
@@ -71,17 +71,17 @@
 
         <section class="page">
             {% if data.pageResult.has_previous %}
-                <a class href="http://127.0.0.1:8000/allGoods/{{ data.subClass }}?page={{ data.pageResult.previous_page_number }}">上一页</a>
+                <a class href="/allGoods/{{ data.subClass }}?page={{ data.pageResult.previous_page_number }}">上一页</a>
             {% endif %}
             {% for page_number in data.new_page_range %}
                 {% ifequal page_number data.pageResult.number %}
-                    <a class="current" href="http://127.0.0.1:8000/allGoods/{{ data.subClass }}?page={{ page_number }}">{{ page_number }}</a>
+                    <a class="current" href="/allGoods/{{ data.subClass }}?page={{ page_number }}">{{ page_number }}</a>
                 {% else %}
-                    <a href="http://127.0.0.1:8000/allGoods/{{ data.subClass }}?page={{ page_number }}">{{ page_number }}</a>
+                    <a href="/allGoods/{{ data.subClass }}?page={{ page_number }}">{{ page_number }}</a>
                 {% endifequal %}
             {% endfor %}
             {% if data.pageResult.has_next %}
-                <a class href="http://127.0.0.1:8000/allGoods/{{ data.subClass }}?page={{ data.pageResult.next_page_number }}">下一页</a>
+                <a class href="/allGoods/{{ data.subClass }}?page={{ data.pageResult.next_page_number }}">下一页</a>
             {% endif %}
 
 

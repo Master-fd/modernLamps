@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'LAMPS',
         'USER' : 'root',
         'PASSWORD' : '633922',
-        'HOST' : '119.29.151.45',
+        'HOST' : '127.0.0.1', #'119.29.151.45',
         'PORT' : '3306',
     }
 }
@@ -117,7 +117,7 @@ MEDIA_GOODS_ROOT = os.path.join(MEDIA_ROOT, 'goodsImage')        #goods图片保
 CORS_ORIGIN_ALLOW_ALL = True   #允许所有跨域请求，具体查看https://github.com/ottoyiu/django-cors-headers/
 
 #网站地址
-BASE_URL = 'http://127.0.0.1:8000/'
+BASE_URL = 'http://119.29.151.45/'
 
 #cookie and session全局设置
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  #引擎（默认）

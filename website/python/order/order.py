@@ -63,7 +63,7 @@ class OrderInfo(object):
         try:
             while True:
                 orderId = str(random.randint(10000, 60000));
-                if not models.UserOrderTable.objects.filter(orderId=orderId) and not models.ManagerOrderTable.objects.filter(orderId=orderId):
+                if not models.UserOrderTable.objects.filter(orderId=orderId):
                     break;
         except Exception, e:
             return Responses.responseJsonArray('fail', '产生订单号失败');
@@ -122,7 +122,6 @@ class OrderInfo(object):
                     models.ShoppingCartTable.objects.filter(account=account).delete();  #清空购物车
                 #增加订单
                 models.UserOrderTable.objects.create(**data);
-                models.ManagerOrderTable.objects.create(**data);
                 return Responses.responseJsonArray('success', '添加成功');
         except Exception, e:
             return Responses.responseJsonArray('fail', '添加失败');
@@ -135,9 +134,13 @@ class OrderInfo(object):
             result = models.UsersTable.objects.get(account=account);
             if result.superUser == True:
                 #管理员
-                result = models.ManagerOrderTable.objects.get(orderId=orderId).delete();
+                result = models.UserOrderTable.objects.filter(orderId=orderId).update(managerDelete=True);
             else:  #普通用户
-                result = models.UserOrderTable.objects.get(orderId=orderId).delete();
+                result = models.UserOrderTable.objects.filter(orderId=orderId).update(userDelete=True);
+
+            result = models.UserOrderTable.objects.get(orderId=orderId);
+            if result.userDelete and result.managerDelete:  #如果用户和管理员都删除了，才真正的删除
+                models.UserOrderTable.objects.get(orderId=orderId).delete();
 
             return Responses.responseJsonArray('success', '删除成功');
         except Exception, e:
@@ -162,8 +165,7 @@ class OrderInfo(object):
             if status:
                 #开启事务
                 with transaction.atomic():
-                    models.UserOrderTable.objects.filter(orderId=orderId, account=account).update(**condition)
-                    models.ManagerOrderTable.objects.filter(orderId=orderId, account=account).update(**condition);
+                    models.UserOrderTable.objects.filter(orderId=orderId).update(**condition)
                     return Responses.responseJsonArray('success', '修改成功', [condition]);
             else:
                 return Responses.responseJsonArray('fail', '没有对应订单');
@@ -202,12 +204,12 @@ class OrderInfo(object):
         try:
              #查看是否为超级用户
             result = models.UsersTable.objects.get(account=account);
-            print result;
-            if result.superUser == True:
+            if result.superUser == False:
                 #管理员
-                results = models.ManagerOrderTable.objects.filter(**condition).order_by("-id");
+                condition['managerDelete'] = False;
             else:
-                results = models.UserOrderTable.objects.filter(**condition).order_by("-id");
+                condition['userDelete'] = False;
+            results = models.UserOrderTable.objects.filter(**condition).order_by("-id");
 
             if results:
                 paginator = Paginator(results, pageSize);  #分页

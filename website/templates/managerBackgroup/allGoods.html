@@ -2,14 +2,14 @@
 {% extends 'common/base.html' %}
 
 {% block description %}
-    <meta name="description" content={{ goodsName }}>
+    <meta name="description" content=所有商品>
 {% endblock %}
 
 {% block keywords%}
-    <meta name="keywords" content={{ goodsName }}>
+    <meta name="keywords" content=所有商品>
 {% endblock %}
 
-{% block title %}{{ goodsName }}{% endblock %}
+{% block title %}所有商品{% endblock %}
 
 {% block userStyle %}
     <link rel="stylesheet" href="../../static/css/bottom.css">
@@ -20,7 +20,7 @@
 
     <div id="page" class="container" data-id="allGoods">
 
-{% include 'common/managerNavBar.html' %}
+{% include 'common/userNavBar.html' %}
         <div class="page-containter">
             <section class="title">
                 <h3>所有商品</h3>
@@ -75,17 +75,17 @@
             </section>
             <section class="page">
                 {% if data.pageResult.has_previous %}
-                    <a class href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ data.pageResult.previous_page_number }}">上一页</a>
+                    <a class href="/managerBackgroup/goods?page={{ data.pageResult.previous_page_number }}">上一页</a>
                 {% endif %}
                 {% for page_number in data.new_page_range %}
                     {% ifequal page_number data.pageResult.number %}
-                        <a class="current" href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="current" href="/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
                     {% else %}
-                        <a href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
+                        <a href="/managerBackgroup/goods?page={{ page_number }}">{{ page_number }}</a>
                     {% endifequal %}
                 {% endfor %}
                 {% if data.pageResult.has_next %}
-                    <a class href="http://127.0.0.1:8000/managerBackgroup/goods?page={{ data.pageResult.next_page_number }}">下一页</a>
+                    <a class href="/managerBackgroup/goods?page={{ data.pageResult.next_page_number }}">下一页</a>
                 {% endif %}
 
 

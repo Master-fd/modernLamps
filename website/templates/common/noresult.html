@@ -1,14 +1,14 @@
 {% extends 'common/base.html' %}
 
 {% block description %}
-    <meta name="description" content={{ goodsName }}>
+    <meta name="description" content=无结果>
 {% endblock %}
 
 {% block keywords%}
-    <meta name="keywords" content={{ goodsName }}>
+    <meta name="keywords" content=无结果>
 {% endblock %}
 
-{% block title %}{{ goodsName }}{% endblock %}
+{% block title %}无结果{% endblock %}
 
 {% block userStyle %}
     <link rel="stylesheet" href="../../static/css/bottom.css">
@@ -21,7 +21,7 @@
 
         <section class="content">
             <div class="no-result-img">
-                <img src="http://127.0.0.1:8000/static/image/no-result.png">
+                <img src="/static/image/no-result.png">
             </div>
             <p class="text">没有相关结果</p>
         </section>

@@ -44,17 +44,17 @@
 
             <section class="page">
                 {% if data.pageResult.has_previous %}
-                    <a class href="http://127.0.0.1:8000/userBackgroup/collect?page={{ data.pageResult.previous_page_number }}">上一页</a>
+                    <a class href="/userBackgroup/collect?page={{ data.pageResult.previous_page_number }}">上一页</a>
                 {% endif %}
                 {% for page_number in data.new_page_range %}
                     {% ifequal page_number data.pageResult.number %}
-                        <a class="current" href="http://127.0.0.1:8000/userBackgroup/collect?page={{ page_number }}">{{ page_number }}</a>
+                        <a class="current" href="/userBackgroup/collect?page={{ page_number }}">{{ page_number }}</a>
                     {% else %}
-                        <a href="http://127.0.0.1:8000/userBackgroup/collect?page={{ page_number }}">{{ page_number }}</a>
+                        <a href="/userBackgroup/collect?page={{ page_number }}">{{ page_number }}</a>
                     {% endifequal %}
                 {% endfor %}
                 {% if data.pageResult.has_next %}
-                    <a class href="http://127.0.0.1:8000/userBackgroup/collect?page={{ data.pageResult.next_page_number }}">下一页</a>
+                    <a class href="/userBackgroup/collect?page={{ data.pageResult.next_page_number }}">下一页</a>
                 {% endif %}
 
             </section>

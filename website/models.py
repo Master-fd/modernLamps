@@ -70,9 +70,10 @@ class UserOrderTable(models.Model):
     status = models.CharField(choices=status_choices, default=status_choices[0][0], max_length=64);   #订单状态
     company = models.CharField(max_length=64);   #快递公司
     expressId = models.CharField(max_length=128); #快递单号
+    userDelete = models.BooleanField(default=False);   #用户是否删除了订单
+    managerDelete = models.BooleanField(default=False);   #管理员是否删除,只有两个都删除了才是真的删除
     createDate = models.DateTimeField(auto_now_add=True);
     updateDate = models.DateTimeField(auto_now=True);
-
 
 #管理员订单表,由管理控制删除
 class ManagerOrderTable(models.Model):

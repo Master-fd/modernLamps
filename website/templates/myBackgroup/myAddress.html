@@ -2,14 +2,14 @@
 {% extends 'common/base.html' %}
 
 {% block description %}
-    <meta name="description" content={{ goodsName }}>
+    <meta name="description" content=我的地址>
 {% endblock %}
 
 {% block keywords%}
-    <meta name="keywords" content={{ goodsName }}>
+    <meta name="keywords" content=我的地址>
 {% endblock %}
 
-{% block title %}{{ goodsName }}{% endblock %}
+{% block title %}我的地址{% endblock %}
 
 {% block userStyle %}
     <link rel="stylesheet" href="../../static/css/bottom.css">
@@ -49,7 +49,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for address in addressList %}
+                        {% for address in data.addressList %}
                         <tr data-id="{{ address.addressId }}">
                             <td>
                                 <div class="text-center js-contact">{{ address.contact }}</div>
@@ -87,7 +87,7 @@
                     <div class="modal-main">
                         <div class="modal-header">
                             添加收货地址
-                            <a class="close-btn js-modal-close" href="javascritpt:void(0);">
+                            <a class="close-btn js-modal-close" href="javascript:void(0);">
                                 <i class="passport-icon close-icon"></i>
                             </a>
                         </div>
@@ -102,8 +102,8 @@
                             <input name="addressId" data-id="" class="hidden">
                         </div>
                         <div class="modal-footer">
-                            <a class="cancel-btn" href="javascritpt:void(0);">取消</a>
-                            <a class="submit-btn" href="javascritpt:void(0);">确定</a>
+                            <a class="cancel-btn" href="javascript:void(0);">取消</a>
+                            <a class="submit-btn" href="javascript:void(0);">确定</a>
                         </div>
 
 

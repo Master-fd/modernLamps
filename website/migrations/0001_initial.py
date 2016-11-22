@@ -113,6 +113,8 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(default=b'undefine', max_length=64, choices=[(b'undefine', '\u672a\u5b9a\u4e49'), (b'new', '\u65b0\u8ba2\u5355'), (b'process', '\u5df2\u53d1\u8d27'), (b'ok', '\u5df2\u6210\u4ea4'), (b'cancel', '\u5df2\u53d6\u6d88'), (b'ruturnGoods', '\u8bf7\u6c42\u9000\u8d27'), (b'ruturnGoodsing', '\u9000\u8d27\u4e2d'), (b'ruturnGoodsed', '\u5df2\u9000\u8d27')])),
                 ('company', models.CharField(max_length=64)),
                 ('expressId', models.CharField(max_length=128)),
+                ('userDelete', models.BooleanField(default=False)),
+                ('managerDelete', models.BooleanField(default=False)),
                 ('createDate', models.DateTimeField(auto_now_add=True)),
                 ('updateDate', models.DateTimeField(auto_now=True)),
             ],
