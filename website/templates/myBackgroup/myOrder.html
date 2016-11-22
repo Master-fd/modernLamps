@@ -61,7 +61,7 @@
                                         <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
                                         <td class="gap-line-right"><div class="price">{{ goods.count }}</div></td>
                                         <td rowspan={{ order.goodsCount }}><div class="price">￥<span>{{ order.totalPrice }}</span></div></td>
-                                        <td rowspan={{ order.goodsCount }}><div class="price"><a href="javascript:void(0);">{{ order.status }}</a></div></td>
+                                        <td rowspan={{ order.goodsCount }}><div class="price"><label>{{ order.status }}</label></div></td>
                                         <td rowspan={{ order.goodsCount }}><div class="price"><a class="js-delete-order" href="javascript:void(0);" data-id="{{ order.orderId }}">删除</a></div> </td>
                                     </tr>
                                 {% else %}
@@ -85,8 +85,12 @@
                                     <td colspan="3">
                                         <div>
                                             <span>快递单号:</span>
-                                            <span>{{ order.company }}</span>
-                                            <span>{{ order.expressId }}</span>
+                                            {% if order.company %}
+                                                <span>{{ order.company }}</span>
+                                            {% else %}
+                                                <span>{{ order.company }}等待发货</span>
+                                            {% endif %}
+                                                <span>{{ order.expressId }}</span>
                                         </div>
                                     </td>
                                 </tr>

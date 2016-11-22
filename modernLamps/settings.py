@@ -112,6 +112,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_GOODS_ROOT = os.path.join(MEDIA_ROOT, 'goodsImage')        #goods图片保存位置
 
 CORS_ORIGIN_ALLOW_ALL = True   #允许所有跨域请求，具体查看https://github.com/ottoyiu/django-cors-headers/
 

@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from django.forms.models import model_to_dict
 from django.core.paginator import Paginator
 import random
+import os
 
 from website import models
 from website.python.common.response import Responses
@@ -137,10 +138,8 @@ class GoodsInfo(object):
     @classmethod
     def addGoods(cls, request=HttpRequest()):
 
-        myUploder = Uploader(settings.MEDIA_ROOT);   #新建下载器
-
         goodsId = '00000';
-        try:
+        try:   #产生goodsId
             while True:
                 goodsId = str(random.randint(10000, 60000));
                 if not models.GoodsTable.objects.filter(goodsId=goodsId).count():
@@ -148,6 +147,7 @@ class GoodsInfo(object):
         except Exception, e:
             return Responses.responseJsonArray('fail', '添加失败,请重试');
 
+        subClass = request.POST.get('subClass', "undefine");  #获取分类
         goodsName = request.POST.get('goodsName', None);
         if not goodsName:
             return Responses.responseJsonArray('fail', '商品名不能为空');
@@ -159,6 +159,9 @@ class GoodsInfo(object):
         except Exception, e:
             return Responses.responseJsonArray('fail', '库存非法');
 
+        dirRoot = os.path.join(os.path.join(settings.MEDIA_GOODS_ROOT, subClass), goodsId);  #每次上传一个商品，用一个文件夹来保存，命名为media/goodsImage/分类/goodsId
+        myUploder = Uploader(dirRoot);   #新建下载器
+
         data = {
                     'goodsId' : goodsId,
                     'goodsName' : goodsName,
@@ -168,7 +171,7 @@ class GoodsInfo(object):
                     'freightCost' : request.POST.get('freightCost', '0'),
                     'saleCount' : 0,
                     'inventoryCount' : inventoryCount,
-                    'subClass' : request.POST.get('subClass', "undefine"),
+                    'subClass' : subClass,
                     'minImageUrl1' : myUploder.uploadFile(request.FILES.get('minImageUrl1', None)),
                     'minImageUrl2' : myUploder.uploadFile(request.FILES.get('minImageUrl2', None)),
                     'minImageUrl3' : myUploder.uploadFile(request.FILES.get('minImageUrl3', None)),

@@ -105,7 +105,7 @@ define(function (require) {
                 if (json_data.status == 'success'){
 
                     pop.popType('success', '上传成功');
-                    //location.reload();
+                    location.reload();
 
                 }else{
                     pop.popClose();

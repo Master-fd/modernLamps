@@ -30,9 +30,10 @@ class Uploader(object):
 
         # #路径
         if not os.path.exists(self.__diskPath):
-            result = os.makedirs(self.__diskPath);   #新建文件夹
-            os.chmod(result, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH);  # mode:777
-            if result:
+            result = os.makedirs(self.__diskPath);   #新建文件夹,成功返回None
+            if not result:
+                os.chmod(self.__diskPath, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH);  # mode:777  无返回值
+            else:
                 return result;
         return True;
 
@@ -49,7 +50,6 @@ class Uploader(object):
             hash_md5 = hashlib.md5();
             hash_md5.update(name);
             fileName = hash_md5.hexdigest() + extension;  #先对名字部分摘要，在拼接
-
             try:
                 with open(os.path.join(self.__diskPath, fileName), 'wb') as descFile:  #新建一个空文件
                     for chunk in fileMemItem.chunks():
@@ -57,7 +57,6 @@ class Uploader(object):
                 descFile.close();
                 # path = settings.BASE_URL + self.__diskPath.split('/')[-1];
                 # return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
-                print self.__diskPath + "\\" + fileName;
                 return self.__diskPath + "\\" + fileName;
             except Exception, e:
                 return '';

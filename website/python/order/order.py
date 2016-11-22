@@ -145,18 +145,28 @@ class OrderInfo(object):
 
     @classmethod
     def modifyOrder(cls, request=HttpRequest(), account='0'):
-        orderId = request.POST.get('orderId', None),
+        orderId = request.POST.get('orderId', None);
         if not orderId:
             return Responses.responseJsonArray('fail', '没有orderId');
-
-        data = {'status' : request.POST.get('status', None)};
-
+        status = request.POST.get('status', None);
+        company = request.POST.get('company', None);
+        expressId = request.POST.get('expressId', None);
+        condition = {};
+        if status:
+            condition['status'] = status;
+        if status:
+            condition['company'] = company;
+        if status:
+            condition['expressId'] = expressId;
         try:
-            #开启事务
-            with transaction.atomic():
-                models.UserOrderTable.objects.filter(orderId=orderId, account=account).update(**data)
-                models.ManagerOrderTable.objects.filter(addressId=orderId, account=account).update(**data);
-                return Responses.responseJsonArray('success', '修改成功');
+            if status:
+                #开启事务
+                with transaction.atomic():
+                    models.UserOrderTable.objects.filter(orderId=orderId, account=account).update(**condition)
+                    models.ManagerOrderTable.objects.filter(orderId=orderId, account=account).update(**condition);
+                    return Responses.responseJsonArray('success', '修改成功', [condition]);
+            else:
+                return Responses.responseJsonArray('fail', '没有对应订单');
         except Exception, e:
             return Responses.responseJsonArray('fail', '修改失败');
 
@@ -164,10 +174,6 @@ class OrderInfo(object):
     def getOrder(cls, request=HttpRequest(), account='0'):
 
         try:
-            condition = {
-                'orderId' : request.GET.get('orderId', None),
-                'status' : request.GET.get('status', None)
-            };
             page = int(request.GET.get('page', '1'));
             pageSize = int(request.GET.get('pageSize', '20'));
         except ValueError, e:
@@ -179,7 +185,13 @@ class OrderInfo(object):
         if pageSize <= 1:
             pageSize = 1;
 
-        data, pageResult = cls.getOrderData(page, pageSize, account, condition={});
+        condition = {};
+        if request.GET.get('orderId', None):
+            condition['orderId'] = request.GET.get('orderId', None);
+        if request.GET.get('status', None):
+            condition['status'] = request.GET.get('status', None);
+
+        data, pageResult = cls.getOrderData(page, pageSize, account, condition);
         if data:
             return Responses.responseJsonArray('success', '请求成功', data);
         else:
@@ -208,7 +220,7 @@ class OrderInfo(object):
                     dict = model_to_dict(obj);
                     dict['createDate'] = obj.createDate;
                     dict['createDate'] = obj.updateDate;   #model_to_dict无法转换时间，需要手动转
-                    dict['status'] = obj.get_status_display;   #获取状态显示
+                    # dict['status'] = obj.get_status_display;   #获取状态显示,这种只能直接渲染模板，无法使用json，dumps
                     data.append(dict);
                 return data, results;  #返回数组
             else:

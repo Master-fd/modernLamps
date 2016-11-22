@@ -29,7 +29,7 @@
             <section class="orders-info">
                 <ul>
                 {% for order in data.orderList %}
-                    <li>
+                    <li data-id="{{ order.orderId }}">
                         <table class="orders-table" cellpadding="0" cellspacing="0" border="0">
                             <colgroup>
                                 <col width="180">
@@ -61,8 +61,8 @@
                                         <td><div class="price">￥<span>{{ goods.price }}</span></div></td>
                                         <td class="gap-line-right"><div class="price">{{ goods.count }}</div></td>
                                         <td rowspan="{{ order.goodsCount }}"><div class="price">￥<span>{{ order.totalPrice }}</span></div></td>
-                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a href="javascript:void(0);">{{ order.status }}</a></div></td>
-                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a class="js-delete-order" href="javascript:void(0);" data-id="{{ order.orderId }}">删除</a></div> </td>
+                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a class="js-modify-status" href="javascript:void(0);">{{ order.status }}</a></div></td>
+                                        <td rowspan="{{ order.goodsCount }}"><div class="price"><a class="js-delete-order" href="javascript:void(0);">删除</a></div> </td>
                                     </tr>
                                 {% else %}
                                     <tr>
@@ -86,8 +86,8 @@
                                     <td colspan="3">
                                         <div>
                                             <span>快递单号:</span>
-                                            <span>{{ order.company }}</span>
-                                            <span>{{ order.expressId }}</span>
+                                            <span class="js-company">{{ order.company }}</span>
+                                            <span class="js-expressId">{{ order.expressId }}</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -114,6 +114,29 @@
                 {% endif %}
 
 
+            </section>
+
+            <section>
+                <div id="pop" class="order-modal" style="display: none">
+                    <div class="modal-mask js-modal-close"></div>
+                    <div class="modal-main">
+                        <div class="modal-header">
+                            填写发货信息
+                            <a class="close-btn js-modal-close" href="javascritpt:void(0);">
+                                <i class="passport-icon close-icon"></i>
+                            </a>
+                        </div>
+                        <div class="modal-content">
+                            <input name="company" class="input input-small" type="text" placeholder="快递公司">
+                            <input name="expressId" class="input input-small" type="text" placeholder="快递单号">
+                            <input name="orderId" data-id="" class="hidden">
+                        </div>
+                        <div class="modal-footer">
+                            <a class="cancel-btn js-cancel-btn" href="javascritpt:void(0);">取消</a>
+                            <a class="submit-btn js-submit-btn" href="javascritpt:void(0);">确定</a>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     </div>

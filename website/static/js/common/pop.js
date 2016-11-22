@@ -15,6 +15,7 @@ define(function (require, exports) {
         switch (type){
             case 'login' : $body.find('.login-modal').css('display', 'block'); break;
             case 'address' : $body.find('.address-modal').css('display', 'block'); break;
+            case 'orderInput' : $body.find('.order-modal').css('display', 'block'); break;
             case 'error' : swal({
                                title : title,
                                type : 'error',

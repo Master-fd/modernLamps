@@ -102,6 +102,13 @@
                 {% for descUrl in goods.descImageUrls %}
                     <img src = "{{ descUrl }}">
                 {% endfor %}
+
+                {% if goods.aboutImageUrl %}
+                    <img src = "{{ goods.aboutImageUrl }}">
+                {% endif %}
+                {% if goods.remarkImageUrl %}
+                    <img src = "{{ goods.remarkImageUrl }}">
+                {% endif %}
             </div>
         </section>
     </div>

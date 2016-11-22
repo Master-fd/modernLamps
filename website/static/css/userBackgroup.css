@@ -41,9 +41,9 @@
     float: left;
     margin-top: 40px;
     width: 890px;
-    padding-bottom: 90px;
+    padding-bottom: 170px;
     min-height: 715px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     background-color: #FFFFFF;
 }
 .page-containter .title{
@@ -161,10 +161,11 @@
     background-position: -567px -157px;
 }
 
-/*address momdal*/
+/*address modal*/
 .table td{
     border-bottom: 1px solid #EFEFEF;
 }
+.order-modal,
 .address-modal{
     position: fixed;
     left: 0;
@@ -173,6 +174,7 @@
     top: 0;
     z-index: 1000;
 }
+.order-modal .modal-mask,
 .address-modal .modal-mask{
     width: 100%;
     height: 100%;
@@ -191,10 +193,14 @@
     color: #363636;
     font-size: 18px;
 }
+.order-modal .modal-main .modal-header,
 .address-modal .modal-main .modal-header{
     padding-left: 40px;
+
 }
+.order-modal .modal-main .modal-header,
 .address-modal .modal-main .modal-header,
+.order-modal .modal-main .modal-footer,
 .address-modal .modal-main .modal-footer{
     color: #363636;
     font-size: 18px;
@@ -202,10 +208,12 @@
     line-height: 60px;
     background-color: #efefef;
 }
+.order-modal .modal-main .modal-footer,
 .address-modal .modal-main .modal-footer{
     vertical-align: middle;
     margin-top: 50px;
 }
+.order-modal .modal-main .close-btn,
 .address-modal .modal-main .close-btn{
     position: absolute;
     right: 0;
@@ -216,6 +224,7 @@
     line-height: 60px;
     text-align: center;
 }
+.order-modal .modal-main .close-icon,
 .address-modal .modal-main .close-icon {
     vertical-align: middle;
     background-position: -434px -39px;
@@ -223,11 +232,13 @@
     width: 18px;
     height: 18px;
 }
+.order-modal .modal-main .modal-content,
 .address-modal .modal-main .modal-content{
     margin: 20px auto 20px auto;
     display: block;
     text-align: center;
 }
+.order-modal .modal-main .modal-content .input,
 .address-modal .modal-main .modal-content .input{
     display: block;
     margin: 20px auto auto 80px;
@@ -239,12 +250,15 @@
     color: #363636;
     font-size: 14px;
 }
+.order-modal .modal-main .modal-content .input-small,
 .address-modal .modal-main .modal-content .input-small{
     width: 250px;
 }
+.order-modal .modal-main .modal-content .input-big,
 .address-modal .modal-main .modal-content .input-big{
     width: 470px;
 }
+.order-modal .modal-main .modal-content .default-checkbox,
 .address-modal .modal-main .modal-content .default-checkbox{
     margin: 30px 80px auto 80px;
     text-align: left;
@@ -252,12 +266,15 @@
     height: 24px;
     line-height: 24px;
 }
+.order-modal .modal-main .modal-content .default-checkbox .check,
 .address-modal .modal-main .modal-content .default-checkbox .check{
     margin: 2px 03px;
     width: 20px;
     height: 20px;
     vertical-align: middle;
 }
+.order-modal .modal-main .modal-footer .submit-btn,
+.order-modal .modal-main .modal-footer .cancel-btn,
 .address-modal .modal-main .modal-footer .submit-btn,
 .address-modal .modal-main .modal-footer .cancel-btn{
     display: inline-block;
@@ -282,6 +299,31 @@
     margin-left: 320px;
 }
 
+/***订单状态修改modal*********************************************************************/
+.order-modal .modal-main{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 450px;
+    height: 340px;
+    margin: -170px 0 0 -225px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #666;
+    color: #363636;
+    font-size: 18px;
+}
+.order-modal .modal-main .modal-footer .cancel-btn{
+    background-color: #FFFFFF;
+    color: #363636;
+    margin-top: 10px;
+    margin-left: 43px;
+}
+.order-modal .modal-main .modal-footer .submit-btn{
+    background-color: #363636;
+    color: #FFFFFF;
+    margin-top: 10px;
+    margin-left: 117px;
+}
 /*我的资料*/
 .information .list,
 .information .item{

@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-
+    {% if requestLogin %}
+    <div id="pop" class="login-modal" style="display: block">
+    {% else %}
     <div id="pop" class="login-modal" style="display: none">
+    {% endif %}
         <div class="modal-mask js-modal-close"></div>
         <div class="modal-main">
             <a class="close-btn js-modal-close" href="javascritpt:void(0);">

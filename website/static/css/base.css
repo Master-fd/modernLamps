@@ -36,9 +36,11 @@ a{
 }
 a,
 a:link,
-a:hover,
 a:visited{
     color: #222222;
+}
+a:hover{
+    color: #ff6753;
 }
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
