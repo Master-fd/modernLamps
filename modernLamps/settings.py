@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '8u!mf@qwkoo(l1=e=6*0)0*y293mdtdzd$u13w@&mfwcy5y6%2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -117,7 +117,7 @@ MEDIA_GOODS_ROOT = os.path.join(MEDIA_ROOT, 'goodsImage')        #goods图片保
 CORS_ORIGIN_ALLOW_ALL = True   #允许所有跨域请求，具体查看https://github.com/ottoyiu/django-cors-headers/
 
 #网站地址
-BASE_URL = 'http://127.0.0.1:8000/'  #'http://119.29.151.45/'
+BASE_URL = 'http://119.29.151.45/'
 
 #cookie and session全局设置
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  #引擎（默认）
