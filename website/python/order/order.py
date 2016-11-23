@@ -115,6 +115,13 @@ class OrderInfo(object):
                                 'count' : goods['count'],
                                 'sumPrice' : goods['sumPrice']};
                         models.OrderTable.objects.create(**goods);  #添加数据到order goods表
+                        inventoryCount = result.inventoryCount-goods['count'];
+                        saleCount = result.saleCount+goods['count'];
+                        condition = {
+                            'inventoryCount' : inventoryCount,
+                            'saleCount' : saleCount
+                        }
+                        models.GoodsTable.objects.filter(goodsId=goods['goodsId']).update(**condition);
                     else:
                         #订单无效, 抛出事务异常
                         raise TransactionManagementError;
@@ -204,7 +211,7 @@ class OrderInfo(object):
         try:
              #查看是否为超级用户
             result = models.UsersTable.objects.get(account=account);
-            if result.superUser == False:
+            if result.superUser == True:
                 #管理员
                 condition['managerDelete'] = False;
             else:

@@ -464,7 +464,7 @@
     height: 100%;
     left: 0px;
     top: 0px;
-    background: url(http://127.0.0.1:8000/static/image/sbolo-logo.png) left center no-repeat;
+    background: url(/static/image/sbolo-logo.png) left center no-repeat;
 }
 .page-containter .upload-info .mask-input{
     position: absolute;

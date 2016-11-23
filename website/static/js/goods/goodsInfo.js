@@ -122,6 +122,7 @@ define(function (require, exports) {
     });
     //直接输入
     $page.find("input[name='count']").blur(function(){
+        $inputNum = $page.find("input[name='count']");
         //检测输入合法性
         var match = $(this).val().match(/\d+/);
         if (match != null){

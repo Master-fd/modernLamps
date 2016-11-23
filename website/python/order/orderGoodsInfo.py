@@ -18,7 +18,8 @@ class OrderGoodsInfo(object):
     @classmethod
     def getOrderGoodsData(cls, account, condition={}):
         try:
-            condition['account'] = account;
+            if account:
+                condition['account'] = account;
             results = models.OrderTable.objects.filter(**condition).order_by('-id');
             if results:
                 data = [];

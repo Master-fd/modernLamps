@@ -77,7 +77,7 @@ table .gap-line{
     width: 180px;
     height: 80px;
     display: block;
-    background: url(http://127.0.0.1:8000/static/image/sbolo-logo.png) left center no-repeat;
+    background: url(/static/image/sbolo-logo.png) left center no-repeat;
 }
 
 .nav .item .search-text{

@@ -9,7 +9,6 @@ define(function(require){
     window.pop = require('pop'); //加载蒙版弹框
 
     var _page = $('#page').data('id');
-
     switch (_page){
 
         case 'home' : seajs.use('static/js/home/home.js'); break;   //加载Home

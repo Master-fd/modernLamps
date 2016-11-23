@@ -52,7 +52,7 @@ define(function (require, exports) {
     //代码主动关闭弹窗
     exports.popClose = function(){
         $body.find('#pop').css('display', 'none');
-        swal.close();
+        //swal.close();   //会导致错误
     }
 
     //单击‘x’，或者外面阴影部分，关闭弹窗

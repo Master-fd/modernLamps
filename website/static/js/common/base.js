@@ -11,9 +11,7 @@ define(function(require, exports){
 /************导航栏头像login数据*******************/
     //登录头像被点击,
     $body.on('click', '.nav .js-login', function(){
-
         account.isLoginFun(resourceUrl+'userBackgroup');  //弹出登录
-
     }).on('click', '.nav .js-logout', function () {
         account.logout();  //退出
     }).on('click', '.login-modal .submit-btn', function(){

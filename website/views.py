@@ -294,7 +294,7 @@ def managerAllOrder(request):
     if allOrder:  #所有订单
         for order in allOrder:
             #获取该笔订单的所有商品
-            orderGoods = OrderGoodsInfo.getOrderGoodsData(account, {'orderId' : order['orderId']});
+            orderGoods = OrderGoodsInfo.getOrderGoodsData(None, {'orderId' : order['orderId']});
             goodsList = [];   #一个订单的所有商品
             if orderGoods:
                 for obj in orderGoods:

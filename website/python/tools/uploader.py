@@ -32,7 +32,7 @@ class Uploader(object):
         if not os.path.exists(self.__diskPath):
             result = os.makedirs(self.__diskPath);   #新建文件夹,成功返回None
             if not result:
-                os.chmod(self.__diskPath, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH);  # mode:777  无返回值
+                os.chmod(self.__diskPath, stat.S_IRWXU|stat.S_IRWXG|stat.S_IRWXO);  # mode:777  无返回值
             else:
                 return result;
         return True;
@@ -57,7 +57,7 @@ class Uploader(object):
                 descFile.close();
 
                 if settings.DEBUG == False:
-                    path = settings.BASE_URL + self.__diskPath.split('/')[-1];
+                    path = settings.BASE_URL+'media'+self.__diskPath.split('media')[-1];
                     return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
                 else:
                     return self.__diskPath + "\\" + fileName;  #只是为了本地文件调试

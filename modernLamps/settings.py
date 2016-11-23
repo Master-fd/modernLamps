@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'LAMPS',
         'USER' : 'root',
         'PASSWORD' : '633922',
-        'HOST' : '127.0.0.1', #'119.29.151.45',
+        'HOST' : '127.0.0.1',
         'PORT' : '3306',
     }
 }
