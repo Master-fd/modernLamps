@@ -1,0 +1,376 @@
+
+
+/*reset*/
+html, body, h1, h2, h3, h4, h4, h5,h6, div, dl, dt, dd, ul, ol, li, p, a, span, i, em,
+blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button,
+textarea, menu{
+    padding: 0;
+    margin: 0;
+}
+td th{
+    display: table-cell;
+    vertical-align: inherit;
+}
+/*default*/
+div {
+    display: block;
+}
+
+
+li{
+    display: list-item;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+body{
+    font-size: 14px;
+    line-height: 1.6em;
+    font-family: "Microsoft YaHei Light","Microsoft YaHei",Arial,Helvetica,"Hiragino Sans GB","SimSun","WenQuanYi Micro Hei",sans-serif;
+    color: #333;
+    background: #fff;
+    background-color: #ededed;
+}
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+a,
+a:link,
+a:visited{
+    color: #222222;
+}
+a:hover{
+    color: #ff6753;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #333;
+    font-family: 'Microsoft YaHei';
+}
+
+table .gap-line{
+    height: 1px;
+    width: 100%;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.hidden{
+    display: none;
+}
+
+/*nav*/
+.nav{
+    height: 80px;
+    width: 100%;
+    min-width: 1170px;
+    background-color: #fff;
+    z-index: 1000;
+    border-bottom: 8px solid #363636;
+}
+.nav .item{
+    vertical-align: middle;
+    display: inline-block;
+}
+.nav .item .logo{
+    margin-left: 15px;
+    width: 180px;
+    height: 80px;
+    display: block;
+    background: url(http://127.0.0.1:8000/static/image/sbolo-logo.png) left center no-repeat;
+}
+
+.nav .item .search-text{
+    width: 255px;
+    height: 34px;
+    border: 1px solid #363636;
+    float: left;
+    margin-left: 60px;
+    padding-left: 15px;
+    font-size: 14px;
+}
+
+.nav .item .search-btn{
+    width: 60px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background: #363636;
+    float: left;
+    border-radius: 0 8px 8px 0;
+    border: 0;
+}
+.item .search-btn .search-icon{
+    width: 21px;
+    height: 21px;
+    background-position: -45px -25px;
+    vertical-align: middle;
+}
+.icon-right{
+    width: 21px;
+    height: 21px;
+    vertical-align: middle;
+}
+.item .home{
+    margin-left: 70px;
+}
+.item .goods{
+    margin-left: 30px;
+}
+.item .home,
+.item .goods{
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+}
+.item .home.current,
+.item .goods.current{
+    background-color: #363636;
+    color: #FFFFFF;
+}
+.item .user{
+    margin-left: 100px;
+}
+.item .user .icon-right{
+    /*margin-left: 250px;*/
+    background-position: -314px -23px;
+}
+.item .logout{
+    margin-left: 10px;
+}
+.item .cart .icon-right{
+    margin-left: 20px;
+    background-position: -382px -22px;
+}
+
+/*common*/
+/*container*/
+.container{
+    width: 1170px;
+    min-height: 1000px;
+    /*background-color: #FFFFFF;*/
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+.bottom .container{
+    min-height: 0px;
+}
+.full{
+    width: 100%;
+    height: 100%;
+}
+.icon{
+    display: inline-block;
+    background: url(../image/sbolo-icon.png);
+}
+.passport-icon{
+    display: inline-block;
+    background: url(../image/passport-icon.png);
+}
+
+/*login*/
+.login-modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 10000;
+}
+.login-modal .modal-mask{
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.3;
+}
+.login-modal .modal-main{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 438px;
+    height: 454px;
+    margin: -227px 0 0 -219px;
+    background-color: #fff;
+    box-shadow: 0 0 10px #666;
+    color: #363636;
+    font-size: 18px;
+}
+.login-modal .modal-main .close-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+}
+.login-modal .modal-main .close-icon {
+    vertical-align: middle;
+    background-position: -434px -39px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+}
+.login-modal .modal-main .passport-logo{
+    background-position: 0 -91px;
+    width: 190px;
+    height: 47px;
+    margin: 68px auto 40px;
+    text-align: center;
+}
+.login-modal .modal-main .modal-content{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0px auto 20px auto;
+    display: block;
+    text-align: center;
+}
+.login-modal .modal-main .modal-content input{
+    margin-top: 20px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #c2c3c6;
+    border-radius: 4px;
+    padding: 5px 15px 5px 45px;
+    width: 240px;
+    color: #363636;
+    font-size: 14px;
+}
+.login-modal .modal-main .modal-content .submit-btn{
+    display: block;
+    width: 302px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #e72715;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 67px;
+}
+.row10{
+    width: 10%;
+}
+.row15{
+    width: 15%;
+}
+.row20{
+    width: 20%;
+}
+.row30{
+    width: 30%;
+}
+.row33{
+    width: 33.33%;
+}
+.row40{
+    width: 40%;
+}
+.row50{
+    width: 50%;
+}
+.row60{
+    width: 60%;
+}
+.row66{
+    width: 66.67%;
+}
+.row70{
+    width: 70%;
+}
+.row80{
+    width: 80%;
+}
+.row90{
+    width: 90%;
+}
+.row100{
+    width: 100%;
+}
+.col10{
+    height: 10%;
+}
+.col20{
+    height: 20%;
+}
+.col30{
+    height: 30%;
+}
+.col33{
+    height: 33.37%;
+}
+.col40{
+    height: 40%;
+}
+.col50{
+    height: 50%;
+}
+.col60{
+    height: 60%;
+}
+.col66{
+    height: 66.67%;
+}
+.col70{
+    height: 70%;
+}
+.col80{
+    height: 80%;
+}
+.col90{
+    height: 90%;
+}
+.col100{
+    height: 100%;
+}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.margin-bottom50{
+    margin-bottom: 50px;
+}
+.margin-bottom30{
+    margin-bottom: 30px;
+}
+.margin-bottom15{
+    margin-bottom: 15px;
+}
+
+/*****************分页***************************/
+.page{
+    position: absolute;
+    width: 890px;
+    display: block;
+    bottom: 10px;
+    margin: 30px auto 100px auto;
+    height: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+.page a{
+    display: inline-block;
+    border-radius: 3px;
+    margin: 0 4px;
+    padding: 0 10px;
+    height: 28px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #363636;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #363636;
+}
+.page .current{
+    color: #fff;
+    background-color: #363636;
+    border-color: transparent;
+}

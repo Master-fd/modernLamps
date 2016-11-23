@@ -1,0 +1,144 @@
+
+
+
+.addressInfo, .goodsInfo, .checkout{
+    margin: 40px 30px 40px 30px;
+    width: 100%;
+}
+.addressInfo .title,
+.goodsInfo .title,
+.checkout .title{
+    font-weight: normal;
+    font-size: 18px;
+    color: #363636;
+    padding-left: 25px;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
+    margin-top: 40px;
+    margin-left: 0px;
+    margin-right: 80px;
+}
+.addressInfo .list{
+    margin: 0px 80px auto 0px;
+    padding-left: 39px;
+    padding-bottom: 30px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+.addressInfo .list .item{
+    float: left;
+    margin: 30px 15px auto auto;
+    padding: 15px;
+    width: 294px;
+    height: 130px;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
+}
+.addressInfo .list .item div{
+    margin-top: 7px;
+    height: 22px;
+    line-height: 22px;
+    width: 294px;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+.addressInfo .list .item input{
+    display: inline-block;
+    margin-left: 275px;
+    width: 20px;
+    height: 20px;
+}
+.addressInfo .list .current{
+    border: 3px solid #363636;
+}
+.addressInfo .list .add-addr-btn{
+    border-radius: 5px;
+    width: 150px;
+    height: 40px;
+    background-color: #ee3531;
+    color: #FFFFFF;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    margin-top: 30px;
+}
+
+.addressInfo .table{
+    mso-cellspacing: 0px;
+    width: 100%;
+    margin: 40px 30px 40px 30px;
+}
+
+.goodsInfo .table .goods-name{
+    padding-left: 30px;
+    text-align: left;
+}
+.goodsInfo .table td .goods-image{
+    height: 60px;
+    width: 60px;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-right: 50px;
+}
+.goodsInfo .table .title{
+    background-color: #f5f5f5;
+}
+.goodsInfo .table th{
+    font-weight: normal;
+    background-color: #e6e7e8;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #363636;
+}
+.goodsInfo .table td div{
+    margin: 30px 20px 30px 20px;
+    vertical-align: middle;
+}
+.goodsInfo .table td .price{
+    text-align: center;
+}
+.goodsInfo .table .goods-name{
+    padding-left: 30px;
+    text-align: left;
+}
+.goodsInfo .goodsInfo .table td .goods-image{
+    height: 60px;
+    width: 60px;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-right: 50px;
+}
+.goodsInfo .table td .goods{
+    margin: 0 30px 0 30px;
+    vertical-align: middle;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+}
+.goodsInfo .table td{
+    border-bottom: 1px solid #efefef;
+}
+.goodsInfo .table .gap-line-right{
+    border-right: 1px solid #EFEFEF;
+}
+.goodsInfo .calcuate {
+    font-size: 18px;
+    vertical-align: middle;
+}
+.goodsInfo .calcuate .calcuate-btn{
+    display: inline-block;
+    padding: 0 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 18px;
+    font-family: "microsoft yahei light";
+    background-color: #ee3531;
+    color: #fff;
+    border-radius: 3px;
+    margin: 0px 15px 0 40px;
+    vertical-align: middle;
+}
