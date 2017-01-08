@@ -58,6 +58,8 @@ class Uploader(object):
 
                 if settings.DEBUG == False:
                     path = settings.BASE_URL+'media'+self.__diskPath.split('media')[-1];
+                    # path = os.path.join(os.path.join(settings.BASE_URL,'media'), self.__diskPath.split('media')[-1]);
+                    # return os.path.join(path, fileName);
                     return path + '/' + fileName;  #返回路径,这个路径是要求服务器来识别的
                 else:
                     return self.__diskPath + "\\" + fileName;  #只是为了本地文件调试

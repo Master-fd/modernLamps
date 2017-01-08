@@ -104,8 +104,10 @@ define(function (require) {
             success : function(json_data){
                 if (json_data.status == 'success'){
 
-                    pop.popType('success', '上传成功');
-                    location.reload();
+                    pop.popType('success', '上传成功', '', function(){
+                        location.reload();
+                    });
+
 
                 }else{
                     pop.popClose();

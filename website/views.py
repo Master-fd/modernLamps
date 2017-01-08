@@ -42,25 +42,26 @@ def search(request):
 #返回首页页面
 def home(request):
     isLogin, account = UserInfo.checkIsLogin(request);
-    goods, pageResult = GoodsInfo.getGoodsData(1, 20, None);
+    goods, pageResult = GoodsInfo.getGoodsData(1, 30, None);
+
     try:
         goodsList = {
-            'banner1' : goods[0],
-            # 'banner2' : goods[1],
-            # 'banner3' : goods[2],
-            # 'banner4' : goods[3],
-            'hotGoods1' : goods[0],
-            # 'hotGoods2' : goods[5],
-            # 'hotGoods3' : goods[6],
-            # 'hotGoods4' : goods[7],
-            # 'hotGoods5' : goods[8],
-            # 'hotGoods6' : goods[9],
-            'first1' : goods[0],
-            'first2' : goods[0],
-            'first3' : goods[0],
-            # 'first4' : goods[13],
-            # 'first5' : goods[14],
-            # 'first6' : goods[15]
+            'banner1' : goods[1],
+            'banner2' : goods[3],
+            'banner3' : goods[5],
+            'banner4' : goods[9],
+            'hotGoods1' : goods[10],
+            'hotGoods2' : goods[11],
+            'hotGoods3' : goods[12],
+            'hotGoods4' : goods[13],
+            'hotGoods5' : goods[14],
+            'hotGoods6' : goods[15],
+            'first1' : goods[16],
+            'first2' : goods[17],
+            'first3' : goods[18],
+            'first4' : goods[19],
+            'first5' : goods[20],
+            'first6' : goods[21]
         };
     except Exception, e:
         return Responses.returnDrawPage(isLogin, 'home/home.html', 'goodsList', None);
@@ -299,9 +300,10 @@ def managerAllOrder(request):
             if orderGoods:
                 for obj in orderGoods:
                     list, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : obj['goodsId']});
-                    goods = list[0];
-                    goods['count'] = obj['count'];
-                    goodsList.append(goods);
+                    if list:
+                        goods = list[0];
+                        goods['count'] = obj['count'];
+                        goodsList.append(goods);
 
             #拼接成一个完整的订单
             order['goodsList'] = goodsList;
@@ -348,9 +350,10 @@ def userBackgroupOrder(request):
             if orderGoods:
                 for obj in orderGoods:
                     list, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : obj['goodsId']});
-                    goods = list[0];
-                    goods['count'] = obj['count'];
-                    goodsList.append(goods);
+                    if list:
+                        goods = list[0];
+                        goods['count'] = obj['count'];
+                        goodsList.append(goods);
 
             #拼接成一个完整的订单
             order['goodsList'] = goodsList;
@@ -391,7 +394,8 @@ def userBackgroupCollect(request):
     if collectList:
         for collect in  collectList:
             goods, pageGoodsResult = GoodsInfo.getGoodsData(1, 2000, {'goodsId' : collect['goodsId']});
-            goodsList.append(goods[0]);
+            if goods:
+                goodsList.append(goods[0]);
 
     data = {
         'collectList' : goodsList,
