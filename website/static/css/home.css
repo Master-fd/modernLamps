@@ -68,7 +68,7 @@ body{
 .first .left a .goodsName,
 .first .right a .goodsName{
     font-size: 14px;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: #363636;
     text-align: center;
 }
@@ -118,14 +118,14 @@ body{
     transition: height .5s ease;
 }
 .hotgoods .big a:hover p{
-    height: 298px;
+    height: 278px;
     padding: 24px 13px;
     line-height: 23px;
     font-size: 14px;
     white-space: normal;
 }
 .hotgoods .small a:hover p{
-    height: 130px;
+    height: 100px;
     padding: 24px 13px;
     line-height: 23px;
     font-size: 14px;

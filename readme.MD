@@ -1,6 +1,6 @@
 ##Sbolo 灯饰商城项目工程 Source Code##
 
-###[项目链接传送门，请猛的单击](http://www.schooljob.xyz/)###
+###[项目链接传送门，请猛的单击](http://www.sbolo.xyz/allGoods/undefine/)###
 
 
 ###Sbolo 简介###

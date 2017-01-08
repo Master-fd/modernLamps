@@ -254,6 +254,16 @@ table .gap-line{
     margin-top: 20px;
     margin-left: 67px;
 }
+.margin-lr1{
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 4px;
+}
+.margin-ud1{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+}
 .row10{
     width: 10%;
 }
@@ -269,11 +279,17 @@ table .gap-line{
 .row33{
     width: 33.33%;
 }
+.row33.margin-lr1{
+    width: 29.33%;
+}
 .row40{
     width: 40%;
 }
 .row50{
     width: 50%;
+}
+.row50.margin-lr1{
+    width: 46%;
 }
 .row60{
     width: 60%;
@@ -293,6 +309,9 @@ table .gap-line{
 .row100{
     width: 100%;
 }
+.row100.margin-lr1{
+    width: 98%;
+}
 .col10{
     height: 10%;
 }
@@ -305,8 +324,14 @@ table .gap-line{
 .col33{
     height: 33.37%;
 }
+.col33.margin-ud1{
+    height: 29.33%;
+}
 .col40{
     height: 40%;
+}
+.col40.margin-ud1{
+    height: 36%;
 }
 .col50{
     height: 50%;
@@ -314,8 +339,14 @@ table .gap-line{
 .col60{
     height: 60%;
 }
+.col60.margin-ud1{
+    height: 56%;
+}
 .col66{
     height: 66.67%;
+}
+.col60.margin-ud1{
+    height: 62.67%;
 }
 .col70{
     height: 70%;
@@ -328,6 +359,9 @@ table .gap-line{
 }
 .col100{
     height: 100%;
+}
+.col100.margin-ud1{
+    height: 96%;
 }
 .float-left{
     float: left;
